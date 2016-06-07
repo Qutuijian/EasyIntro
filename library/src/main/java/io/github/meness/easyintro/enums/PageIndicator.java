@@ -21,7 +21,7 @@ import android.support.annotation.LayoutRes;
 import io.github.meness.easyintro.R;
 
 public enum PageIndicator {
-    SPRING(R.layout.indicator_spring), CIRCLE(R.layout.indicator_circle), NONE(-1);
+    SPRING(R.layout.layout_easyintro_indicator_spring), CIRCLE(R.layout.layout_easyintro_indicator_circle), NONE(-1);
 
     @LayoutRes
     private final int mIndicatorRes;

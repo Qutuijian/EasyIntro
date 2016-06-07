@@ -32,5 +32,5 @@ public interface ISlide {
 
     void withOverlaySlide(Fragment slide, @IdRes int container);
 
-    void withSlideTo(Class<Fragment> aClass, boolean smoothScroll);
+    void withSlideTo(Class slideClass, boolean smoothScroll);
 }

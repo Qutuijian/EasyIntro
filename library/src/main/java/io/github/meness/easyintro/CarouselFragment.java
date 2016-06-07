@@ -491,8 +491,8 @@ public class CarouselFragment extends Fragment implements ISlide, ICheck, ITouch
     }
 
     @Override
-    public void withSlideTo(Class<Fragment> aClass, boolean smoothScroll) {
-        withSlideTo(mAdapter.getItemPosition(aClass), smoothScroll);
+    public void withSlideTo(Class slideClass, boolean smoothScroll) {
+        withSlideTo(mAdapter.getItemPosition(slideClass), smoothScroll);
     }
 
     @Override
@@ -559,7 +559,7 @@ public class CarouselFragment extends Fragment implements ISlide, ICheck, ITouch
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_carousel, container, false);
+        return inflater.inflate(R.layout.fragment_easyintro_carousel, container, false);
     }
 
     @Override

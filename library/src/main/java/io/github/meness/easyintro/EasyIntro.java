@@ -90,7 +90,7 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_easyintro_main);
 
         initCarousel(savedInstanceState);
     }
@@ -267,7 +267,7 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withSlideTo(Class<Fragment> aClass, boolean smoothScroll) {
-        carouselFragment.withSlideTo(aClass, smoothScroll);
+    public void withSlideTo(Class slideClass, boolean smoothScroll) {
+        carouselFragment.withSlideTo(slideClass, smoothScroll);
     }
 }

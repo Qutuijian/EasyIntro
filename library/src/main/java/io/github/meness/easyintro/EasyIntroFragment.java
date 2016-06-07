@@ -63,8 +63,8 @@ public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouc
     }
 
     @Override
-    public void withSlideTo(Class<Fragment> aClass, boolean smoothScroll) {
-        getBaseContext().withSlideTo(aClass, smoothScroll);
+    public void withSlideTo(Class slideClass, boolean smoothScroll) {
+        getBaseContext().withSlideTo(slideClass, smoothScroll);
     }
 
     @Override
