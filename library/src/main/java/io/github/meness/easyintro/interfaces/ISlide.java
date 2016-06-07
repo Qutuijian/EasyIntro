@@ -14,11 +14,23 @@
  * limitations under the License.
  */
 
-package io.github.meness.easyintro;
+package io.github.meness.easyintro.interfaces;
 
-/**
- * It's just a helper.
- */
-public interface IndicatorsContainerHeight {
-      void call(int height);
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
+
+public interface ISlide {
+    void withNextSlide(boolean smoothScroll);
+
+    void withPreviousSlide(boolean smoothScroll);
+
+    void withSlideTo(int page, boolean smoothScroll);
+
+    Fragment getCurrentSlide();
+
+    void withSlide(Fragment slide);
+
+    void withOverlaySlide(Fragment slide, @IdRes int container);
+
+    void withSlideTo(Class<Fragment> aClass, boolean smoothScroll);
 }

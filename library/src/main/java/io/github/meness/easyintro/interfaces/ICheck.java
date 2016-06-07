@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.meness.easyintro.enums;
+package io.github.meness.easyintro.interfaces;
 
-import android.support.annotation.LayoutRes;
+import io.github.meness.easyintro.enums.SwipeDirection;
 
-import io.github.meness.easyintro.R;
+public interface ICheck {
+    boolean isLocked();
 
-public enum PageIndicator {
-    SPRING(R.layout.indicator_spring), CIRCLE(R.layout.indicator_circle), NONE(-1);
+    SwipeDirection getSwipeDirection();
 
-    @LayoutRes
-    private final int mIndicatorRes;
+    int getPageMargin();
 
-    PageIndicator(@LayoutRes int indicatorRes) {
-        mIndicatorRes = indicatorRes;
-    }
+    boolean isRightIndicatorVisible();
 
-    @LayoutRes
-    public int getIndicatorRes() {
-        return mIndicatorRes;
-    }
+    boolean isRightIndicatorDisabled();
+
+    boolean isLeftIndicatorVisible();
+
+    boolean isLeftIndicatorDisabled();
 }

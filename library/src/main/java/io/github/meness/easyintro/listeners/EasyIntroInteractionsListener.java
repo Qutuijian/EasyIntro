@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.meness.easyintro.enums;
+package io.github.meness.easyintro.listeners;
 
-import android.support.annotation.LayoutRes;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
 
-import io.github.meness.easyintro.R;
+import io.github.meness.easyintro.interfaces.ITouch;
 
-public enum PageIndicator {
-    SPRING(R.layout.indicator_spring), CIRCLE(R.layout.indicator_circle), NONE(-1);
-
-    @LayoutRes
-    private final int mIndicatorRes;
-
-    PageIndicator(@LayoutRes int indicatorRes) {
-        mIndicatorRes = indicatorRes;
-    }
-
-    @LayoutRes
-    public int getIndicatorRes() {
-        return mIndicatorRes;
-    }
+/**
+ * {@link io.github.meness.easyintro.EasyIntro}
+ */
+public interface EasyIntroInteractionsListener extends ITouch {
+    void onCarouselViewCreated(View view, @Nullable Bundle savedInstanceState);
 }

@@ -30,32 +30,14 @@ class EasyIntroPagerAdapter extends SmartFragmentStatePagerAdapter {
     }
 
     public void addFragment(Fragment fragment) {
-        if (!fragmentAlreadyAdded(fragment)) {
+        if (!alreadyExists(fragment)) {
             mFragments.add(fragment);
             notifyDataSetChanged();
         }
     }
 
-    public boolean fragmentAlreadyAdded(Fragment fragment) {
+    private boolean alreadyExists(Fragment fragment) {
         return mFragments.indexOf(fragment) != -1;
-    }
-
-    public void replaceFragment(Fragment oldFragment, Fragment newFragment) {
-        int oldIndex = mFragments.indexOf(oldFragment);
-        if (oldIndex != -1) {
-            mFragments.set(oldIndex, newFragment);
-            notifyDataSetChanged();
-        }
-    }
-
-    public void removeFragment(Class<? extends Fragment> aClass) {
-        for (Fragment fragment : mFragments) {
-            if (fragment.getClass().equals(aClass)) {
-                mFragments.remove(fragment);
-                notifyDataSetChanged();
-                break;
-            }
-        }
     }
 
     @Override

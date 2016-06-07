@@ -15,11 +15,16 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorHelloFragmentBg"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -29,4 +34,4 @@
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textSize="30sp"/>
-</LinearLayout>
+</FrameLayout>

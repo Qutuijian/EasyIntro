@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.meness.easyintro;
+package io.github.meness.easyintro.interfaces;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
@@ -24,23 +24,14 @@ import android.support.v4.app.Fragment;
 
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
-import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.enums.ToggleIndicators;
 
-interface IEasyIntro {
+public interface IConfig {
     void withTranslucentStatusBar(boolean b);
 
-    void withPageIndicator(boolean b);
+    void withPageIndicatorVisibility(boolean b);
 
     void withStatusBarColor(@ColorInt int statusBarColor);
-
-    void withNextSlide();
-
-    void withPreviousSlide();
-
-    void withSlideTo(int page);
-
-    Fragment getCurrentSlide();
 
     void withOffScreenPageLimit(int limit);
 
@@ -52,29 +43,13 @@ interface IEasyIntro {
 
     void withTranslucentNavigationBar(boolean b);
 
-    void withSlide(Fragment slide);
-
     void withSlideTransformer(SlideTransformer transformer);
-
-    boolean isRightIndicatorVisible();
 
     void withRightIndicatorDisabled(boolean b);
 
-    boolean isRightIndicatorDisabled();
-
-    void withRemoveSlide(Class<? extends Fragment> aClass);
-
-    boolean isLeftIndicatorVisible();
-
     void withLeftIndicatorDisabled(boolean b);
 
-    boolean isLeftIndicatorDisabled();
-
     void withToggleIndicators(ToggleIndicators indicators);
-
-    void withSmoothScroll(boolean b);
-
-    boolean isSmoothScrollEnabled();
 
     void withVibrateOnSlide(int intensity);
 
@@ -84,17 +59,11 @@ interface IEasyIntro {
 
     void withPageMargin(int marginPixels);
 
-    int getPageMargin();
-
     void setPageMarginDrawable(Drawable d);
 
     void setPageMarginDrawable(@DrawableRes int resId);
 
     void withToggleIndicatorsSound(boolean b);
-
-    void getIndicatorsContainerHeight(IndicatorsContainerHeight containerHeight);
-
-    void withReplaceSlide(Fragment oldFragment, Fragment newFragment);
 
     void withSlideSound(@RawRes int sound);
 
@@ -103,8 +72,4 @@ interface IEasyIntro {
     void withPageIndicator(PageIndicator pageIndicator);
 
     void withLock(boolean b, Fragment lock);
-
-    boolean isLocked();
-
-    SwipeDirection getSwipeDirection();
 }

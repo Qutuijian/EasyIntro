@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-package io.github.meness.easyintro.enums;
+package io.github.meness.easyintro.interfaces;
 
-import android.support.annotation.LayoutRes;
+public interface ITouch {
+    void onPreviousTouch();
 
-import io.github.meness.easyintro.R;
+    void onNextTouch();
 
-public enum PageIndicator {
-    SPRING(R.layout.indicator_spring), CIRCLE(R.layout.indicator_circle), NONE(-1);
+    void onDoneTouch();
 
-    @LayoutRes
-    private final int mIndicatorRes;
-
-    PageIndicator(@LayoutRes int indicatorRes) {
-        mIndicatorRes = indicatorRes;
-    }
-
-    @LayoutRes
-    public int getIndicatorRes() {
-        return mIndicatorRes;
-    }
+    void onSkipTouch();
 }

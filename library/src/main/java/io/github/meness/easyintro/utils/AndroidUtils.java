@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-package io.github.meness.easyintro.enums;
+package io.github.meness.easyintro.utils;
 
-import android.support.annotation.LayoutRes;
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 
-import io.github.meness.easyintro.R;
+public final class AndroidUtils {
 
-public enum PageIndicator {
-    SPRING(R.layout.indicator_spring), CIRCLE(R.layout.indicator_circle), NONE(-1);
-
-    @LayoutRes
-    private final int mIndicatorRes;
-
-    PageIndicator(@LayoutRes int indicatorRes) {
-        mIndicatorRes = indicatorRes;
+    private AndroidUtils() throws InstantiationException {
+        throw new InstantiationException("This class is not for instantiation");
     }
 
-    @LayoutRes
-    public int getIndicatorRes() {
-        return mIndicatorRes;
+    public static boolean hasVibratePermission(Context context) {
+        int res = context.checkCallingOrSelfPermission(Manifest.permission.VIBRATE);
+        return (res == PackageManager.PERMISSION_GRANTED);
     }
 }

@@ -18,15 +18,15 @@ package io.github.meness.easyintro.app;
 
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.app.fragments.EndFragment;
-import io.github.meness.easyintro.app.fragments.GroupedSlides;
 import io.github.meness.easyintro.app.fragments.HelloFragment;
+import io.github.meness.easyintro.app.fragments.OverlaySlides;
 import io.github.meness.easyintro.enums.SlideTransformer;
 
 public class MyEasyIntro extends EasyIntro {
     @Override
-    protected void init() {
+    protected void initIntro() {
         withSlide(HelloFragment.instantiate(getApplicationContext(), HelloFragment.class.getName()));
-        withSlide(GroupedSlides.instantiate(getApplicationContext(), GroupedSlides.class.getName()));
+        withSlide(OverlaySlides.instantiate(getApplicationContext(), OverlaySlides.class.getName()));
         withSlide(EndFragment.instantiate(getApplicationContext(), EndFragment.class.getName()));
 
         withSlideTransformer(SlideTransformer.ZOOM_OUT_SLIDE);

@@ -21,38 +21,30 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
-import io.github.meness.easyintro.EasyIntroSlidesInside;
+import io.github.meness.easyintro.EasyIntroFragment;
 import io.github.meness.easyintro.app.R;
 
-public class GroupedSlides extends EasyIntroSlidesInside {
-
-    @Override
-    protected void init() {
-        // add slides into the group
-        withSlide(instantiate(getContext(), BackFragment.class.getName()));
-        withSlide(instantiate(getContext(), BackFragment.class.getName()));
-    }
-
+public class LoginFragment extends EasyIntroFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sign, container, false);
+        return inflater.inflate(R.layout.fragment_back, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
+
+        Toast.makeText(getContext(), "Toast from Login Fragment", Toast.LENGTH_SHORT).show();
+
+        Button backBtn = (Button) view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                withReplace(1);
-            }
-        });
-        view.findViewById(R.id.joinBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 withReplace(2);
+                getBaseContext().onBackPressed();
             }
         });
     }

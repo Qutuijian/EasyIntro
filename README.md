@@ -15,7 +15,8 @@ If any (or all) of these questions seem familiar, the **EasyIntro** is the perfe
 * Follows the Google Material Design Guidelines
 * Uses vector (.svg) icons
 * Modify the slides on the go
-* **The Most Notable:** Grouped slides
+* **Overlay slides**
+* **Back stack fully supported for overlay slides**
 * Modify intro settings on the go
 * Comes with multiple default indicators
 * Limit your swipe direction to left and/or right
@@ -24,7 +25,6 @@ If any (or all) of these questions seem familiar, the **EasyIntro** is the perfe
 * Abstract toggle indicator
 * Fragment to have easy access to your intro methods
 * Comes with multiple default slide transformers
-* Automatically fix fragment paddings
 * Based on a ViewPager
 * RTL swipe support
 * Customizable
@@ -64,14 +64,14 @@ public class IntroOneFragment extends EasyIntroFragment {
 ```
 **Note:** By extending `EasyIntroFragment` you have easier access to the intro methods and the layout bottom padding will be modified automatically.
 
-Create an activity which extends `EasyIntro` and override the necessary `init()` method:
+Create an activity which extends `EasyIntro` and override the necessary `initIntro()` method:
 ```java
 public class MyEasyIntro extends EasyIntro {
     
     // override all listeners you need
     
     @Override
-    protected void init() {
+    protected void initIntro() {
         // use withSlide() to add Fragments and
         // modify intro settings here
     }

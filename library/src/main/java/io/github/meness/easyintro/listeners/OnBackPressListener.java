@@ -14,20 +14,8 @@
  * limitations under the License.
  */
 
-package io.github.meness.easyintro;
+package io.github.meness.easyintro.listeners;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-
-public final class AndroidUtils {
-
-    private AndroidUtils() throws InstantiationException {
-        throw new InstantiationException("This class is not for instantiation");
-    }
-
-    public static boolean hasVibratePermission(Context context) {
-        int res = context.checkCallingOrSelfPermission(Manifest.permission.VIBRATE);
-        return (res == PackageManager.PERMISSION_GRANTED);
-    }
+public interface OnBackPressListener {
+    boolean onBackPressed();
 }

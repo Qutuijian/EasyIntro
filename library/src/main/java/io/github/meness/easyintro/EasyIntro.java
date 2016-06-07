@@ -17,558 +17,257 @@
 package io.github.meness.easyintro;
 
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
-
-import com.mikepenz.materialize.MaterializeBuilder;
-
-import java.lang.reflect.InvocationTargetException;
 
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
-import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.enums.ToggleIndicators;
-import io.github.meness.easyintro.listeners.OnToggleIndicatorsClickListener;
-import io.github.meness.easyintro.views.DirectionalViewPager;
-import io.github.meness.easyintro.views.LeftToggleIndicator;
-import io.github.meness.easyintro.views.RightToggleIndicator;
+import io.github.meness.easyintro.interfaces.IConfig;
+import io.github.meness.easyintro.interfaces.ISlide;
+import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
 
-public abstract class EasyIntro extends AppCompatActivity implements IEasyIntro, OnToggleIndicatorsClickListener {
+public abstract class EasyIntro extends AppCompatActivity implements EasyIntroInteractionsListener, ISlide, IConfig {
     public static final String TAG = EasyIntro.class.getSimpleName();
-    private final EasyIntroPagerAdapter mAdapter = new EasyIntroPagerAdapter(getSupportFragmentManager());
-    private ViewGroup mIndicatorsContainer;
-    private DirectionalViewPager mPager;
-    private MaterializeBuilder materializeBuilder;
-    @RawRes
-    private int mSoundRes;
-    @LayoutRes
-    private int mIndicatorRes;
-    private RightToggleIndicator mRightIndicator;
-    private LeftToggleIndicator mLeftIndicator;
-    private ToggleIndicators mToggleIndicators = ToggleIndicators.DEFAULT;
-    private boolean mSmoothScroll = true;
-    private Vibrator mVibrator;
-    private int mVibrateIntensity = 20;
-    private boolean mVibrate;
-    private boolean mRtlSwipe;
-    private boolean mRightIndicatorEnabled = true;
-    private boolean mLeftIndicatorEnabled = true;
-    private SwipeDirection mSwipeDirection = SwipeDirection.ALL;
-    private Fragment mLockOn;
-
-    @CallSuper
-    public void onSlideChanged(Fragment fragment) {
-        if (mSoundRes != 0) {
-            MediaPlayer.create(getApplicationContext(), mSoundRes).start();
-        }
-        if (mVibrate) {
-            mVibrator.vibrate(mVibrateIntensity);
-        }
-
-        updateToggleIndicators();
-
-        if (fragment == mLockOn) {
-            lockEverything(true);
-        }
-    }
-
-    private void updateToggleIndicators() {
-        if (mToggleIndicators == ToggleIndicators.NONE) {
-            hideLeftIndicator();
-            hideRightIndicator();
-            return;
-        }
-
-        int slidesCount = mAdapter.getCount() - 1;
-        int totalSlides = mAdapter.getCount();
-        int currentItem = mPager.getCurrentItem();
-
-        if (totalSlides == 0) {
-            hideLeftIndicator();
-            hideRightIndicator();
-        } else if (totalSlides == 1) {
-            hideLeftIndicator();
-            showRightIndicator();
-            mRightIndicator.makeItDone();
-        } else {
-            showRightIndicator();
-            if (mToggleIndicators == ToggleIndicators.NO_LEFT_INDICATOR) {
-                hideLeftIndicator();
-            } else {
-                showLeftIndicator();
-            }
-        }
-
-        if (currentItem == slidesCount) {
-            mRightIndicator.makeItDone();
-            mLeftIndicator.makeItPrevious();
-        } else if (currentItem < slidesCount) {
-            if (currentItem == 0) {
-                if (mToggleIndicators == ToggleIndicators.WITHOUT_SKIP || mToggleIndicators == ToggleIndicators.NO_LEFT_INDICATOR) {
-                    hideLeftIndicator();
-                } else {
-                    mLeftIndicator.makeItSkip();
-                    showLeftIndicator();
-                }
-            } else {
-                if (mToggleIndicators == ToggleIndicators.NO_LEFT_INDICATOR) {
-                    hideLeftIndicator();
-                } else {
-                    mLeftIndicator.makeItPrevious();
-                    showLeftIndicator();
-                }
-            }
-            mRightIndicator.makeItNext();
-        }
-    }
-
-    private void lockEverything(boolean b) {
-        if (b) {
-            mPager.setAllowedSwipeDirection(SwipeDirection.NONE);
-        } else {
-            withSwipeDirection(mSwipeDirection);
-        }
-        mLeftIndicator.withDisabled(mLeftIndicatorEnabled);
-        mRightIndicator.withDisabled(mRightIndicatorEnabled);
-    }
-
-    private void hideLeftIndicator() {
-        mLeftIndicator.hide();
-    }
-
-    private void hideRightIndicator() {
-        mRightIndicator.hide();
-    }
-
-    private void showRightIndicator() {
-        mRightIndicator.show();
-    }
-
-    private void showLeftIndicator() {
-        mLeftIndicator.show();
-    }
-
-    private void withSwipeDirection(SwipeDirection direction) {
-        mSwipeDirection = direction;
-        mPager.setAllowedSwipeDirection(direction);
-    }
+    private CarouselFragment carouselFragment;
 
     @Override
-    public final void onRightToggleClick() {
-        int slidesCount = mAdapter.getCount() - 1;
-        int currentItem = mPager.getCurrentItem();
-        int nextItem = currentItem + 1;
-
-        // we're on the last slide
-        if (currentItem == slidesCount) {
-            onDonePressed(mAdapter.getRegisteredFragment(currentItem));
-        }
-        // we're going to the last slide
-        else if (nextItem == slidesCount) {
-            mLeftIndicator.makeItPrevious();
-            mRightIndicator.makeItDone();
-            onNextPressed(mAdapter.getRegisteredFragment(nextItem));
-        }
-        // we're going to the next slide
-        else {
-            mLeftIndicator.makeItPrevious();
-            onNextPressed(mAdapter.getRegisteredFragment(currentItem));
-        }
-    }
-
-    @Override
-    public final void onLeftToggleClick() {
-        int currentItem = mPager.getCurrentItem();
-        int previousItem = currentItem - 1;
-
-        // we're on the first slide
-        if (currentItem == 0) {
-            onSkipPressed(mAdapter.getRegisteredFragment(currentItem));
-        }
-        // we're going to the first slide
-        else if (previousItem == 0) {
-            mRightIndicator.makeItNext();
-            mLeftIndicator.makeItSkip();
-            onPreviousPressed(mAdapter.getRegisteredFragment(previousItem));
-        }
-        // we're going to the previous slide
-        else {
-            mRightIndicator.makeItNext();
-            mLeftIndicator.makeItPrevious();
-            onPreviousPressed(mAdapter.getRegisteredFragment(currentItem));
-        }
-    }
-
-    @CallSuper
-    public void onSkipPressed(Fragment fragment) {
+    public void onPreviousTouch() {
         // empty
     }
 
-    @CallSuper
-    public void onPreviousPressed(Fragment fragment) {
-        withPreviousSlide();
-    }
-
-    @CallSuper
-    public void onDonePressed(Fragment fragment) {
+    @Override
+    public void onNextTouch() {
         // empty
     }
 
-    @CallSuper
-    public void onNextPressed(Fragment fragment) {
-        withNextSlide();
+    @Override
+    public void onDoneTouch() {
+        // empty
+    }
+
+    @Override
+    public void onSkipTouch() {
+        // empty
+    }
+
+    protected final CarouselFragment getCarouselFragment() {
+        return carouselFragment;
     }
 
     /**
-     * Set custom indicator. The indicator must have the `setViewPager(ViewPager)` method.
-     * Indicator could be set once inside {@link #init()}.
-     *
-     * @param indicator Custom indicator resource
+     * Only Activity has this special callback method
+     * Fragment doesn't have any onBackPressed callback
+     * <p/>
+     * Logic:
+     * Each time when the back button is pressed, this Activity will propagate the call to the
+     * container Fragment and that Fragment will propagate the call to its each tab Fragment
+     * those Fragments will propagate this method call to their child Fragments and
+     * eventually all the propagated calls will get back to this initial method
+     * <p/>
+     * If the container Fragment or any of its Tab Fragments and/or Tab child Fragments couldn't
+     * handle the onBackPressed propagated call then this Activity will handle the callback itself
      */
-    public final void withPageIndicator(@LayoutRes int indicator) {
-        mIndicatorRes = indicator;
+    @Override
+    public final void onBackPressed() {
+        if (!carouselFragment.onBackPressed()) {
+            // container Fragment or its associates couldn't handle the back pressed task
+            // delegating the task to super class
+            super.onBackPressed();
+
+        } // else: carousel handled the back pressed task
+        // do not call super
     }
 
     @Override
-    public final void withTranslucentStatusBar(boolean b) {
-        materializeBuilder.withTranslucentStatusBarProgrammatically(b);
+    public final void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity);
+
+        initCarousel(savedInstanceState);
     }
 
-    @Override
-    public final void withPageIndicator(boolean b) {
-        mIndicatorsContainer.findViewById(R.id.pageIndicator).setVisibility(b ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public final void withStatusBarColor(@ColorInt int statusBarColor) {
-        materializeBuilder.withStatusBarColor(statusBarColor);
-    }
-
-    @Override
-    public final void withNextSlide() {
-        mPager.setCurrentItem(mPager.getCurrentItem() + 1, mSmoothScroll);
-    }
-
-    @Override
-    public final void withPreviousSlide() {
-        mPager.setCurrentItem(mPager.getCurrentItem() - 1, mSmoothScroll);
-    }
-
-    @Override
-    public final void withSlideTo(int page) {
-        mPager.setCurrentItem(page, mSmoothScroll);
-    }
-
-    @Override
-    public final Fragment getCurrentSlide() {
-        return mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-    }
-
-    @Override
-    public final void withOffScreenPageLimit(int limit) {
-        mPager.setOffscreenPageLimit(limit);
-    }
-
-    @Override
-    public final void withTransparentStatusBar(boolean b) {
-        materializeBuilder.withTransparentStatusBar(b);
-    }
-
-    @Override
-    public final void withTransparentNavigationBar(boolean b) {
-        materializeBuilder.withTransparentNavigationBar(b);
-    }
-
-    @Override
-    public final void withFullscreen(boolean b) {
-        materializeBuilder.withSystemUIHidden(b);
-    }
-
-    @Override
-    public final void withTranslucentNavigationBar(boolean b) {
-        materializeBuilder.withTranslucentNavigationBarProgrammatically(b);
-    }
-
-    @Override
-    public final void withSlide(Fragment slide) {
-        mAdapter.addFragment(slide);
-        updateToggleIndicators();
-    }
-
-    @Override
-    public final void withSlideTransformer(SlideTransformer transformer) {
-        mPager.setPageTransformer(true, transformer.getTransformer());
-    }
-
-    @Override
-    public final boolean isRightIndicatorVisible() {
-        return mRightIndicator.isVisible();
-    }
-
-    @Override
-    public final void withRightIndicatorDisabled(boolean b) {
-        mRightIndicatorEnabled = b;
-        mRightIndicator.withDisabled(b);
-    }
-
-    @Override
-    public final boolean isRightIndicatorDisabled() {
-        return mRightIndicator.isDisabled();
-    }
-
-    @Override
-    public final void withRemoveSlide(Class<? extends Fragment> aClass) {
-        mAdapter.removeFragment(aClass);
-    }
-
-    @Override
-    public final boolean isLeftIndicatorVisible() {
-        return mLeftIndicator.isVisible();
-    }
-
-    @Override
-    public final void withLeftIndicatorDisabled(boolean b) {
-        mLeftIndicatorEnabled = b;
-        mLeftIndicator.withDisabled(b);
-    }
-
-    @Override
-    public final boolean isLeftIndicatorDisabled() {
-        return mLeftIndicator.isDisabled();
-    }
-
-    @Override
-    public final void withToggleIndicators(ToggleIndicators indicators) {
-        mToggleIndicators = indicators;
-
-        // RTL swipe support
-        if (mRtlSwipe && indicators.getSwipeDirection() == SwipeDirection.LEFT) {
-            withSwipeDirection(SwipeDirection.RIGHT);
+    private void initCarousel(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            // withholding the previously created fragment from being created again
+            // On orientation change, it will prevent fragment recreation
+            // its necessary to reserve the fragment stack inside each tab
+            // Creating the ViewPager container fragment once
+            carouselFragment = (CarouselFragment) CarouselFragment.instantiate(getApplicationContext(), CarouselFragment.class.getName());
+            carouselFragment.setInteractionsListener(this);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, carouselFragment)
+                    .commit();
         } else {
-            withSwipeDirection(indicators.getSwipeDirection());
+            // restoring the previously created fragment
+            // and getting the reference
+            carouselFragment = (CarouselFragment) getSupportFragmentManager().getFragments().get(0);
         }
     }
 
     @Override
-    public final void withSmoothScroll(boolean b) {
-        mSmoothScroll = b;
+    @CallSuper
+    public void onCarouselViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        initIntro();
+    }
+
+    protected abstract void initIntro();
+
+    @Override
+    public void withTranslucentStatusBar(boolean b) {
+        carouselFragment.withTranslucentStatusBar(b);
     }
 
     @Override
-    public final boolean isSmoothScrollEnabled() {
-        return mSmoothScroll;
+    public void withPageIndicatorVisibility(boolean b) {
+        carouselFragment.withPageIndicatorVisibility(b);
     }
 
     @Override
-    /**
-     * @param intensity Desired intensity
-     */
-    public final void withVibrateOnSlide(int intensity) {
-        setVibrateEnabled();
-        mVibrateIntensity = intensity;
+    public void withStatusBarColor(@ColorInt int statusBarColor) {
+        carouselFragment.withStatusBarColor(statusBarColor);
     }
 
     @Override
-    /**
-     * Enable vibration on slide with default 20 vibration intensity.
-     * Needs {@link android.Manifest.permission#VIBRATE} permission
-     *
-     * @see EasyIntro#withVibrateOnSlide(int)
-     */
-    public final void withVibrateOnSlide() {
-        setVibrateEnabled();
-        mVibrate = true;
+    public void withOffScreenPageLimit(int limit) {
+        carouselFragment.withOffScreenPageLimit(limit);
     }
 
     @Override
-    public final void withRtlSwipe() {
-        mRtlSwipe = true;
+    public void withTransparentStatusBar(boolean b) {
+        carouselFragment.withTransparentStatusBar(b);
     }
 
     @Override
-    /**
-     * @see ViewPager#setPageMargin(int)
-     */
-    public final void withPageMargin(int marginPixels) {
-        mPager.setPageMargin(marginPixels);
+    public void withTransparentNavigationBar(boolean b) {
+        carouselFragment.withTransparentNavigationBar(b);
     }
 
     @Override
-    public final int getPageMargin() {
-        return mPager.getPageMargin();
+    public void withFullscreen(boolean b) {
+        carouselFragment.withFullscreen(b);
     }
 
     @Override
-    /**
-     * @see ViewPager#setPageMarginDrawable(Drawable)
-     */
-    public final void setPageMarginDrawable(Drawable d) {
-        mPager.setPageMarginDrawable(d);
+    public void withTranslucentNavigationBar(boolean b) {
+        carouselFragment.withTranslucentNavigationBar(b);
     }
 
     @Override
-    /**
-     * @see ViewPager#setPageMarginDrawable(int)
-     */
-    public final void setPageMarginDrawable(@DrawableRes int resId) {
-        mPager.setPageMarginDrawable(resId);
+    public void withSlideTransformer(SlideTransformer transformer) {
+        carouselFragment.withSlideTransformer(transformer);
     }
 
     @Override
-    public final void withToggleIndicatorsSound(boolean b) {
-        mLeftIndicator.setSoundEffectsEnabled(b);
-        mRightIndicator.setSoundEffectsEnabled(b);
+    public void withRightIndicatorDisabled(boolean b) {
+        carouselFragment.withRightIndicatorDisabled(b);
     }
 
     @Override
-    public final void getIndicatorsContainerHeight(final IndicatorsContainerHeight containerHeight) {
-        mIndicatorsContainer.post(new Runnable() {
-            @Override
-            public void run() {
-                containerHeight.call(mIndicatorsContainer.getHeight());
-            }
-        });
+    public void withLeftIndicatorDisabled(boolean b) {
+        carouselFragment.withLeftIndicatorDisabled(b);
     }
 
     @Override
-    public final void withReplaceSlide(Fragment oldFragment, Fragment newFragment) {
-        mAdapter.replaceFragment(oldFragment, newFragment);
+    public void withToggleIndicators(ToggleIndicators indicators) {
+        carouselFragment.withToggleIndicators(indicators);
     }
 
     @Override
-    /**
-     * Play a sound while sliding.
-     * Pass 0 for no sound (default)
-     *
-     * @param sound Sound raw resource
-     */
-    public final void withSlideSound(@RawRes int sound) {
-        mSoundRes = sound;
+    public void withVibrateOnSlide(int intensity) {
+        carouselFragment.withVibrateOnSlide(intensity);
     }
 
     @Override
-    /**
-     * @see android.view.View#setOverScrollMode(int)
-     */
-    public final void withOverScrollMode(int mode) {
-        mPager.setOverScrollMode(mode);
+    public void withVibrateOnSlide() {
+        carouselFragment.withVibrateOnSlide();
     }
 
     @Override
-    /**
-     * Set predefined indicator.
-     * Indicator could be set once inside {@link #init()}.
-     *
-     * @param pageIndicator Custom indicator
-     */
-    public final void withPageIndicator(PageIndicator pageIndicator) {
-        mIndicatorRes = pageIndicator.getIndicatorRes();
+    public void withRtlSwipe() {
+        carouselFragment.withRtlSwipe();
+    }
+
+    @Override
+    public void withPageMargin(int marginPixels) {
+        carouselFragment.withPageMargin(marginPixels);
+    }
+
+    @Override
+    public void setPageMarginDrawable(Drawable d) {
+        carouselFragment.setPageMarginDrawable(d);
+    }
+
+    @Override
+    public void setPageMarginDrawable(@DrawableRes int resId) {
+        carouselFragment.setPageMarginDrawable(resId);
+    }
+
+    @Override
+    public void withToggleIndicatorsSound(boolean b) {
+        carouselFragment.withToggleIndicatorsSound(b);
+    }
+
+    @Override
+    public void withSlideSound(@RawRes int sound) {
+        carouselFragment.withSlideSound(sound);
+    }
+
+    @Override
+    public void withOverScrollMode(int mode) {
+        carouselFragment.withOverScrollMode(mode);
+    }
+
+    @Override
+    public void withPageIndicator(PageIndicator pageIndicator) {
+        carouselFragment.withPageIndicator(pageIndicator);
     }
 
     @Override
     public void withLock(boolean b, Fragment lock) {
-        if (b) {
-            mLockOn = lock;
-        } else {
-            mLockOn = null;
-            lockEverything(false);
-        }
+        carouselFragment.withLock(b, lock);
     }
 
     @Override
-    public boolean isLocked() {
-        return getSwipeDirection() == SwipeDirection.NONE;
+    public void withNextSlide(boolean smoothScroll) {
+        carouselFragment.withNextSlide(smoothScroll);
     }
 
     @Override
-    public SwipeDirection getSwipeDirection() {
-        return mPager.getSwipeDirection();
-    }
-
-    private void setVibrateEnabled() {
-        if (!AndroidUtils.hasVibratePermission(getApplicationContext())) {
-            Log.d(TAG, getString(R.string.exception_permission_vibrate));
-            return;
-        }
-        mVibrate = true;
+    public void withPreviousSlide(boolean smoothScroll) {
+        carouselFragment.withPreviousSlide(smoothScroll);
     }
 
     @Override
-    protected final void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewpager);
-
-        // native init
-        materializeBuilder = new MaterializeBuilder(this);
-        mPager = (DirectionalViewPager) findViewById(R.id.pager);
-        mIndicatorsContainer = (ViewGroup) findViewById(R.id.indicatorsContainer);
-        mRightIndicator = (RightToggleIndicator) findViewById(R.id.nextIndicator);
-        mLeftIndicator = (LeftToggleIndicator) findViewById(R.id.previousIndicator);
-        mVibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
-
-        // user init
-        init();
-
-        // finalize
-        materializeBuilder.build();
-        mPager.addOnPageChangeListener(new OnPageChangeListener());
-        mRightIndicator.setListener(EasyIntro.this);
-        mLeftIndicator.setListener(EasyIntro.this);
-        mPager.setAdapter(mAdapter);
-        addIndicator();
-        updateToggleIndicators();
+    public void withSlideTo(int page, boolean smoothScroll) {
+        carouselFragment.withSlideTo(page, smoothScroll);
     }
 
-    protected abstract void init();
-
-    private void addIndicator() {
-        // circle indicator by default
-        if (mIndicatorRes == 0) {
-            withPageIndicator(PageIndicator.CIRCLE);
-        }
-        ViewStub viewStub = (ViewStub) mIndicatorsContainer.findViewById(R.id.pageIndicator);
-        viewStub.setLayoutResource(mIndicatorRes);
-        // id must be set
-        viewStub.inflate().setId(R.id.pageIndicator);
-        setViewPagerToPageIndicator();
+    @Override
+    public Fragment getCurrentSlide() {
+        return carouselFragment.getCurrentSlide();
     }
 
-    private void setViewPagerToPageIndicator() {
-        try {
-            View view = mIndicatorsContainer.findViewById(R.id.pageIndicator);
-            // invoke indicator `setViewPager(ViewPager)` method
-            view.getClass().getMethod("setViewPager", ViewPager.class).invoke(view, mPager);
-        } catch (NoSuchMethodException e) {
-            Log.e(TAG, getString(R.string.exception_no_such_method_set_view_pager));
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            Log.e(TAG, getString(R.string.exception_invocation_target_set_view_pager));
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            Log.e(TAG, getString(R.string.exception_illegal_access_set_view_pager));
-            e.printStackTrace();
-        }
+    @Override
+    public void withSlide(Fragment slide) {
+        carouselFragment.withSlide(slide);
     }
 
-    private class OnPageChangeListener extends ViewPager.SimpleOnPageChangeListener {
-        @Override
-        public void onPageSelected(int position) {
-            super.onPageSelected(position);
-            onSlideChanged(mAdapter.getItem(position));
-        }
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container) {
+        carouselFragment.withOverlaySlide(slide, container);
+    }
+
+    @Override
+    public void withSlideTo(Class<Fragment> aClass, boolean smoothScroll) {
+        carouselFragment.withSlideTo(aClass, smoothScroll);
     }
 }

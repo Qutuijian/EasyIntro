@@ -42,13 +42,13 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile "com.android.support:appcompat-v7:{$rootProject.ext.supportLibVersion}"
+    compile "com.android.support:support-annotations:{$rootProject.ext.supportLibVersion}"
     compile('com.mikepenz:materialize:0.8.8@aar') {
         transitive = true
     }
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
     compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
-    compile 'me.relex:circleindicator:1.1.9@aar'
-    compile "com.android.support:support-annotations:{$rootProject.ext.supportLibVersion}"
+    compile 'me.relex:circleindicator:1.2.1@aar'
 }
 
 apply from: '../publish-closure.gradle'

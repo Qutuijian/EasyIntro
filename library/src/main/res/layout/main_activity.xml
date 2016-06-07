@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright 2016 Alireza Eskandarpour Shoferi
   ~
@@ -14,11 +15,11 @@
   ~ limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">EasyIntro</string>
-    <string name="back">Back!</string>
-    <string name="login">Login</string>
-    <string name="join">Join</string>
-    <string name="overlay_slides">Overlay Slides</string>
-    <string name="hello">Hello World</string>
-</resources>
+
+<FrameLayout
+    android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</FrameLayout>

@@ -16,233 +16,114 @@
 
 package io.github.meness.easyintro;
 
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.RawRes;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 
-import io.github.meness.easyintro.enums.PageIndicator;
-import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.SwipeDirection;
-import io.github.meness.easyintro.enums.ToggleIndicators;
+import io.github.meness.easyintro.interfaces.ICheck;
+import io.github.meness.easyintro.interfaces.ISlide;
+import io.github.meness.easyintro.interfaces.ITouch;
+import io.github.meness.easyintro.listeners.OnBackPressListener;
+import io.github.meness.easyintro.utils.BackPressImpl;
 
-public class EasyIntroFragment extends Fragment implements IEasyIntro {
-
-    @Override
-    public void withTranslucentStatusBar(boolean b) {
-        getEasyIntro().withTranslucentStatusBar(b);
-    }
-
-    public final EasyIntro getEasyIntro() {
-        return (EasyIntro) getContext();
-    }
+public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouch, OnBackPressListener {
 
     @Override
-    public void withPageIndicator(boolean b) {
-        getEasyIntro().withPageIndicator(b);
+    public void withNextSlide(boolean smoothScroll) {
+        getBaseContext().withNextSlide(smoothScroll);
     }
 
-    @Override
-    public void withStatusBarColor(@ColorInt int statusBarColor) {
-        getEasyIntro().withStatusBarColor(statusBarColor);
+    protected final CarouselFragment getBaseContext() {
+        return ((EasyIntro) getContext()).getCarouselFragment();
     }
 
     @Override
-    public void withNextSlide() {
-        getEasyIntro().withNextSlide();
+    public void withPreviousSlide(boolean smoothScroll) {
+        getBaseContext().withPreviousSlide(smoothScroll);
     }
 
     @Override
-    public void withPreviousSlide() {
-        getEasyIntro().withPreviousSlide();
-    }
-
-    @Override
-    public void withSlideTo(int page) {
-        getEasyIntro().withSlideTo(page);
+    public void withSlideTo(int page, boolean smoothScroll) {
+        getBaseContext().withSlideTo(page, smoothScroll);
     }
 
     @Override
     public Fragment getCurrentSlide() {
-        return getEasyIntro().getCurrentSlide();
-    }
-
-    @Override
-    public void withOffScreenPageLimit(int limit) {
-        getEasyIntro().withOffScreenPageLimit(limit);
-    }
-
-    @Override
-    public void withTransparentStatusBar(boolean b) {
-        getEasyIntro().withTransparentStatusBar(b);
-    }
-
-    @Override
-    public void withTransparentNavigationBar(boolean b) {
-        getEasyIntro().withTransparentNavigationBar(b);
-    }
-
-    @Override
-    public void withFullscreen(boolean b) {
-        getEasyIntro().withFullscreen(b);
-    }
-
-    @Override
-    public void withTranslucentNavigationBar(boolean b) {
-        getEasyIntro().withTranslucentNavigationBar(b);
+        return getBaseContext().getCurrentSlide();
     }
 
     @Override
     public void withSlide(Fragment slide) {
-        getEasyIntro().withSlide(slide);
+        getBaseContext().withSlide(slide);
     }
 
     @Override
-    public void withSlideTransformer(SlideTransformer transformer) {
-        getEasyIntro().withSlideTransformer(transformer);
+    public void withOverlaySlide(Fragment slide, @IdRes int container) {
+        getBaseContext().withOverlaySlide(slide, container);
     }
 
     @Override
-    public boolean isRightIndicatorVisible() {
-        return getEasyIntro().isRightIndicatorVisible();
-    }
-
-    @Override
-    public void withRightIndicatorDisabled(boolean b) {
-        getEasyIntro().withRightIndicatorDisabled(b);
-    }
-
-    @Override
-    public boolean isRightIndicatorDisabled() {
-        return getEasyIntro().isRightIndicatorDisabled();
-    }
-
-    @Override
-    public void withRemoveSlide(Class<? extends Fragment> aClass) {
-        getEasyIntro().withRemoveSlide(aClass);
-    }
-
-    @Override
-    public boolean isLeftIndicatorVisible() {
-        return getEasyIntro().isLeftIndicatorVisible();
-    }
-
-    @Override
-    public void withLeftIndicatorDisabled(boolean b) {
-        getEasyIntro().withLeftIndicatorDisabled(b);
-    }
-
-    @Override
-    public boolean isLeftIndicatorDisabled() {
-        return getEasyIntro().isLeftIndicatorDisabled();
-    }
-
-    @Override
-    public void withToggleIndicators(ToggleIndicators indicators) {
-        getEasyIntro().withToggleIndicators(indicators);
-    }
-
-    @Override
-    public void withSmoothScroll(boolean b) {
-        getEasyIntro().withSmoothScroll(b);
-    }
-
-    @Override
-    public boolean isSmoothScrollEnabled() {
-        return getEasyIntro().isSmoothScrollEnabled();
-    }
-
-    @Override
-    public void withVibrateOnSlide(int intensity) {
-        getEasyIntro().withVibrateOnSlide(intensity);
-    }
-
-    @Override
-    public void withVibrateOnSlide() {
-        getEasyIntro().withVibrateOnSlide();
-    }
-
-    @Override
-    public void withRtlSwipe() {
-        getEasyIntro().withRtlSwipe();
-    }
-
-    @Override
-    public void withPageMargin(int marginPixels) {
-        getEasyIntro().withPageMargin(marginPixels);
-    }
-
-    @Override
-    public int getPageMargin() {
-        return getEasyIntro().getPageMargin();
-    }
-
-    @Override
-    public void setPageMarginDrawable(Drawable d) {
-        getEasyIntro().setPageMarginDrawable(d);
-    }
-
-    @Override
-    public void setPageMarginDrawable(@DrawableRes int resId) {
-        getEasyIntro().setPageMarginDrawable(resId);
-    }
-
-    @Override
-    public void withToggleIndicatorsSound(boolean b) {
-        getEasyIntro().withToggleIndicatorsSound(b);
-    }
-
-    @Override
-    public void getIndicatorsContainerHeight(IndicatorsContainerHeight containerHeight) {
-        getEasyIntro().getIndicatorsContainerHeight(containerHeight);
-    }
-
-    @Override
-    public void withReplaceSlide(Fragment oldFragment, Fragment newFragment) {
-        getEasyIntro().withReplaceSlide(oldFragment, newFragment);
-    }
-
-    @Override
-    public void withSlideSound(@RawRes int sound) {
-        getEasyIntro().withSlideSound(sound);
-    }
-
-    @Override
-    public void withOverScrollMode(int mode) {
-        getEasyIntro().withOverScrollMode(mode);
-    }
-
-    @Override
-    public void withPageIndicator(PageIndicator pageIndicator) {
-        getEasyIntro().withPageIndicator(pageIndicator);
-    }
-
-    @Override
-    public void withLock(boolean b, Fragment lock) {
-        getEasyIntro().withLock(b, lock);
+    public void withSlideTo(Class<Fragment> aClass, boolean smoothScroll) {
+        getBaseContext().withSlideTo(aClass, smoothScroll);
     }
 
     @Override
     public boolean isLocked() {
-        return getEasyIntro().isLocked();
+        return getBaseContext().isLocked();
     }
 
     @Override
     public SwipeDirection getSwipeDirection() {
-        return getEasyIntro().getSwipeDirection();
+        return getBaseContext().getSwipeDirection();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getEasyIntro().getIndicatorsContainerHeight(new IndicatorsContainerHeight() {
-            @Override
-            public void call(int height) {
-                getView().setPadding(0, 0, 0, height);
-            }
-        });
+    public int getPageMargin() {
+        return getBaseContext().getPageMargin();
+    }
+
+    @Override
+    public boolean isRightIndicatorVisible() {
+        return getBaseContext().isRightIndicatorVisible();
+    }
+
+    @Override
+    public boolean isRightIndicatorDisabled() {
+        return getBaseContext().isRightIndicatorDisabled();
+    }
+
+    @Override
+    public boolean isLeftIndicatorVisible() {
+        return getBaseContext().isLeftIndicatorVisible();
+    }
+
+    @Override
+    public boolean isLeftIndicatorDisabled() {
+        return getBaseContext().isLeftIndicatorDisabled();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        return new BackPressImpl(this).onBackPressed();
+    }
+
+    @Override
+    public void onPreviousTouch() {
+        // empty
+    }
+
+    @Override
+    public void onNextTouch() {
+        // empty
+    }
+
+    @Override
+    public void onDoneTouch() {
+        // empty
+    }
+
+    @Override
+    public void onSkipTouch() {
+        // empty
     }
 }
