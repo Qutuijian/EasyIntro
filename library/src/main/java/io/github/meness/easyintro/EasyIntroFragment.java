@@ -64,6 +64,10 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
         return getBaseContext().isLeftIndicatorDisabled();
     }
 
+    protected final EasyIntroCarouselFragment getBaseContext() {
+        return ((EasyIntro) getContext()).getCarouselFragment();
+    }
+
     @Override
     public boolean onBackPressed() {
         return new BackPressImpl(this).onBackPressed();
@@ -112,10 +116,6 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     @Override
     public void withNextSlide(boolean smoothScroll) {
         getBaseContext().withNextSlide(smoothScroll);
-    }
-
-    protected final EasyIntroCarouselFragment getBaseContext() {
-        return ((EasyIntro) getContext()).getCarouselFragment();
     }
 
     @Override

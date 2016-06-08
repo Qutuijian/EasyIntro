@@ -119,16 +119,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
         updateToggleIndicators();
     }
 
-    /**
-     * set custom indicator. The indicator must have the `setViewPager(ViewPager)` method
-     *
-     * @param resId Custom indicator resource
-     */
-    @Override
-    public final void withPageIndicator(@LayoutRes int resId) {
-        mIndicatorRes = resId;
-    }
-
     @Override
     public final void withTranslucentStatusBar(boolean b) {
         mMaterializeBuilder.withTranslucentStatusBarProgrammatically(b);
@@ -269,6 +259,16 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @Override
     public void withLeftIndicatorDisabled(boolean b) {
         mLeftIndicator.withDisabled(b);
+    }
+
+    /**
+     * set custom indicator. The indicator must have the `setViewPager(ViewPager)` method
+     *
+     * @param resId Custom indicator resource
+     */
+    @Override
+    public final void withPageIndicator(@LayoutRes int resId) {
+        mIndicatorRes = resId;
     }
 
     private void setVibrateEnabled() {
