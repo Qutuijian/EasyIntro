@@ -124,6 +124,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
      *
      * @param indicator Custom indicator resource
      */
+    @Override
     public final void withPageIndicator(@LayoutRes int indicator) {
         mIndicatorRes = indicator;
     }

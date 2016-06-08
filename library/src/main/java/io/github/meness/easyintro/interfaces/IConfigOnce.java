@@ -19,6 +19,7 @@ package io.github.meness.easyintro.interfaces;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.RawRes;
 
 import io.github.meness.easyintro.EasyIntro;
@@ -74,4 +75,6 @@ public interface IConfigOnce {
 
     // disable indicator globally
     void withLeftIndicatorDisabled(boolean b);
+
+    void withPageIndicator(@LayoutRes int indicator);
 }

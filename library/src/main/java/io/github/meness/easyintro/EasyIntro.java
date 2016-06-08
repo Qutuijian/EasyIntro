@@ -22,6 +22,7 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
@@ -225,6 +226,11 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     @Override
     public void withLeftIndicatorDisabled(boolean b) {
         carouselFragment.withLeftIndicatorDisabled(b);
+    }
+
+    @Override
+    public void withPageIndicator(@LayoutRes int indicator) {
+        carouselFragment.withPageIndicator(indicator);
     }
 
     @Override
