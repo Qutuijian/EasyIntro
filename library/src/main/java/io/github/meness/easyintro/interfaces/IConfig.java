@@ -16,7 +16,9 @@
 
 package io.github.meness.easyintro.interfaces;
 
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.EasyIntroFragment;
@@ -34,4 +36,18 @@ public interface IConfig {
     void withLeftIndicatorDisabled(boolean b, @NonNull Class slide);
 
     void withBothIndicatorsDisabled(boolean b, Class slide);
+
+    void withNextSlide(boolean smoothScroll);
+
+    void withPreviousSlide(boolean smoothScroll);
+
+    void withSlideTo(int page, boolean smoothScroll);
+
+    Fragment getCurrentSlide();
+
+    void withSlide(Fragment slide);
+
+    void withOverlaySlide(Fragment slide, @IdRes int container);
+
+    void withSlideTo(Class slideClass, boolean smoothScroll);
 }

@@ -20,11 +20,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import io.github.meness.easyintro.interfaces.ITouch;
+import io.github.meness.easyintro.interfaces.ISlide;
 
 /**
  * {@link io.github.meness.easyintro.EasyIntro}
  */
-public interface EasyIntroInteractionsListener extends ITouch {
+public interface EasyIntroInteractionsListener extends ISlide {
     void onCarouselViewCreated(View view, @Nullable Bundle savedInstanceState);
 }

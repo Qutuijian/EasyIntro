@@ -34,31 +34,30 @@ import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.ToggleIndicator;
 import io.github.meness.easyintro.interfaces.IConfig;
 import io.github.meness.easyintro.interfaces.IConfigOnce;
-import io.github.meness.easyintro.interfaces.ISlide;
 import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
 
-public abstract class EasyIntro extends AppCompatActivity implements EasyIntroInteractionsListener, ISlide, IConfig, IConfigOnce {
+public abstract class EasyIntro extends AppCompatActivity implements EasyIntroInteractionsListener, IConfig, IConfigOnce {
     public static final String TAG = EasyIntro.class.getSimpleName();
     private EasyIntroCarouselFragment carouselFragment;
 
     @Override
-    public void onPreviousTouch() {
-        // empty
+    public void onPreviousSlide() {
+
     }
 
     @Override
-    public void onNextTouch() {
-        // empty
+    public void onNextSlide() {
+
     }
 
     @Override
-    public void onDoneTouch() {
-        // empty
+    public void onDonePressed() {
+
     }
 
     @Override
-    public void onSkipTouch() {
-        // empty
+    public void onSkipPressed() {
+
     }
 
     protected final EasyIntroCarouselFragment getCarouselFragment() {
@@ -179,8 +178,8 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withRtlSwipe() {
-        carouselFragment.withRtlSwipe();
+    public void withRtlSupport() {
+        carouselFragment.withRtlSupport();
     }
 
     @Override

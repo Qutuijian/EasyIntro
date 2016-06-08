@@ -36,18 +36,18 @@ class EasyIntroPagerAdapter extends SmartFragmentStatePagerAdapter {
         }
     }
 
-    public int getItemPosition(Class aClass){
-        for (Fragment fragment : mFragments){
-            if (fragment.getClass().getName().equalsIgnoreCase(aClass.getName())){
+    private boolean alreadyExists(Fragment fragment) {
+        return mFragments.indexOf(fragment) != -1;
+    }
+
+    public int getItemPosition(Class aClass) {
+        for (Fragment fragment : mFragments) {
+            if (fragment.getClass().getName().equalsIgnoreCase(aClass.getName())) {
                 return mFragments.indexOf(fragment);
             }
         }
 
         return -1;
-    }
-
-    private boolean alreadyExists(Fragment fragment) {
-        return mFragments.indexOf(fragment) != -1;
     }
 
     @Override

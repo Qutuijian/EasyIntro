@@ -51,7 +51,6 @@ import io.github.meness.easyintro.interfaces.ICheck;
 import io.github.meness.easyintro.interfaces.IConfig;
 import io.github.meness.easyintro.interfaces.IConfigOnce;
 import io.github.meness.easyintro.interfaces.ISlide;
-import io.github.meness.easyintro.interfaces.ITouch;
 import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
 import io.github.meness.easyintro.listeners.OnBackPressListener;
 import io.github.meness.easyintro.listeners.OnToggleIndicatorsClickListener;
@@ -60,25 +59,25 @@ import io.github.meness.easyintro.views.DirectionalViewPager;
 import io.github.meness.easyintro.views.LeftToggleIndicator;
 import io.github.meness.easyintro.views.RightToggleIndicator;
 
-public class EasyIntroCarouselFragment extends Fragment implements ISlide, ICheck, IConfigOnce, ITouch, OnBackPressListener, IConfig, OnToggleIndicatorsClickListener {
-    SparseArray<Class> mDisableLeftIndicatorOn = new SparseArray<>();
-    SparseArray<Class> mDisableRightIndicatorOn = new SparseArray<>();
+public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConfigOnce, ISlide, OnBackPressListener, IConfig, OnToggleIndicatorsClickListener {
+    private SparseArray<Class> mDisableLeftIndicatorOn = new SparseArray<>();
+    private SparseArray<Class> mDisableRightIndicatorOn = new SparseArray<>();
     private EasyIntroPagerAdapter mAdapter;
     private DirectionalViewPager mPager;
     private ViewGroup mIndicatorsContainer;
-    private ToggleIndicator mToggleIndicators = ToggleIndicator.DEFAULT;
+    private ToggleIndicator mToggleIndicator = ToggleIndicator.DEFAULT;
     private RightToggleIndicator mRightIndicator;
     private LeftToggleIndicator mLeftIndicator;
     @RawRes
-    private int mSoundRes;
+    private int mSoundRes = -1; // no sound by default
     @LayoutRes
     private int mIndicatorRes = PageIndicator.CIRCLE.getIndicatorRes(); // circle page indicator by default
     private Vibrator mVibrator;
     private int mVibrateIntensity = 20;
     private boolean mVibrate;
-    private boolean mRtlSwipe;
+    private boolean mRtlSupport;
     private SwipeDirection mSwipeDirection = SwipeDirection.ALL;
-    private MaterializeBuilder materializeBuilder;
+    private MaterializeBuilder mMaterializeBuilder;
     private EasyIntroInteractionsListener mInteractionsListener;
 
     public void setInteractionsListener(EasyIntroInteractionsListener listener) {
@@ -87,7 +86,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
 
     @CallSuper
     protected void onSlideChanged(Fragment fragment) {
-        if (mSoundRes != 0) {
+        if (mSoundRes != -1) {
             MediaPlayer.create(getContext(), mSoundRes).start();
         }
         if (mVibrate) {
@@ -121,8 +120,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     /**
-     * Set custom indicator. The indicator must have the `setViewPager(ViewPager)` method.
-     * Indicator could be set once inside {@link EasyIntro#initIntro()}.
+     * set custom indicator. The indicator must have the `setViewPager(ViewPager)` method
      *
      * @param indicator Custom indicator resource
      */
@@ -132,12 +130,12 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
 
     @Override
     public final void withTranslucentStatusBar(boolean b) {
-        materializeBuilder.withTranslucentStatusBarProgrammatically(b);
+        mMaterializeBuilder.withTranslucentStatusBarProgrammatically(b);
     }
 
     @Override
     public final void withStatusBarColor(@ColorInt int statusBarColor) {
-        materializeBuilder.withStatusBarColor(statusBarColor);
+        mMaterializeBuilder.withStatusBarColor(statusBarColor);
     }
 
     @Override
@@ -147,22 +145,22 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
 
     @Override
     public final void withTransparentStatusBar(boolean b) {
-        materializeBuilder.withTransparentStatusBar(b);
+        mMaterializeBuilder.withTransparentStatusBar(b);
     }
 
     @Override
     public final void withTransparentNavigationBar(boolean b) {
-        materializeBuilder.withTransparentNavigationBar(b);
+        mMaterializeBuilder.withTransparentNavigationBar(b);
     }
 
     @Override
     public final void withFullscreen(boolean b) {
-        materializeBuilder.withSystemUIHidden(b);
+        mMaterializeBuilder.withSystemUIHidden(b);
     }
 
     @Override
     public final void withTranslucentNavigationBar(boolean b) {
-        materializeBuilder.withTranslucentNavigationBarProgrammatically(b);
+        mMaterializeBuilder.withTranslucentNavigationBarProgrammatically(b);
     }
 
     @Override
@@ -172,10 +170,10 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
 
     @Override
     public final void withToggleIndicators(ToggleIndicator indicators) {
-        mToggleIndicators = indicators;
+        mToggleIndicator = indicators;
 
         // RTL swipe support
-        if (mRtlSwipe && indicators.getSwipeDirection() == SwipeDirection.LEFT) {
+        if (mRtlSupport && indicators.getSwipeDirection() == SwipeDirection.LEFT) {
             withSwipeDirection(SwipeDirection.RIGHT);
         } else {
             withSwipeDirection(indicators.getSwipeDirection());
@@ -209,8 +207,8 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     @Override
-    public final void withRtlSwipe() {
-        mRtlSwipe = true;
+    public final void withRtlSupport() {
+        mRtlSupport = true;
     }
 
     @Override
@@ -264,8 +262,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
 
     @Override
     /**
-     * Set predefined indicator.
-     * Indicator could be set once inside {@link #init()}.
+     * set predefined indicator.
      *
      * @param pageIndicator Custom indicator
      */
@@ -323,98 +320,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     @Override
-    public final void onRightToggleClick() {
-        int slidesCount = mAdapter.getCount() - 1;
-        int currentItem = mPager.getCurrentItem();
-        int nextItem = currentItem + 1;
-
-        // we're on the last slide
-        if (currentItem == slidesCount) {
-            onDoneTouch();
-        }
-        // we're going to the last slide
-        else if (nextItem == slidesCount) {
-            mLeftIndicator.makeItPrevious();
-            mRightIndicator.makeItDone();
-            onNextTouch();
-        }
-        // we're going to the next slide
-        else {
-            mLeftIndicator.makeItPrevious();
-            onNextTouch();
-        }
-    }
-
-    @Override
-    public final void onLeftToggleClick() {
-        int currentItem = mPager.getCurrentItem();
-        int previousItem = currentItem - 1;
-
-        // we're on the first slide
-        if (currentItem == 0) {
-            onSkipTouch();
-        }
-        // we're going to the first slide
-        else if (previousItem == 0) {
-            mRightIndicator.makeItNext();
-            mLeftIndicator.makeItSkip();
-            onPreviousTouch();
-        }
-        // we're going to the previous slide
-        else {
-            mRightIndicator.makeItNext();
-            mLeftIndicator.makeItPrevious();
-            onPreviousTouch();
-        }
-    }
-
-    @Override
-    public void onPreviousTouch() {
-        // pass to current fragment
-        Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-        if (currentFragment instanceof EasyIntroFragment) {
-            ((EasyIntroFragment) currentFragment).onPreviousTouch();
-        }
-        // pass to EasyIntro activity
-        mInteractionsListener.onPreviousTouch();
-        withPreviousSlide(true);
-    }
-
-    @Override
-    public void onNextTouch() {
-        // pass to current fragment
-        Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-        if (currentFragment instanceof EasyIntroFragment) {
-            ((EasyIntroFragment) currentFragment).onNextTouch();
-        }
-        // pass to EasyIntro activity
-        mInteractionsListener.onNextTouch();
-        withNextSlide(true);
-    }
-
-    @Override
-    public void onDoneTouch() {
-        // pass to current fragment
-        Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-        if (currentFragment instanceof EasyIntroFragment) {
-            ((EasyIntroFragment) currentFragment).onDoneTouch();
-        }
-        // pass to EasyIntro activity
-        mInteractionsListener.onDoneTouch();
-    }
-
-    @Override
-    public void onSkipTouch() {
-        // pass to current fragment
-        Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-        if (currentFragment instanceof EasyIntroFragment) {
-            ((EasyIntroFragment) currentFragment).onSkipTouch();
-        }
-        // pass to EasyIntro activity
-        mInteractionsListener.onSkipTouch();
-    }
-
-    @Override
     public final void withNextSlide(boolean smoothScroll) {
         mPager.setCurrentItem(mPager.getCurrentItem() + 1, smoothScroll);
     }
@@ -441,7 +346,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     private void updateToggleIndicators() {
-        if (mToggleIndicators == ToggleIndicator.NONE) {
+        if (mToggleIndicator == ToggleIndicator.NONE) {
             hideLeftIndicator();
             hideRightIndicator();
             return;
@@ -460,7 +365,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
             mRightIndicator.makeItDone();
         } else {
             showRightIndicator();
-            if (mToggleIndicators == ToggleIndicator.NO_LEFT_INDICATOR) {
+            if (mToggleIndicator == ToggleIndicator.NO_LEFT_INDICATOR) {
                 hideLeftIndicator();
             } else {
                 showLeftIndicator();
@@ -472,14 +377,14 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
             mLeftIndicator.makeItPrevious();
         } else if (currentItem < slidesCount) {
             if (currentItem == 0) {
-                if (mToggleIndicators == ToggleIndicator.WITHOUT_SKIP || mToggleIndicators == ToggleIndicator.NO_LEFT_INDICATOR) {
+                if (mToggleIndicator == ToggleIndicator.WITHOUT_SKIP || mToggleIndicator == ToggleIndicator.NO_LEFT_INDICATOR) {
                     hideLeftIndicator();
                 } else {
                     mLeftIndicator.makeItSkip();
                     showLeftIndicator();
                 }
             } else {
-                if (mToggleIndicators == ToggleIndicator.NO_LEFT_INDICATOR) {
+                if (mToggleIndicator == ToggleIndicator.NO_LEFT_INDICATOR) {
                     hideLeftIndicator();
                 } else {
                     mLeftIndicator.makeItPrevious();
@@ -518,6 +423,98 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     @Override
     public void withSlideTo(Class slideClass, boolean smoothScroll) {
         withSlideTo(mAdapter.getItemPosition(slideClass), smoothScroll);
+    }
+
+    @Override
+    public final void onRightToggleClick() {
+        int slidesCount = mAdapter.getCount() - 1;
+        int currentItem = mPager.getCurrentItem();
+        int nextItem = currentItem + 1;
+
+        // we're on the last slide
+        if (currentItem == slidesCount) {
+            onDonePressed();
+        }
+        // we're going to the last slide
+        else if (nextItem == slidesCount) {
+            mLeftIndicator.makeItPrevious();
+            mRightIndicator.makeItDone();
+            onNextSlide();
+        }
+        // we're going to the next slide
+        else {
+            mLeftIndicator.makeItPrevious();
+            onNextSlide();
+        }
+    }
+
+    @Override
+    public final void onLeftToggleClick() {
+        int currentItem = mPager.getCurrentItem();
+        int previousItem = currentItem - 1;
+
+        // we're on the first slide
+        if (currentItem == 0) {
+            onSkipPressed();
+        }
+        // we're going to the first slide
+        else if (previousItem == 0) {
+            mRightIndicator.makeItNext();
+            mLeftIndicator.makeItSkip();
+            onPreviousSlide();
+        }
+        // we're going to the previous slide
+        else {
+            mRightIndicator.makeItNext();
+            mLeftIndicator.makeItPrevious();
+            onPreviousSlide();
+        }
+    }
+
+    @Override
+    public void onPreviousSlide() {
+        // pass to current fragment
+        Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
+        if (currentFragment instanceof EasyIntroFragment) {
+            ((EasyIntroFragment) currentFragment).onPreviousSlide();
+        }
+        // pass to EasyIntro activity
+        mInteractionsListener.onPreviousSlide();
+        withPreviousSlide(true);
+    }
+
+    @Override
+    public void onNextSlide() {
+        // pass to current fragment
+        Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
+        if (currentFragment instanceof EasyIntroFragment) {
+            ((EasyIntroFragment) currentFragment).onNextSlide();
+        }
+        // pass to EasyIntro activity
+        mInteractionsListener.onNextSlide();
+        withNextSlide(true);
+    }
+
+    @Override
+    public void onDonePressed() {
+        // pass to current fragment
+        Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
+        if (currentFragment instanceof EasyIntroFragment) {
+            ((EasyIntroFragment) currentFragment).onDonePressed();
+        }
+        // pass to EasyIntro activity
+        mInteractionsListener.onDonePressed();
+    }
+
+    @Override
+    public void onSkipPressed() {
+        // pass to current fragment
+        Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
+        if (currentFragment instanceof EasyIntroFragment) {
+            ((EasyIntroFragment) currentFragment).onSkipPressed();
+        }
+        // pass to EasyIntro activity
+        mInteractionsListener.onSkipPressed();
     }
 
     @Override
@@ -620,10 +617,10 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
         super.onActivityCreated(savedInstanceState);
 
         // native init
-        materializeBuilder = new MaterializeBuilder(getActivity());
+        mMaterializeBuilder = new MaterializeBuilder(getActivity());
 
         // finalize
-        materializeBuilder.build();
+        mMaterializeBuilder.build();
     }
 
     private void addIndicator() {

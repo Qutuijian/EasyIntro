@@ -24,50 +24,10 @@ import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.interfaces.ICheck;
 import io.github.meness.easyintro.interfaces.IConfig;
 import io.github.meness.easyintro.interfaces.ISlide;
-import io.github.meness.easyintro.interfaces.ITouch;
 import io.github.meness.easyintro.listeners.OnBackPressListener;
 import io.github.meness.easyintro.utils.BackPressImpl;
 
-public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouch, IConfig, OnBackPressListener {
-
-    @Override
-    public void withNextSlide(boolean smoothScroll) {
-        getBaseContext().withNextSlide(smoothScroll);
-    }
-
-    protected final EasyIntroCarouselFragment getBaseContext() {
-        return ((EasyIntro) getContext()).getCarouselFragment();
-    }
-
-    @Override
-    public void withPreviousSlide(boolean smoothScroll) {
-        getBaseContext().withPreviousSlide(smoothScroll);
-    }
-
-    @Override
-    public void withSlideTo(int page, boolean smoothScroll) {
-        getBaseContext().withSlideTo(page, smoothScroll);
-    }
-
-    @Override
-    public Fragment getCurrentSlide() {
-        return getBaseContext().getCurrentSlide();
-    }
-
-    @Override
-    public void withSlide(Fragment slide) {
-        getBaseContext().withSlide(slide);
-    }
-
-    @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container) {
-        getBaseContext().withOverlaySlide(slide, container);
-    }
-
-    @Override
-    public void withSlideTo(Class slideClass, boolean smoothScroll) {
-        getBaseContext().withSlideTo(slideClass, smoothScroll);
-    }
+public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConfig, OnBackPressListener {
 
     @Override
     public boolean isLocked() {
@@ -110,22 +70,22 @@ public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouc
     }
 
     @Override
-    public void onPreviousTouch() {
+    public void onPreviousSlide() {
         // empty
     }
 
     @Override
-    public void onNextTouch() {
+    public void onNextSlide() {
         // empty
     }
 
     @Override
-    public void onDoneTouch() {
+    public void onDonePressed() {
         // empty
     }
 
     @Override
-    public void onSkipTouch() {
+    public void onSkipPressed() {
         // empty
     }
 
@@ -147,5 +107,44 @@ public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouc
     @Override
     public void withBothIndicatorsDisabled(boolean b, Class slide) {
         getBaseContext().withBothIndicatorsDisabled(b, slide);
+    }
+
+    @Override
+    public void withNextSlide(boolean smoothScroll) {
+        getBaseContext().withNextSlide(smoothScroll);
+    }
+
+    protected final EasyIntroCarouselFragment getBaseContext() {
+        return ((EasyIntro) getContext()).getCarouselFragment();
+    }
+
+    @Override
+    public void withPreviousSlide(boolean smoothScroll) {
+        getBaseContext().withPreviousSlide(smoothScroll);
+    }
+
+    @Override
+    public void withSlideTo(int page, boolean smoothScroll) {
+        getBaseContext().withSlideTo(page, smoothScroll);
+    }
+
+    @Override
+    public Fragment getCurrentSlide() {
+        return getBaseContext().getCurrentSlide();
+    }
+
+    @Override
+    public void withSlide(Fragment slide) {
+        getBaseContext().withSlide(slide);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container) {
+        getBaseContext().withOverlaySlide(slide, container);
+    }
+
+    @Override
+    public void withSlideTo(Class slideClass, boolean smoothScroll) {
+        getBaseContext().withSlideTo(slideClass, smoothScroll);
     }
 }

@@ -16,21 +16,12 @@
 
 package io.github.meness.easyintro.interfaces;
 
-import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
-
 public interface ISlide {
-    void withNextSlide(boolean smoothScroll);
+    void onPreviousSlide();
 
-    void withPreviousSlide(boolean smoothScroll);
+    void onNextSlide();
 
-    void withSlideTo(int page, boolean smoothScroll);
+    void onDonePressed();
 
-    Fragment getCurrentSlide();
-
-    void withSlide(Fragment slide);
-
-    void withOverlaySlide(Fragment slide, @IdRes int container);
-
-    void withSlideTo(Class slideClass, boolean smoothScroll);
+    void onSkipPressed();
 }

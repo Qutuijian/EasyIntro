@@ -53,7 +53,7 @@ public interface IConfigOnce {
 
     void withVibrateOnSlide();
 
-    void withRtlSwipe();
+    void withRtlSupport();
 
     void withPageMargin(int marginPixels);
 
