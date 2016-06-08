@@ -208,7 +208,12 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    public final void withToggleIndicatorSound(boolean b) {
+    public boolean isToggleIndicatorSoundEffectsEnabled() {
+        return mLeftIndicator.isSoundEffectsEnabled() && mRightIndicator.isSoundEffectsEnabled();
+    }
+
+    @Override
+    public final void withToggleIndicatorSoundEffects(boolean b) {
         mLeftIndicator.setSoundEffectsEnabled(b);
         mRightIndicator.setSoundEffectsEnabled(b);
     }

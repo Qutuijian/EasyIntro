@@ -32,4 +32,10 @@ public interface ICheck {
     boolean isLeftIndicatorVisible();
 
     boolean isLeftIndicatorDisabled();
+
+    /**
+     * @return boolean
+     * @see android.view.View#isSoundEffectsEnabled()
+     */
+    boolean isToggleIndicatorSoundEffectsEnabled();
 }

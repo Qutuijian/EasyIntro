@@ -21,7 +21,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.RawRes;
-import android.support.v4.view.ViewPager;
 
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.enums.PageIndicator;
@@ -71,29 +70,34 @@ public interface IConfigOnce {
 
     /**
      * @param marginPixels margin pixels
-     * @see ViewPager#setPageMargin(int)
+     * @see android.support.v4.view.ViewPager#setPageMargin(int)
      */
     void withPageMargin(int marginPixels);
 
     /**
      * @param d Drawable
-     * @see ViewPager#setPageMarginDrawable(Drawable)
+     * @see android.support.v4.view.ViewPager#setPageMarginDrawable(Drawable)
      * @see IConfigOnce#setPageMarginDrawable(int)
      */
     void setPageMarginDrawable(Drawable d);
 
     /**
      * @param resId resource id
-     * @see ViewPager#setPageMarginDrawable(int)
+     * @see android.support.v4.view.ViewPager#setPageMarginDrawable(int)
      * @see IConfigOnce#setPageMarginDrawable(Drawable)
      */
     void setPageMarginDrawable(@DrawableRes int resId);
 
-    void withToggleIndicatorSound(boolean b);
+    /**
+     * enable sound effects on pressing toggle indicators
+     * @param b enable sound
+     * @see android.view.View#setSoundEffectsEnabled(boolean)
+     */
+    void withToggleIndicatorSoundEffects(boolean b);
 
     /**
-     * Play a sound while sliding.
-     * Pass 0 for no sound (default)
+     * play sound on slide
+     * pass -1 for no sound (by default)
      *
      * @param resId Sound raw resource
      */

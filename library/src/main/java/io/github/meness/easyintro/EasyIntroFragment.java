@@ -64,6 +64,11 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
         return getBaseContext().isLeftIndicatorDisabled();
     }
 
+    @Override
+    public boolean isToggleIndicatorSoundEffectsEnabled() {
+        return getBaseContext().isToggleIndicatorSoundEffectsEnabled();
+    }
+
     protected final EasyIntroCarouselFragment getBaseContext() {
         return ((EasyIntro) getContext()).getCarouselFragment();
     }
