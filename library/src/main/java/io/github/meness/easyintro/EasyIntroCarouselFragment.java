@@ -44,7 +44,7 @@ import java.lang.reflect.InvocationTargetException;
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.SwipeDirection;
-import io.github.meness.easyintro.enums.ToggleIndicators;
+import io.github.meness.easyintro.enums.ToggleIndicator;
 import io.github.meness.easyintro.interfaces.ICheck;
 import io.github.meness.easyintro.interfaces.IConfig;
 import io.github.meness.easyintro.interfaces.ISlide;
@@ -61,7 +61,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     private EasyIntroPagerAdapter mAdapter;
     private DirectionalViewPager mPager;
     private ViewGroup mIndicatorsContainer;
-    private ToggleIndicators mToggleIndicators = ToggleIndicators.DEFAULT;
+    private ToggleIndicator mToggleIndicators = ToggleIndicator.DEFAULT;
     private RightToggleIndicator mRightIndicator;
     private LeftToggleIndicator mLeftIndicator;
     @RawRes
@@ -167,7 +167,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     @Override
-    public final void withToggleIndicators(ToggleIndicators indicators) {
+    public final void withToggleIndicators(ToggleIndicator indicators) {
         mToggleIndicators = indicators;
 
         // RTL swipe support
@@ -416,7 +416,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     private void updateToggleIndicators() {
-        if (mToggleIndicators == ToggleIndicators.NONE) {
+        if (mToggleIndicators == ToggleIndicator.NONE) {
             hideLeftIndicator();
             hideRightIndicator();
             return;
@@ -435,7 +435,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
             mRightIndicator.makeItDone();
         } else {
             showRightIndicator();
-            if (mToggleIndicators == ToggleIndicators.NO_LEFT_INDICATOR) {
+            if (mToggleIndicators == ToggleIndicator.NO_LEFT_INDICATOR) {
                 hideLeftIndicator();
             } else {
                 showLeftIndicator();
@@ -447,14 +447,14 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
             mLeftIndicator.makeItPrevious();
         } else if (currentItem < slidesCount) {
             if (currentItem == 0) {
-                if (mToggleIndicators == ToggleIndicators.WITHOUT_SKIP || mToggleIndicators == ToggleIndicators.NO_LEFT_INDICATOR) {
+                if (mToggleIndicators == ToggleIndicator.WITHOUT_SKIP || mToggleIndicators == ToggleIndicator.NO_LEFT_INDICATOR) {
                     hideLeftIndicator();
                 } else {
                     mLeftIndicator.makeItSkip();
                     showLeftIndicator();
                 }
             } else {
-                if (mToggleIndicators == ToggleIndicators.NO_LEFT_INDICATOR) {
+                if (mToggleIndicators == ToggleIndicator.NO_LEFT_INDICATOR) {
                     hideLeftIndicator();
                 } else {
                     mLeftIndicator.makeItPrevious();

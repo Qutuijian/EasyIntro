@@ -24,7 +24,7 @@ import android.support.v4.app.Fragment;
 
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
-import io.github.meness.easyintro.enums.ToggleIndicators;
+import io.github.meness.easyintro.enums.ToggleIndicator;
 
 public interface IConfig {
     void withTranslucentStatusBar(boolean b);
@@ -49,7 +49,7 @@ public interface IConfig {
 
     void withLeftIndicatorDisabled(boolean b);
 
-    void withToggleIndicators(ToggleIndicators indicators);
+    void withToggleIndicators(ToggleIndicator indicators);
 
     void withVibrateOnSlide(int intensity);
 

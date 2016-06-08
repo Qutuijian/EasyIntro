@@ -30,7 +30,7 @@ import android.view.View;
 
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
-import io.github.meness.easyintro.enums.ToggleIndicators;
+import io.github.meness.easyintro.enums.ToggleIndicator;
 import io.github.meness.easyintro.interfaces.IConfig;
 import io.github.meness.easyintro.interfaces.ISlide;
 import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
@@ -177,7 +177,7 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withToggleIndicators(ToggleIndicators indicators) {
+    public void withToggleIndicators(ToggleIndicator indicators) {
         carouselFragment.withToggleIndicators(indicators);
     }
 
