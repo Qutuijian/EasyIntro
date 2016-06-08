@@ -73,7 +73,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @LayoutRes
     private int mIndicatorRes = PageIndicator.CIRCLE.getIndicatorRes(); // circle page indicator by default
     private Vibrator mVibrator;
-    private int mVibrateIntensity = 20;
+    private int mVibrateIntensity;
     private boolean mVibrate;
     private boolean mRtlSupport;
     private SwipeDirection mSwipeDirection = SwipeDirection.ALL;
@@ -187,24 +187,14 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    /**
-     * @param intensity Desired intensity
-     */
     public final void withVibrateOnSlide(int intensity) {
         setVibrateEnabled();
         mVibrateIntensity = intensity;
     }
 
     @Override
-    /**
-     * Enable vibration on slide with default 20 vibration intensity.
-     * Needs {@link android.Manifest.permission#VIBRATE} permission
-     *
-     * @see EasyIntro#withVibrateOnSlide(int)
-     */
     public final void withVibrateOnSlide() {
-        setVibrateEnabled();
-        mVibrate = true;
+        withVibrateOnSlide(20);
     }
 
     @Override
