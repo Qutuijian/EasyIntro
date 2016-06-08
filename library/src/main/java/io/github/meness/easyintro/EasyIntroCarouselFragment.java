@@ -568,11 +568,12 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // init views
+        // init
         mPager = (DirectionalViewPager) view.findViewById(R.id.pager);
         mIndicatorsContainer = (ViewGroup) view.findViewById(R.id.indicatorsContainer);
         mRightIndicator = (RightToggleIndicator) view.findViewById(R.id.nextIndicator);
         mLeftIndicator = (LeftToggleIndicator) view.findViewById(R.id.previousIndicator);
+        mMaterializeBuilder = new MaterializeBuilder(getActivity());
 
         mRightIndicator.setListener(this);
         mLeftIndicator.setListener(this);
@@ -596,10 +597,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // native init
-        mMaterializeBuilder = new MaterializeBuilder(getActivity());
-
-        // finalize
         mMaterializeBuilder.build();
     }
 
