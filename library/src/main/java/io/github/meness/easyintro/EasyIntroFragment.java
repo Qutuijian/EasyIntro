@@ -33,7 +33,7 @@ public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouc
         getBaseContext().withNextSlide(smoothScroll);
     }
 
-    protected final CarouselFragment getBaseContext() {
+    protected final EasyIntroCarouselFragment getBaseContext() {
         return ((EasyIntro) getContext()).getCarouselFragment();
     }
 

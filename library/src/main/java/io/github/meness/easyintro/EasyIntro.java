@@ -37,7 +37,7 @@ import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
 
 public abstract class EasyIntro extends AppCompatActivity implements EasyIntroInteractionsListener, ISlide, IConfig {
     public static final String TAG = EasyIntro.class.getSimpleName();
-    private CarouselFragment carouselFragment;
+    private EasyIntroCarouselFragment carouselFragment;
 
     @Override
     public void onPreviousTouch() {
@@ -59,7 +59,7 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
         // empty
     }
 
-    protected final CarouselFragment getCarouselFragment() {
+    protected final EasyIntroCarouselFragment getCarouselFragment() {
         return carouselFragment;
     }
 
@@ -101,7 +101,7 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
             // On orientation change, it will prevent fragment recreation
             // its necessary to reserve the fragment stack inside each tab
             // Creating the ViewPager container fragment once
-            carouselFragment = (CarouselFragment) CarouselFragment.instantiate(getApplicationContext(), CarouselFragment.class.getName());
+            carouselFragment = (EasyIntroCarouselFragment) EasyIntroCarouselFragment.instantiate(getApplicationContext(), EasyIntroCarouselFragment.class.getName());
             carouselFragment.setInteractionsListener(this);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, carouselFragment)
@@ -109,7 +109,7 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
         } else {
             // restoring the previously created fragment
             // and getting the reference
-            carouselFragment = (CarouselFragment) getSupportFragmentManager().getFragments().get(0);
+            carouselFragment = (EasyIntroCarouselFragment) getSupportFragmentManager().getFragments().get(0);
         }
     }
 

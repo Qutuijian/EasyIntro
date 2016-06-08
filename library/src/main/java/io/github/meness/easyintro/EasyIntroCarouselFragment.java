@@ -57,7 +57,7 @@ import io.github.meness.easyintro.views.DirectionalViewPager;
 import io.github.meness.easyintro.views.LeftToggleIndicator;
 import io.github.meness.easyintro.views.RightToggleIndicator;
 
-public class CarouselFragment extends Fragment implements ISlide, ICheck, ITouch, OnBackPressListener, IConfig, OnToggleIndicatorsClickListener {
+public class EasyIntroCarouselFragment extends Fragment implements ISlide, ICheck, ITouch, OnBackPressListener, IConfig, OnToggleIndicatorsClickListener {
     private EasyIntroPagerAdapter mAdapter;
     private DirectionalViewPager mPager;
     private ViewGroup mIndicatorsContainer;
