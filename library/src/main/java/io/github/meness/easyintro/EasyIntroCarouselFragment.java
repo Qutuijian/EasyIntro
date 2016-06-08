@@ -404,8 +404,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
     @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container) {
-        Fragment currentSlide = getCurrentSlide();
-        FragmentTransaction transaction = currentSlide.getChildFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getCurrentSlide().getChildFragmentManager().beginTransaction();
         // add to back stack
         transaction.addToBackStack(null);
         transaction.replace(container, slide).commit();
