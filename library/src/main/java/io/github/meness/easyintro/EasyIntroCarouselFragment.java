@@ -201,9 +201,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    /**
-     * @see ViewPager#setPageMarginDrawable(Drawable)
-     */
     public final void setPageMarginDrawable(Drawable d) {
         mPager.setPageMarginDrawable(d);
     }

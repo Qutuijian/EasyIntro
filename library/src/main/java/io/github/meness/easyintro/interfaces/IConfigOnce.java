@@ -70,8 +70,18 @@ public interface IConfigOnce {
 
     void withPageMargin(int marginPixels);
 
+    /**
+     * @param d Drawable
+     * @see android.support.v4.view.ViewPager#setPageMarginDrawable(Drawable)
+     * @see IConfigOnce#setPageMarginDrawable(int)
+     */
     void setPageMarginDrawable(Drawable d);
 
+    /**
+     * @param resId resource id
+     * @see android.support.v4.view.ViewPager#setPageMarginDrawable(int)
+     * @see IConfigOnce#setPageMarginDrawable(Drawable)
+     */
     void setPageMarginDrawable(@DrawableRes int resId);
 
     void withToggleIndicatorSound(boolean b);
