@@ -45,8 +45,8 @@
 <li>Follows the Google Material Design Guidelines</li>
 <li>Uses vector (.svg) icons</li>
 <li>Modify the slides on the go</li>
-<li>
-<strong>The Most Notable:</strong> Grouped slides</li>
+<li><strong>Overlay slides</strong></li>
+<li><strong>Back stack fully supported for overlay slides</strong></li>
 <li>Modify intro settings on the go</li>
 <li>Comes with multiple default indicators</li>
 <li>Limit your swipe direction to left and/or right</li>
@@ -55,7 +55,6 @@
 <li>Abstract toggle indicator</li>
 <li>Fragment to have easy access to your intro methods</li>
 <li>Comes with multiple default slide transformers</li>
-<li>Automatically fix fragment paddings</li>
 <li>Based on a ViewPager</li>
 <li>RTL swipe support</li>
 <li>Customizable</li>
@@ -111,14 +110,14 @@
 
 <p><strong>Note:</strong> By extending <code>EasyIntroFragment</code> you have easier access to the intro methods and the layout bottom padding will be modified automatically.</p>
 
-<p>Create an activity which extends <code>EasyIntro</code> and override the necessary <code>init()</code> method:</p>
+<p>Create an activity which extends <code>EasyIntro</code> and override the necessary <code>initIntro()</code> method:</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">MyEasyIntro</span> <span class="pl-k">extends</span> <span class="pl-e">EasyIntro</span> {
 
     <span class="pl-c">// override all listeners you need</span>
 
     <span class="pl-k">@Override</span>
-    <span class="pl-k">protected</span> <span class="pl-k">void</span> <span class="pl-en">init</span>() {
+    <span class="pl-k">protected</span> <span class="pl-k">void</span> <span class="pl-en">initIntro</span>() {
         <span class="pl-c">// use withSlide() to add Fragments and</span>
         <span class="pl-c">// modify intro settings here</span>
     }
