@@ -26,7 +26,7 @@ If any (or all) of these questions seem familiar, the **EasyIntro** is the perfe
 * Fragment to have easy access to your intro methods
 * Comes with multiple default slide transformers
 * Based on a ViewPager
-* RTL swipe support
+* **RTL support**
 * **Lock on specific slides**
 * Customizable
 * Tested and stable
