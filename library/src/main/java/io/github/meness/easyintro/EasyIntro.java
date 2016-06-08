@@ -43,22 +43,22 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
 
     @Override
     public void onPreviousSlide() {
-
+        // empty
     }
 
     @Override
     public void onNextSlide() {
-
+        // empty
     }
 
     @Override
     public void onDonePressed() {
-
+        // empty
     }
 
     @Override
     public void onSkipPressed() {
-
+        // empty
     }
 
     protected final EasyIntroCarouselFragment getCarouselFragment() {
@@ -79,7 +79,8 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
      * handle the onBackPressed propagated call then this Activity will handle the callback itself
      */
     @Override
-    public final void onBackPressed() {
+    @CallSuper
+    public void onBackPressed() {
         if (!carouselFragment.onBackPressed()) {
             // container Fragment or its associates couldn't handle the back pressed task
             // delegating the task to super class
@@ -90,7 +91,8 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public final void onCreate(@Nullable Bundle savedInstanceState) {
+    @CallSuper
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easyintro_main);
 
