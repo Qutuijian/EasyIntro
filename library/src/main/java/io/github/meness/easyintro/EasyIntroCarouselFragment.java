@@ -78,8 +78,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     private boolean mVibrate;
     private boolean mRtlSwipe;
     private SwipeDirection mSwipeDirection = SwipeDirection.ALL;
-    // FIXME change type to Class
-    private Fragment mLockOn;
     private MaterializeBuilder materializeBuilder;
     private EasyIntroInteractionsListener mInteractionsListener;
 
@@ -301,7 +299,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     @Override
     public final void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
         mDisableRightIndicatorOn.append(mDisableRightIndicatorOn.size(), slide);
-        // TODO swipe direction must be modified
         if (b) {
             mPager.setAllowedSwipeDirection(SwipeDirection.RIGHT);
         } else {
@@ -312,7 +309,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     @Override
     public final void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
         mDisableLeftIndicatorOn.append(mDisableLeftIndicatorOn.size(), slide);
-        // TODO swipe direction must be modified
         if (b) {
             mPager.setAllowedSwipeDirection(SwipeDirection.LEFT);
         } else {
