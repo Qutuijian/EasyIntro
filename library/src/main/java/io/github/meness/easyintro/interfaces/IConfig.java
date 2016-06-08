@@ -16,60 +16,22 @@
 
 package io.github.meness.easyintro.interfaces;
 
-import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.RawRes;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
 
-import io.github.meness.easyintro.enums.PageIndicator;
-import io.github.meness.easyintro.enums.SlideTransformer;
-import io.github.meness.easyintro.enums.ToggleIndicator;
+import io.github.meness.easyintro.EasyIntro;
+import io.github.meness.easyintro.EasyIntroFragment;
 
+/**
+ * following method may be configured multiple times through {@link EasyIntro#initIntro()} and/or {@link EasyIntroFragment}
+ */
 public interface IConfig {
-    void withTranslucentStatusBar(boolean b);
-
     void withPageIndicatorVisibility(boolean b);
 
-    void withStatusBarColor(@ColorInt int statusBarColor);
+    // disable indicator for specific slide
+    void withRightIndicatorDisabled(boolean b, @NonNull Class slide);
 
-    void withOffScreenPageLimit(int limit);
+    // disable indicator for specific slide
+    void withLeftIndicatorDisabled(boolean b, @NonNull Class slide);
 
-    void withTransparentStatusBar(boolean b);
-
-    void withTransparentNavigationBar(boolean b);
-
-    void withFullscreen(boolean b);
-
-    void withTranslucentNavigationBar(boolean b);
-
-    void withSlideTransformer(SlideTransformer transformer);
-
-    void withRightIndicatorDisabled(boolean b);
-
-    void withLeftIndicatorDisabled(boolean b);
-
-    void withToggleIndicators(ToggleIndicator indicators);
-
-    void withVibrateOnSlide(int intensity);
-
-    void withVibrateOnSlide();
-
-    void withRtlSwipe();
-
-    void withPageMargin(int marginPixels);
-
-    void setPageMarginDrawable(Drawable d);
-
-    void setPageMarginDrawable(@DrawableRes int resId);
-
-    void withToggleIndicatorsSound(boolean b);
-
-    void withSlideSound(@RawRes int sound);
-
-    void withOverScrollMode(int mode);
-
-    void withPageIndicator(PageIndicator pageIndicator);
-
-    void withLock(boolean b, Fragment lock);
+    void withBothIndicatorsDisabled(boolean b, Class slide);
 }
