@@ -49,10 +49,23 @@ public interface IConfigOnce {
 
     void withToggleIndicator(ToggleIndicator indicators);
 
+    /**
+     * enable vibration on slide
+     * {@link android.Manifest.permission#VIBRATE} permission required
+     *
+     * @param intensity intensity
+     */
     void withVibrateOnSlide(int intensity);
 
+    /**
+     * enable vibration on slide with default 20 intensity
+     * {@link android.Manifest.permission#VIBRATE} permission required
+     */
     void withVibrateOnSlide();
 
+    /**
+     * enable RTL support
+     */
     void withRtlSupport();
 
     void withPageMargin(int marginPixels);
@@ -61,7 +74,7 @@ public interface IConfigOnce {
 
     void setPageMarginDrawable(@DrawableRes int resId);
 
-    void withToggleIndicatorsSound(boolean b);
+    void withToggleIndicatorSound(boolean b);
 
     void withSlideSound(@RawRes int sound);
 
@@ -69,11 +82,26 @@ public interface IConfigOnce {
 
     void withPageIndicator(PageIndicator pageIndicator);
 
-    // disable indicator globally
+    /**
+     * disable/enable right indicator for whole slides
+     *
+     * @param b disabled
+     * @see IConfig#withRightIndicatorDisabled(boolean, Class) for disabling on specific slides
+     */
     void withRightIndicatorDisabled(boolean b);
 
-    // disable indicator globally
+    /**
+     * disable/enable left indicator for whole slides
+     *
+     * @param b disabled
+     * @see IConfig#withLeftIndicatorDisabled(boolean, Class) for disabling on specific slides
+     */
     void withLeftIndicatorDisabled(boolean b);
 
-    void withPageIndicator(@LayoutRes int indicator);
+    /**
+     * provide custom page indicator view
+     *
+     * @param resId resource id
+     */
+    void withPageIndicator(@LayoutRes int resId);
 }
