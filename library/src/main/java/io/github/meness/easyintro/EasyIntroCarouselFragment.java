@@ -122,11 +122,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     /**
      * set custom indicator. The indicator must have the `setViewPager(ViewPager)` method
      *
-     * @param indicator Custom indicator resource
+     * @param resId Custom indicator resource
      */
     @Override
-    public final void withPageIndicator(@LayoutRes int indicator) {
-        mIndicatorRes = indicator;
+    public final void withPageIndicator(@LayoutRes int resId) {
+        mIndicatorRes = resId;
     }
 
     @Override
@@ -227,7 +227,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    public final void withToggleIndicatorsSound(boolean b) {
+    public final void withToggleIndicatorSound(boolean b) {
         mLeftIndicator.setSoundEffectsEnabled(b);
         mRightIndicator.setSoundEffectsEnabled(b);
     }

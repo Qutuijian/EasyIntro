@@ -199,8 +199,8 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withToggleIndicatorsSound(boolean b) {
-        carouselFragment.withToggleIndicatorsSound(b);
+    public void withToggleIndicatorSound(boolean b) {
+        carouselFragment.withToggleIndicatorSound(b);
     }
 
     @Override
@@ -229,8 +229,8 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withPageIndicator(@LayoutRes int indicator) {
-        carouselFragment.withPageIndicator(indicator);
+    public void withPageIndicator(@LayoutRes int resId) {
+        carouselFragment.withPageIndicator(resId);
     }
 
     @Override
