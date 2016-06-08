@@ -21,6 +21,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.RawRes;
+import android.support.v4.view.ViewPager;
 
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.enums.PageIndicator;
@@ -68,25 +69,35 @@ public interface IConfigOnce {
      */
     void withRtlSupport();
 
+    /**
+     * @param marginPixels margin pixels
+     * @see ViewPager#setPageMargin(int)
+     */
     void withPageMargin(int marginPixels);
 
     /**
      * @param d Drawable
-     * @see android.support.v4.view.ViewPager#setPageMarginDrawable(Drawable)
+     * @see ViewPager#setPageMarginDrawable(Drawable)
      * @see IConfigOnce#setPageMarginDrawable(int)
      */
     void setPageMarginDrawable(Drawable d);
 
     /**
      * @param resId resource id
-     * @see android.support.v4.view.ViewPager#setPageMarginDrawable(int)
+     * @see ViewPager#setPageMarginDrawable(int)
      * @see IConfigOnce#setPageMarginDrawable(Drawable)
      */
     void setPageMarginDrawable(@DrawableRes int resId);
 
     void withToggleIndicatorSound(boolean b);
 
-    void withSlideSound(@RawRes int sound);
+    /**
+     * Play a sound while sliding.
+     * Pass 0 for no sound (default)
+     *
+     * @param resId Sound raw resource
+     */
+    void withSlideSound(@RawRes int resId);
 
     void withOverScrollMode(int mode);
 

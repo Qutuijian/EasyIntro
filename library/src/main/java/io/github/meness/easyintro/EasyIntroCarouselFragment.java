@@ -193,9 +193,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    /**
-     * @see ViewPager#setPageMargin(int)
-     */
     public final void withPageMargin(int marginPixels) {
         mPager.setPageMargin(marginPixels);
     }
@@ -206,9 +203,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    /**
-     * @see ViewPager#setPageMarginDrawable(int)
-     */
     public final void setPageMarginDrawable(@DrawableRes int resId) {
         mPager.setPageMarginDrawable(resId);
     }
@@ -220,12 +214,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    /**
-     * Play a sound while sliding.
-     * Pass 0 for no sound (default)
-     *
-     * @param sound Sound raw resource
-     */
     public final void withSlideSound(@RawRes int sound) {
         mSoundRes = sound;
     }
