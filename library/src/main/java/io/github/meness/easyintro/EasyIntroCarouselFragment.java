@@ -605,8 +605,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                // FIXME use registered fragments
-                onSlideChanged(mAdapter.getItem(position));
+                onSlideChanged(mAdapter.getRegisteredFragment(position));
             }
         });
 
