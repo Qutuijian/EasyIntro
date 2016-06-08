@@ -47,8 +47,7 @@ public interface IConfigOnce {
 
     void withSlideTransformer(SlideTransformer transformer);
 
-    // FIXME rename to withToggleIndicator
-    void withToggleIndicators(ToggleIndicator indicators);
+    void withToggleIndicator(ToggleIndicator indicators);
 
     void withVibrateOnSlide(int intensity);
 

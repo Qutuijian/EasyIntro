@@ -170,7 +170,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    public final void withToggleIndicators(ToggleIndicator indicators) {
+    public final void withToggleIndicator(ToggleIndicator indicators) {
         mToggleIndicator = indicators;
 
         // RTL swipe support

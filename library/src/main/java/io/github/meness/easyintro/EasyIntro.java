@@ -164,8 +164,8 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withToggleIndicators(ToggleIndicator indicators) {
-        carouselFragment.withToggleIndicators(indicators);
+    public void withToggleIndicator(ToggleIndicator indicators) {
+        carouselFragment.withToggleIndicator(indicators);
     }
 
     @Override
