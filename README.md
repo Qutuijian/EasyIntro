@@ -27,6 +27,7 @@ If any (or all) of these questions seem familiar, the **EasyIntro** is the perfe
 * Comes with multiple default slide transformers
 * Based on a ViewPager
 * RTL swipe support
+* **Lock on specific slides**
 * Customizable
 * Tested and stable
 * Absolutely no limits
