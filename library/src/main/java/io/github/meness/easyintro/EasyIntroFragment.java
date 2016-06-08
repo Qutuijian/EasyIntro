@@ -136,12 +136,12 @@ public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouc
 
     @Override
     public void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
-        getBaseContext().withRightIndicatorDisabled(b,slide);
+        getBaseContext().withRightIndicatorDisabled(b, slide);
     }
 
     @Override
     public void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
-        getBaseContext().withLeftIndicatorDisabled(b,slide);
+        getBaseContext().withLeftIndicatorDisabled(b, slide);
     }
 
     @Override

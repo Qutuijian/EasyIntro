@@ -219,16 +219,6 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withPageIndicatorVisibility(boolean b) {
-        carouselFragment.withPageIndicatorVisibility(b);
-    }
-
-    @Override
-    public void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
-        carouselFragment.withRightIndicatorDisabled(b,slide);
-    }
-
-    @Override
     public void withRightIndicatorDisabled(boolean b) {
         carouselFragment.withRightIndicatorDisabled(b);
     }
@@ -239,8 +229,18 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
+    public void withPageIndicatorVisibility(boolean b) {
+        carouselFragment.withPageIndicatorVisibility(b);
+    }
+
+    @Override
+    public void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
+        carouselFragment.withRightIndicatorDisabled(b, slide);
+    }
+
+    @Override
     public void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
-        carouselFragment.withLeftIndicatorDisabled(b,slide);
+        carouselFragment.withLeftIndicatorDisabled(b, slide);
     }
 
     @Override

@@ -61,6 +61,8 @@ import io.github.meness.easyintro.views.LeftToggleIndicator;
 import io.github.meness.easyintro.views.RightToggleIndicator;
 
 public class EasyIntroCarouselFragment extends Fragment implements ISlide, ICheck, IConfigOnce, ITouch, OnBackPressListener, IConfig, OnToggleIndicatorsClickListener {
+    SparseArray<Class> mDisableLeftIndicatorOn = new SparseArray<>();
+    SparseArray<Class> mDisableRightIndicatorOn = new SparseArray<>();
     private EasyIntroPagerAdapter mAdapter;
     private DirectionalViewPager mPager;
     private ViewGroup mIndicatorsContainer;
@@ -95,25 +97,23 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
         }
 
         // disable left indicator for specific slide
-        for (int i = 0;i<mDisableLeftIndicatorOn.size();i++){
-            if (fragment.getClass().getName().equalsIgnoreCase(mDisableLeftIndicatorOn.get(i).getName())){
+        for (int i = 0; i < mDisableLeftIndicatorOn.size(); i++) {
+            if (fragment.getClass().getName().equalsIgnoreCase(mDisableLeftIndicatorOn.get(i).getName())) {
                 mLeftIndicator.withDisabled(true);
                 mPager.setAllowedSwipeDirection(SwipeDirection.LEFT);
                 break;
-            }
-            else{
+            } else {
                 mLeftIndicator.withDisabled(false);
                 withSwipeDirection(mSwipeDirection);
             }
         }
         // disable right indicator for specific slide
-        for (int i = 0;i<mDisableRightIndicatorOn.size();i++){
-            if (fragment.getClass().getName().equalsIgnoreCase(mDisableRightIndicatorOn.get(i).getName())){
+        for (int i = 0; i < mDisableRightIndicatorOn.size(); i++) {
+            if (fragment.getClass().getName().equalsIgnoreCase(mDisableRightIndicatorOn.get(i).getName())) {
                 mRightIndicator.withDisabled(true);
                 mPager.setAllowedSwipeDirection(SwipeDirection.RIGHT);
                 break;
-            }
-            else{
+            } else {
                 mRightIndicator.withDisabled(false);
                 withSwipeDirection(mSwipeDirection);
             }
@@ -135,11 +135,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     @Override
     public final void withTranslucentStatusBar(boolean b) {
         materializeBuilder.withTranslucentStatusBarProgrammatically(b);
-    }
-
-    @Override
-    public final void withPageIndicatorVisibility(boolean b) {
-        mIndicatorsContainer.findViewById(R.id.pageIndicator).setVisibility(b ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -175,41 +170,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     @Override
     public final void withSlideTransformer(SlideTransformer transformer) {
         mPager.setPageTransformer(true, transformer.getTransformer());
-    }
-
-    @Override
-    public final void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
-        mDisableRightIndicatorOn.append(mDisableRightIndicatorOn.size(),slide);
-        // TODO swipe direction must be modified
-        if (b) {
-            mPager.setAllowedSwipeDirection(SwipeDirection.RIGHT);
-        } else {
-            withSwipeDirection(mSwipeDirection);
-        }
-    }
-
-    SparseArray<Class> mDisableLeftIndicatorOn = new SparseArray<>();
-    SparseArray<Class> mDisableRightIndicatorOn = new SparseArray<>();
-
-    @Override
-    public final void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
-        mDisableLeftIndicatorOn.append(mDisableLeftIndicatorOn.size(),slide);
-        // TODO swipe direction must be modified
-        if (b) {
-            mPager.setAllowedSwipeDirection(SwipeDirection.LEFT);
-        } else {
-            withSwipeDirection(mSwipeDirection);
-        }
-    }
-
-    @Override
-    public void withRightIndicatorDisabled(boolean b) {
-        mRightIndicator.withDisabled(b);
-    }
-
-    @Override
-    public void withLeftIndicatorDisabled(boolean b) {
-mLeftIndicator.withDisabled(b);
     }
 
     @Override
@@ -316,9 +276,13 @@ mLeftIndicator.withDisabled(b);
     }
 
     @Override
-    public void withBothIndicatorsDisabled(boolean b, Class slide) {
-        withLeftIndicatorDisabled(b,slide);
-        withRightIndicatorDisabled(b,slide);
+    public void withRightIndicatorDisabled(boolean b) {
+        mRightIndicator.withDisabled(b);
+    }
+
+    @Override
+    public void withLeftIndicatorDisabled(boolean b) {
+        mLeftIndicator.withDisabled(b);
     }
 
     private void setVibrateEnabled() {
@@ -327,6 +291,39 @@ mLeftIndicator.withDisabled(b);
             return;
         }
         mVibrate = true;
+    }
+
+    @Override
+    public final void withPageIndicatorVisibility(boolean b) {
+        mIndicatorsContainer.findViewById(R.id.pageIndicator).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public final void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
+        mDisableRightIndicatorOn.append(mDisableRightIndicatorOn.size(), slide);
+        // TODO swipe direction must be modified
+        if (b) {
+            mPager.setAllowedSwipeDirection(SwipeDirection.RIGHT);
+        } else {
+            withSwipeDirection(mSwipeDirection);
+        }
+    }
+
+    @Override
+    public final void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
+        mDisableLeftIndicatorOn.append(mDisableLeftIndicatorOn.size(), slide);
+        // TODO swipe direction must be modified
+        if (b) {
+            mPager.setAllowedSwipeDirection(SwipeDirection.LEFT);
+        } else {
+            withSwipeDirection(mSwipeDirection);
+        }
+    }
+
+    @Override
+    public void withBothIndicatorsDisabled(boolean b, Class slide) {
+        withLeftIndicatorDisabled(b, slide);
+        withRightIndicatorDisabled(b, slide);
     }
 
     @Override
