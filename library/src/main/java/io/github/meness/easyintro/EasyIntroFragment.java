@@ -17,16 +17,18 @@
 package io.github.meness.easyintro;
 
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.interfaces.ICheck;
+import io.github.meness.easyintro.interfaces.IConfig;
 import io.github.meness.easyintro.interfaces.ISlide;
 import io.github.meness.easyintro.interfaces.ITouch;
 import io.github.meness.easyintro.listeners.OnBackPressListener;
 import io.github.meness.easyintro.utils.BackPressImpl;
 
-public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouch, OnBackPressListener {
+public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouch, IConfig, OnBackPressListener {
 
     @Override
     public void withNextSlide(boolean smoothScroll) {
@@ -125,5 +127,25 @@ public class EasyIntroFragment extends Fragment implements ISlide, ICheck, ITouc
     @Override
     public void onSkipTouch() {
         // empty
+    }
+
+    @Override
+    public void withPageIndicatorVisibility(boolean b) {
+        getBaseContext().withPageIndicatorVisibility(b);
+    }
+
+    @Override
+    public void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
+        getBaseContext().withRightIndicatorDisabled(b,slide);
+    }
+
+    @Override
+    public void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
+        getBaseContext().withLeftIndicatorDisabled(b,slide);
+    }
+
+    @Override
+    public void withBothIndicatorsDisabled(boolean b, Class slide) {
+        getBaseContext().withBothIndicatorsDisabled(b, slide);
     }
 }

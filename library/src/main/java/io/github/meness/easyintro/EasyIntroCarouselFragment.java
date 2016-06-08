@@ -26,12 +26,14 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,7 @@ import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.enums.ToggleIndicator;
 import io.github.meness.easyintro.interfaces.ICheck;
 import io.github.meness.easyintro.interfaces.IConfig;
+import io.github.meness.easyintro.interfaces.IConfigOnce;
 import io.github.meness.easyintro.interfaces.ISlide;
 import io.github.meness.easyintro.interfaces.ITouch;
 import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
@@ -57,7 +60,7 @@ import io.github.meness.easyintro.views.DirectionalViewPager;
 import io.github.meness.easyintro.views.LeftToggleIndicator;
 import io.github.meness.easyintro.views.RightToggleIndicator;
 
-public class EasyIntroCarouselFragment extends Fragment implements ISlide, ICheck, ITouch, OnBackPressListener, IConfig, OnToggleIndicatorsClickListener {
+public class EasyIntroCarouselFragment extends Fragment implements ISlide, ICheck, IConfigOnce, ITouch, OnBackPressListener, IConfig, OnToggleIndicatorsClickListener {
     private EasyIntroPagerAdapter mAdapter;
     private DirectionalViewPager mPager;
     private ViewGroup mIndicatorsContainer;
@@ -72,9 +75,8 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     private int mVibrateIntensity = 20;
     private boolean mVibrate;
     private boolean mRtlSwipe;
-    private boolean mRightIndicatorEnabled = true;
-    private boolean mLeftIndicatorEnabled = true;
     private SwipeDirection mSwipeDirection = SwipeDirection.ALL;
+    // FIXME change type to Class
     private Fragment mLockOn;
     private MaterializeBuilder materializeBuilder;
     private EasyIntroInteractionsListener mInteractionsListener;
@@ -84,7 +86,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     @CallSuper
-    private void onSlideChanged(Fragment fragment) {
+    protected void onSlideChanged(Fragment fragment) {
         if (mSoundRes != 0) {
             MediaPlayer.create(getContext(), mSoundRes).start();
         }
@@ -92,11 +94,32 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
             mVibrator.vibrate(mVibrateIntensity);
         }
 
-        updateToggleIndicators();
-
-        if (fragment == mLockOn) {
-            lockEverything(true);
+        // disable left indicator for specific slide
+        for (int i = 0;i<mDisableLeftIndicatorOn.size();i++){
+            if (fragment.getClass().getName().equalsIgnoreCase(mDisableLeftIndicatorOn.get(i).getName())){
+                mLeftIndicator.withDisabled(true);
+                mPager.setAllowedSwipeDirection(SwipeDirection.LEFT);
+                break;
+            }
+            else{
+                mLeftIndicator.withDisabled(false);
+                withSwipeDirection(mSwipeDirection);
+            }
         }
+        // disable right indicator for specific slide
+        for (int i = 0;i<mDisableRightIndicatorOn.size();i++){
+            if (fragment.getClass().getName().equalsIgnoreCase(mDisableRightIndicatorOn.get(i).getName())){
+                mRightIndicator.withDisabled(true);
+                mPager.setAllowedSwipeDirection(SwipeDirection.RIGHT);
+                break;
+            }
+            else{
+                mRightIndicator.withDisabled(false);
+                withSwipeDirection(mSwipeDirection);
+            }
+        }
+
+        updateToggleIndicators();
     }
 
     /**
@@ -155,15 +178,38 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     @Override
-    public final void withRightIndicatorDisabled(boolean b) {
-        mRightIndicatorEnabled = b;
+    public final void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
+        mDisableRightIndicatorOn.append(mDisableRightIndicatorOn.size(),slide);
+        // TODO swipe direction must be modified
+        if (b) {
+            mPager.setAllowedSwipeDirection(SwipeDirection.RIGHT);
+        } else {
+            withSwipeDirection(mSwipeDirection);
+        }
+    }
+
+    SparseArray<Class> mDisableLeftIndicatorOn = new SparseArray<>();
+    SparseArray<Class> mDisableRightIndicatorOn = new SparseArray<>();
+
+    @Override
+    public final void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
+        mDisableLeftIndicatorOn.append(mDisableLeftIndicatorOn.size(),slide);
+        // TODO swipe direction must be modified
+        if (b) {
+            mPager.setAllowedSwipeDirection(SwipeDirection.LEFT);
+        } else {
+            withSwipeDirection(mSwipeDirection);
+        }
+    }
+
+    @Override
+    public void withRightIndicatorDisabled(boolean b) {
         mRightIndicator.withDisabled(b);
     }
 
     @Override
-    public final void withLeftIndicatorDisabled(boolean b) {
-        mLeftIndicatorEnabled = b;
-        mLeftIndicator.withDisabled(b);
+    public void withLeftIndicatorDisabled(boolean b) {
+mLeftIndicator.withDisabled(b);
     }
 
     @Override
@@ -270,23 +316,9 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
     }
 
     @Override
-    public void withLock(boolean b, Fragment lock) {
-        if (b) {
-            mLockOn = lock;
-        } else {
-            mLockOn = null;
-            lockEverything(false);
-        }
-    }
-
-    private void lockEverything(boolean b) {
-        if (b) {
-            mPager.setAllowedSwipeDirection(SwipeDirection.NONE);
-        } else {
-            withSwipeDirection(mSwipeDirection);
-        }
-        mLeftIndicator.withDisabled(mLeftIndicatorEnabled);
-        mRightIndicator.withDisabled(mRightIndicatorEnabled);
+    public void withBothIndicatorsDisabled(boolean b, Class slide) {
+        withLeftIndicatorDisabled(b,slide);
+        withRightIndicatorDisabled(b,slide);
     }
 
     private void setVibrateEnabled() {
@@ -580,6 +612,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ISlide, IChec
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                // FIXME use registered fragments
                 onSlideChanged(mAdapter.getItem(position));
             }
         });

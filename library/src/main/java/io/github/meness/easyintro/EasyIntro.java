@@ -22,6 +22,7 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.support.v4.app.Fragment;
@@ -32,10 +33,11 @@ import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.ToggleIndicator;
 import io.github.meness.easyintro.interfaces.IConfig;
+import io.github.meness.easyintro.interfaces.IConfigOnce;
 import io.github.meness.easyintro.interfaces.ISlide;
 import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
 
-public abstract class EasyIntro extends AppCompatActivity implements EasyIntroInteractionsListener, ISlide, IConfig {
+public abstract class EasyIntro extends AppCompatActivity implements EasyIntroInteractionsListener, ISlide, IConfig, IConfigOnce {
     public static final String TAG = EasyIntro.class.getSimpleName();
     private EasyIntroCarouselFragment carouselFragment;
 
@@ -127,11 +129,6 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withPageIndicatorVisibility(boolean b) {
-        carouselFragment.withPageIndicatorVisibility(b);
-    }
-
-    @Override
     public void withStatusBarColor(@ColorInt int statusBarColor) {
         carouselFragment.withStatusBarColor(statusBarColor);
     }
@@ -164,16 +161,6 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     @Override
     public void withSlideTransformer(SlideTransformer transformer) {
         carouselFragment.withSlideTransformer(transformer);
-    }
-
-    @Override
-    public void withRightIndicatorDisabled(boolean b) {
-        carouselFragment.withRightIndicatorDisabled(b);
-    }
-
-    @Override
-    public void withLeftIndicatorDisabled(boolean b) {
-        carouselFragment.withLeftIndicatorDisabled(b);
     }
 
     @Override
@@ -232,8 +219,33 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withLock(boolean b, Fragment lock) {
-        carouselFragment.withLock(b, lock);
+    public void withPageIndicatorVisibility(boolean b) {
+        carouselFragment.withPageIndicatorVisibility(b);
+    }
+
+    @Override
+    public void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
+        carouselFragment.withRightIndicatorDisabled(b,slide);
+    }
+
+    @Override
+    public void withRightIndicatorDisabled(boolean b) {
+        carouselFragment.withRightIndicatorDisabled(b);
+    }
+
+    @Override
+    public void withLeftIndicatorDisabled(boolean b) {
+        carouselFragment.withLeftIndicatorDisabled(b);
+    }
+
+    @Override
+    public void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
+        carouselFragment.withLeftIndicatorDisabled(b,slide);
+    }
+
+    @Override
+    public void withBothIndicatorsDisabled(boolean b, Class slide) {
+        carouselFragment.withBothIndicatorsDisabled(b, slide);
     }
 
     @Override
