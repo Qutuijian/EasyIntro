@@ -16,7 +16,7 @@
 
 <resources>
 
-    <style name="MyEasyIntroStyle" parent="EasyIntro.NoActionBar.FullScreen">
+    <style name="MyEasyIntroStyle" parent="EasyIntro.NoActionBar">
         <!-- customize EasyIntro here
              refer to the parent and see what items are already defined -->
     </style>

@@ -30,5 +30,6 @@ public class MyEasyIntro extends EasyIntro {
         withSlide(EndFragment.instantiate(getApplicationContext(), EndFragment.class.getName()));
 
         withSlideTransformer(SlideTransformer.ZOOM_OUT_SLIDE);
+        withFullscreen(true);
     }
 }
