@@ -31,9 +31,9 @@ import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.ToggleIndicator;
 
 /**
- * following methods may be configured once through {@link EasyIntro#initIntro()}
+ * configuration on {@link EasyIntro}
  */
-public interface IConfigOnce {
+public interface IConfigOnActivity {
     void withTranslucentStatusBar(boolean b);
 
     void withStatusBarColor(@ColorInt int statusBarColor);
@@ -80,14 +80,14 @@ public interface IConfigOnce {
     /**
      * @param d Drawable
      * @see android.support.v4.view.ViewPager#setPageMarginDrawable(Drawable)
-     * @see IConfigOnce#setPageMarginDrawable(int)
+     * @see IConfigOnActivity#setPageMarginDrawable(int)
      */
     void setPageMarginDrawable(Drawable d);
 
     /**
      * @param resId resource id
      * @see android.support.v4.view.ViewPager#setPageMarginDrawable(int)
-     * @see IConfigOnce#setPageMarginDrawable(Drawable)
+     * @see IConfigOnActivity#setPageMarginDrawable(Drawable)
      */
     void setPageMarginDrawable(@DrawableRes int resId);
 
@@ -131,7 +131,7 @@ public interface IConfigOnce {
      * disable/enable right indicator for whole slides
      *
      * @param b Boolean
-     * @see IConfig#withRightIndicatorDisabled(boolean, Class) for disabling on specific slides
+     * @see IConfigMultiple#withRightIndicatorDisabled(boolean, Class) for disabling on specific slides
      */
     void withRightIndicatorDisabled(boolean b);
 
@@ -148,7 +148,7 @@ public interface IConfigOnce {
      * disable/enable left indicator for whole slides
      *
      * @param b Boolean
-     * @see IConfig#withLeftIndicatorDisabled(boolean, Class) for disabling on specific slides
+     * @see IConfigMultiple#withLeftIndicatorDisabled(boolean, Class) for disabling on specific slides
      */
     void withLeftIndicatorDisabled(boolean b);
 

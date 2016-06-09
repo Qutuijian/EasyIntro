@@ -18,36 +18,16 @@ package io.github.meness.easyintro.interfaces;
 
 import android.support.annotation.AnimRes;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.EasyIntroFragment;
 
 /**
- * following method may be configured multiple times through {@link EasyIntro#initIntro()} and/or {@link EasyIntroFragment}
+ * configuration on {@link EasyIntroFragment}
  */
-public interface IConfig {
-    void withPageIndicatorVisibility(boolean b);
-
-    // disable indicator for specific slide
-    void withRightIndicatorDisabled(boolean b, @NonNull Class slide);
-
-    // disable indicator for specific slide
-    void withLeftIndicatorDisabled(boolean b, @NonNull Class slide);
-
-    void withBothIndicatorsDisabled(boolean b, Class slide);
-
-    void withNextSlide(boolean smoothScroll);
-
-    void withPreviousSlide(boolean smoothScroll);
-
-    void withSlideTo(int page, boolean smoothScroll);
-
-    Fragment getCurrentSlide();
-
+public interface IConfigOnFragment {
     /**
      * replace an overlay slide
      *
@@ -56,7 +36,7 @@ public interface IConfig {
      * @param fragmentManager fragment manager
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int)
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int)
-     * @see IConfigOnce#withOverlaySlideAnimation(int, int, int, int) for defining once
+     * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining once
      */
     void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager);
 
@@ -70,7 +50,7 @@ public interface IConfig {
      * @param exit            anim resource id
      * @see #withOverlaySlide(Fragment, int, FragmentManager)
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int)
-     * @see IConfigOnce#withOverlaySlideAnimation(int, int, int, int) for defining once
+     * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining once
      */
     void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
                           @AnimRes int exit);
@@ -87,7 +67,7 @@ public interface IConfig {
      * @param popExit         anim resource id
      * @see #withOverlaySlide(Fragment, int, FragmentManager)
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int)
-     * @see IConfigOnce#withOverlaySlideAnimation(int, int, int, int) for defining oncece
+     * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining oncece
      */
     void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
                           @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit);
@@ -109,10 +89,8 @@ public interface IConfig {
      * @see #withOverlaySlide(Fragment, int, FragmentManager)
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int)
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int)
-     * @see IConfigOnce#withOverlaySlideAnimation(int, int, int, int) for defining oncece
+     * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining oncece
      */
     void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
                           @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName);
-
-    void withSlideTo(Class slideClass, boolean smoothScroll);
 }

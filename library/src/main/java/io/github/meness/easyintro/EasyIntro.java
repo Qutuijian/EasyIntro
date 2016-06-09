@@ -22,13 +22,11 @@ import android.support.annotation.AnimRes;
 import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -36,11 +34,11 @@ import io.github.meness.easyintro.enums.IndicatorContainer;
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.ToggleIndicator;
-import io.github.meness.easyintro.interfaces.IConfig;
-import io.github.meness.easyintro.interfaces.IConfigOnce;
+import io.github.meness.easyintro.interfaces.IConfigMultiple;
+import io.github.meness.easyintro.interfaces.IConfigOnActivity;
 import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
 
-public abstract class EasyIntro extends AppCompatActivity implements EasyIntroInteractionsListener, IConfig, IConfigOnce {
+public abstract class EasyIntro extends AppCompatActivity implements EasyIntroInteractionsListener, IConfigMultiple, IConfigOnActivity {
     public static final String TAG = EasyIntro.class.getSimpleName();
     private EasyIntroCarouselFragment carouselFragment;
 
@@ -301,26 +299,6 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     @Override
     public Fragment getCurrentSlide() {
         return carouselFragment.getCurrentSlide();
-    }
-
-    @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
-        carouselFragment.withOverlaySlide(slide, container, fragmentManager);
-    }
-
-    @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit) {
-        carouselFragment.withOverlaySlide(slide, container, fragmentManager, enter, exit);
-    }
-
-    @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit) {
-        carouselFragment.withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit);
-    }
-
-    @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName) {
-        carouselFragment.withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, sharedElement, transitionName);
     }
 
     @Override

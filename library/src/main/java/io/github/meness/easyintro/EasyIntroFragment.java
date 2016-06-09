@@ -25,12 +25,13 @@ import android.view.View;
 
 import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.interfaces.ICheck;
-import io.github.meness.easyintro.interfaces.IConfig;
+import io.github.meness.easyintro.interfaces.IConfigMultiple;
+import io.github.meness.easyintro.interfaces.IConfigOnFragment;
 import io.github.meness.easyintro.interfaces.ISlide;
 import io.github.meness.easyintro.listeners.OnBackPressListener;
 import io.github.meness.easyintro.utils.BackPressImpl;
 
-public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConfig, OnBackPressListener {
+public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConfigOnFragment, IConfigMultiple, OnBackPressListener {
     @Override
     public boolean isLocked() {
         return getBaseContext().isLocked();

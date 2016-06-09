@@ -53,8 +53,9 @@ import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.enums.ToggleIndicator;
 import io.github.meness.easyintro.interfaces.ICheck;
-import io.github.meness.easyintro.interfaces.IConfig;
-import io.github.meness.easyintro.interfaces.IConfigOnce;
+import io.github.meness.easyintro.interfaces.IConfigMultiple;
+import io.github.meness.easyintro.interfaces.IConfigOnActivity;
+import io.github.meness.easyintro.interfaces.IConfigOnFragment;
 import io.github.meness.easyintro.interfaces.ISlide;
 import io.github.meness.easyintro.listeners.EasyIntroInteractionsListener;
 import io.github.meness.easyintro.listeners.OnBackPressListener;
@@ -64,7 +65,7 @@ import io.github.meness.easyintro.views.DirectionalViewPager;
 import io.github.meness.easyintro.views.LeftToggleIndicator;
 import io.github.meness.easyintro.views.RightToggleIndicator;
 
-public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConfigOnce, ISlide, OnBackPressListener, IConfig, OnToggleIndicatorsClickListener {
+public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConfigOnActivity, ISlide, OnBackPressListener, IConfigOnFragment, IConfigMultiple, OnToggleIndicatorsClickListener {
     private SparseArray<Class> mDisableLeftIndicatorOn = new SparseArray<>();
     private SparseArray<Class> mDisableRightIndicatorOn = new SparseArray<>();
     private EasyIntroPagerAdapter mAdapter;
