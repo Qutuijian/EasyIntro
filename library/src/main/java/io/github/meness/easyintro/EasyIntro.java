@@ -30,6 +30,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import io.github.meness.easyintro.enums.IndicatorContainer;
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.ToggleIndicator;
@@ -221,6 +222,16 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
+    public void withIndicatorContainer(IndicatorContainer container) {
+        carouselFragment.withIndicatorContainer(container);
+    }
+
+    @Override
+    public void withIndicatorContainer(@LayoutRes int resId) {
+        carouselFragment.withIndicatorContainer(resId);
+    }
+
+    @Override
     public void withRightIndicatorDisabled(boolean b) {
         carouselFragment.withRightIndicatorDisabled(b);
     }
@@ -273,6 +284,11 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     @Override
     public Fragment getCurrentSlide() {
         return carouselFragment.getCurrentSlide();
+    }
+
+    @Override
+    public void withIndicatorContainerGravity(int gravity) {
+        carouselFragment.withIndicatorContainerGravity(gravity);
     }
 
     @Override

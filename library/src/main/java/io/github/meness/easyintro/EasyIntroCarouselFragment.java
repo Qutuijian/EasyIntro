@@ -34,15 +34,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.FrameLayout;
 
 import com.mikepenz.materialize.MaterializeBuilder;
 
 import java.lang.reflect.InvocationTargetException;
 
+import io.github.meness.easyintro.enums.IndicatorContainer;
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.SwipeDirection;
@@ -64,7 +67,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     private SparseArray<Class> mDisableRightIndicatorOn = new SparseArray<>();
     private EasyIntroPagerAdapter mAdapter;
     private DirectionalViewPager mPager;
-    private ViewGroup mIndicatorsContainer;
+    private View mIndicatorsContainer;
     private ToggleIndicator mToggleIndicator = ToggleIndicator.DEFAULT;
     private RightToggleIndicator mRightIndicator;
     private LeftToggleIndicator mLeftIndicator;
@@ -79,6 +82,9 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     private SwipeDirection mSwipeDirection = SwipeDirection.ALL;
     private MaterializeBuilder mMaterializeBuilder;
     private EasyIntroInteractionsListener mInteractionsListener;
+    @LayoutRes
+    private int mIndicatorContainer = IndicatorContainer.ARROW.getLayout(); // arrow layout by default
+    private int mIndicatorContainerGravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
 
     public void setInteractionsListener(EasyIntroInteractionsListener listener) {
         this.mInteractionsListener = listener;
@@ -208,11 +214,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    public boolean isToggleIndicatorSoundEffectsEnabled() {
-        return mLeftIndicator.isSoundEffectsEnabled() && mRightIndicator.isSoundEffectsEnabled();
-    }
-
-    @Override
     public final void withToggleIndicatorSoundEffects(boolean b) {
         mLeftIndicator.setSoundEffectsEnabled(b);
         mRightIndicator.setSoundEffectsEnabled(b);
@@ -242,8 +243,23 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
+    public void withIndicatorContainer(IndicatorContainer container) {
+        mIndicatorContainer = container.getLayout();
+    }
+
+    @Override
+    public void withIndicatorContainer(@LayoutRes int resId) {
+        mIndicatorContainer = resId;
+    }
+
+    @Override
     public void withRightIndicatorDisabled(boolean b) {
         mRightIndicator.withDisabled(b);
+    }
+
+    @Override
+    public void withIndicatorContainerGravity(int gravity) {
+        mIndicatorContainerGravity = gravity;
     }
 
     @Override
@@ -323,6 +339,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @Override
     public final void withSlide(Fragment slide) {
         mAdapter.addFragment(slide);
+        // FIXME vaghti withSlide haro configOnce kari line paeeno bardar
         updateToggleIndicators();
     }
 
@@ -532,6 +549,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
         return mLeftIndicator.isDisabled();
     }
 
+    @Override
+    public boolean isToggleIndicatorSoundEffectsEnabled() {
+        return mLeftIndicator.isSoundEffectsEnabled() && mRightIndicator.isSoundEffectsEnabled();
+    }
+
     /**
      * Retrieve the currently visible Tab Fragment and propagate the onBackPressed callback
      *
@@ -570,13 +592,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
         // init
         mPager = (DirectionalViewPager) view.findViewById(R.id.pager);
-        mIndicatorsContainer = (ViewGroup) view.findViewById(R.id.indicatorsContainer);
-        mRightIndicator = (RightToggleIndicator) view.findViewById(R.id.nextIndicator);
-        mLeftIndicator = (LeftToggleIndicator) view.findViewById(R.id.previousIndicator);
         mMaterializeBuilder = new MaterializeBuilder(getActivity());
-
-        mRightIndicator.setListener(this);
-        mLeftIndicator.setListener(this);
 
         mPager.setAdapter(mAdapter);
         mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -589,8 +605,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
         mInteractionsListener.onCarouselViewCreated(view, savedInstanceState);
 
-        addIndicator();
-        updateToggleIndicators();
+        inflateIndicatorContainer(view);
     }
 
     @Override
@@ -600,9 +615,53 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
         mMaterializeBuilder.build();
     }
 
+    private void inflateIndicatorContainer(final View view) {
+        final ViewStub indicatorContainerStub = (ViewStub) view.findViewById(R.id.indicatorsContainer);
+
+        // set gravity
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) indicatorContainerStub.getLayoutParams();
+        params.gravity = mIndicatorContainerGravity;
+        indicatorContainerStub.setLayoutParams(params);
+
+        indicatorContainerStub.setLayoutResource(mIndicatorContainer);
+        indicatorContainerStub.setOnInflateListener(new ViewStub.OnInflateListener() {
+            @Override
+            public void onInflate(ViewStub stub, View inflated) {
+                // there must be predefined ids
+                if (inflated.findViewById(R.id.previousIndicator) == null) {
+                    throw new RuntimeException(getString(R.string.exception_left_indicator_id));
+                } else if (inflated.findViewById(R.id.nextIndicator) == null) {
+                    throw new RuntimeException(getString(R.string.exception_right_indicator_id));
+                } else if (inflated.findViewById(R.id.pageIndicator) == null) {
+                    throw new RuntimeException(getString(R.string.exception_page_indicator_id));
+                }
+                // check indicators instanceof
+                else if (!(inflated.findViewById(R.id.previousIndicator) instanceof LeftToggleIndicator)) {
+                    throw new RuntimeException(getString(R.string.exception_previous_indicator_instanceof));
+                } else if (!(inflated.findViewById(R.id.nextIndicator) instanceof RightToggleIndicator)) {
+                    throw new RuntimeException(getString(R.string.exception_next_indicator_instanceof));
+                }
+
+                mIndicatorsContainer = inflated;
+
+                // must be initialized after inflating indicator container
+                mRightIndicator = (RightToggleIndicator) mIndicatorsContainer.findViewById(R.id.nextIndicator);
+                mLeftIndicator = (LeftToggleIndicator) mIndicatorsContainer.findViewById(R.id.previousIndicator);
+                mRightIndicator.setListener(EasyIntroCarouselFragment.this);
+                mLeftIndicator.setListener(EasyIntroCarouselFragment.this);
+
+                addIndicator();
+                updateToggleIndicators();
+            }
+        });
+
+        indicatorContainerStub.inflate();
+    }
+
     private void addIndicator() {
         if (mIndicatorRes != -1) {
             ViewStub viewStub = (ViewStub) mIndicatorsContainer.findViewById(R.id.pageIndicator);
+            // FIXME set id in correct way
             viewStub.setLayoutResource(mIndicatorRes);
             // id must be set
             viewStub.inflate().setId(R.id.pageIndicator);

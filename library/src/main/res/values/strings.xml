@@ -19,4 +19,9 @@
     <string name="exception.invocation_target.set_view_pager">Exception in invoking \'setViewPager\' method from the indicator.</string>
     <string name="exception.illegal_access.set_view_pager">Exception in invoking \'setViewPager\' method from the indicator.</string>
     <string name="exception.permission.vibrate">android.permission.VIBRATE permission needed.</string>
+    <string name="exception_left_indicator_id">There\'s no \'leftIndicator\' ID</string>
+    <string name="exception_right_indicator_id">There\'s no \'rightIndicator\' ID</string>
+    <string name="exception_page_indicator_id">There\'s no \'pageIndicator\' ID</string>
+    <string name="exception_previous_indicator_instanceof">Left indicator must be instance of \'LeftToggleIndicator\'</string>
+    <string name="exception_next_indicator_instanceof">Right indicator must be instance of \'RightToggleIndicator\'</string>
 </resources>

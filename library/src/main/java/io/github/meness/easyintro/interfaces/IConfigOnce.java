@@ -23,6 +23,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.RawRes;
 
 import io.github.meness.easyintro.EasyIntro;
+import io.github.meness.easyintro.enums.IndicatorContainer;
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;
 import io.github.meness.easyintro.enums.ToggleIndicator;
@@ -90,7 +91,8 @@ public interface IConfigOnce {
 
     /**
      * enable sound effects on pressing toggle indicators
-     * @param b enable sound
+     *
+     * @param b Boolean
      * @see android.view.View#setSoundEffectsEnabled(boolean)
      */
     void withToggleIndicatorSoundEffects(boolean b);
@@ -108,17 +110,40 @@ public interface IConfigOnce {
     void withPageIndicator(PageIndicator pageIndicator);
 
     /**
+     * use different indicator container style
+     *
+     * @param container IndicatorContainer
+     * @see #withIndicatorContainer(int) for custom layout
+     */
+    void withIndicatorContainer(IndicatorContainer container);
+
+    /**
+     * use custom indicator container
+     *
+     * @param resId resource id
+     * @see #withIndicatorContainer(IndicatorContainer) for predefined layouts
+     */
+    void withIndicatorContainer(@LayoutRes int resId);
+
+    /**
      * disable/enable right indicator for whole slides
      *
-     * @param b disabled
+     * @param b Boolean
      * @see IConfig#withRightIndicatorDisabled(boolean, Class) for disabling on specific slides
      */
     void withRightIndicatorDisabled(boolean b);
 
     /**
+     * set different indicator container gravity (bottom and center horizontal by default)
+     *
+     * @param gravity Gravity
+     */
+    void withIndicatorContainerGravity(int gravity);
+
+    /**
      * disable/enable left indicator for whole slides
      *
-     * @param b disabled
+     * @param b Boolean
      * @see IConfig#withLeftIndicatorDisabled(boolean, Class) for disabling on specific slides
      */
     void withLeftIndicatorDisabled(boolean b);
