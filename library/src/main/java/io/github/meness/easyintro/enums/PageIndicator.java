@@ -24,14 +24,14 @@ public enum PageIndicator {
     SPRING(R.layout.layout_easyintro_indicator_spring), CIRCLE(R.layout.layout_easyintro_indicator_circle), NONE(-1);
 
     @LayoutRes
-    private final int mIndicatorRes;
+    private final int mResId;
 
     PageIndicator(@LayoutRes int indicatorRes) {
-        mIndicatorRes = indicatorRes;
+        mResId = indicatorRes;
     }
 
     @LayoutRes
-    public int getIndicatorRes() {
-        return mIndicatorRes;
+    public int getLayout() {
+        return mResId;
     }
 }

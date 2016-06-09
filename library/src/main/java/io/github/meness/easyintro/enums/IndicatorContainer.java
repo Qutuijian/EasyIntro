@@ -22,7 +22,7 @@ import io.github.meness.easyintro.R;
 
 public enum IndicatorContainer {
     ARROW(R.layout.layout_easyintro_indicator_container_arrow);
-    
+
     @LayoutRes
     private final int mResId;
 
