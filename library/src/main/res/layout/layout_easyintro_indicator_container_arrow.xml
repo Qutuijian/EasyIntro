@@ -36,6 +36,7 @@
         android:id="@+id/pageIndicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:inflatedId="@id/pageIndicator"
         android:layout_toEndOf="@+id/previousIndicator"
         android:layout_toLeftOf="@+id/nextIndicator"
         android:layout_toRightOf="@+id/previousIndicator"

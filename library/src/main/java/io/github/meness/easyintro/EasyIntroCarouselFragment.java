@@ -652,18 +652,20 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
                 updateToggleIndicators();
             }
         });
-
         indicatorContainerStub.inflate();
     }
 
     private void addIndicator() {
         if (mIndicatorRes != -1) {
             ViewStub viewStub = (ViewStub) mIndicatorsContainer.findViewById(R.id.pageIndicator);
-            // FIXME set id in correct way
             viewStub.setLayoutResource(mIndicatorRes);
-            // id must be set
-            viewStub.inflate().setId(R.id.pageIndicator);
-            setViewPagerToPageIndicator();
+            viewStub.setOnInflateListener(new ViewStub.OnInflateListener() {
+                @Override
+                public void onInflate(ViewStub stub, View inflated) {
+                    setViewPagerToPageIndicator();
+                }
+            });
+            viewStub.inflate();
         }
     }
 
