@@ -22,7 +22,7 @@
     android:layout_height="wrap_content">
     <!--TODO id haro avaz kon-->
     <io.github.meness.easyintro.views.LeftToggleIndicator
-        android:id="@+id/previousIndicator"
+        android:id="@+id/leftIndicator"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentLeft="true"
@@ -37,13 +37,13 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:inflatedId="@id/pageIndicator"
-        android:layout_toEndOf="@+id/previousIndicator"
-        android:layout_toLeftOf="@+id/nextIndicator"
-        android:layout_toRightOf="@+id/previousIndicator"
-        android:layout_toStartOf="@+id/nextIndicator"/>
+        android:layout_toEndOf="@+id/leftIndicator"
+        android:layout_toLeftOf="@+id/rightIndicator"
+        android:layout_toRightOf="@+id/leftIndicator"
+        android:layout_toStartOf="@+id/rightIndicator"/>
 
     <io.github.meness.easyintro.views.RightToggleIndicator
-        android:id="@+id/nextIndicator"
+        android:id="@+id/rightIndicator"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"

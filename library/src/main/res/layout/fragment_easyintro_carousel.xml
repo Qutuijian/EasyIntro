@@ -27,9 +27,9 @@
     </io.github.meness.easyintro.views.DirectionalViewPager>
 
     <ViewStub
-        android:id="@+id/indicatorsContainer"
+        android:id="@+id/indicatorContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inflatedId="@id/indicatorsContainer"/>
+        android:inflatedId="@id/indicatorContainer"/>
 
 </FrameLayout>

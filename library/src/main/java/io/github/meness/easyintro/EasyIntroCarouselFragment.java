@@ -615,7 +615,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     private void inflateIndicatorContainer(final View view) {
-        final ViewStub indicatorContainerStub = (ViewStub) view.findViewById(R.id.indicatorsContainer);
+        final ViewStub indicatorContainerStub = (ViewStub) view.findViewById(R.id.indicatorContainer);
 
         // set gravity
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) indicatorContainerStub.getLayoutParams();
@@ -627,25 +627,25 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
             @Override
             public void onInflate(ViewStub stub, View inflated) {
                 // there must be predefined ids
-                if (inflated.findViewById(R.id.previousIndicator) == null) {
+                if (inflated.findViewById(R.id.leftIndicator) == null) {
                     throw new RuntimeException(getString(R.string.exception_left_indicator_id));
-                } else if (inflated.findViewById(R.id.nextIndicator) == null) {
+                } else if (inflated.findViewById(R.id.rightIndicator) == null) {
                     throw new RuntimeException(getString(R.string.exception_right_indicator_id));
                 } else if (inflated.findViewById(R.id.pageIndicator) == null) {
                     throw new RuntimeException(getString(R.string.exception_page_indicator_id));
                 }
                 // check indicators instanceof
-                else if (!(inflated.findViewById(R.id.previousIndicator) instanceof LeftToggleIndicator)) {
+                else if (!(inflated.findViewById(R.id.leftIndicator) instanceof LeftToggleIndicator)) {
                     throw new RuntimeException(getString(R.string.exception_previous_indicator_instanceof));
-                } else if (!(inflated.findViewById(R.id.nextIndicator) instanceof RightToggleIndicator)) {
+                } else if (!(inflated.findViewById(R.id.rightIndicator) instanceof RightToggleIndicator)) {
                     throw new RuntimeException(getString(R.string.exception_next_indicator_instanceof));
                 }
 
                 mIndicatorsContainer = inflated;
 
                 // must be initialized after inflating indicator container
-                mRightIndicator = (RightToggleIndicator) mIndicatorsContainer.findViewById(R.id.nextIndicator);
-                mLeftIndicator = (LeftToggleIndicator) mIndicatorsContainer.findViewById(R.id.previousIndicator);
+                mRightIndicator = (RightToggleIndicator) mIndicatorsContainer.findViewById(R.id.rightIndicator);
+                mLeftIndicator = (LeftToggleIndicator) mIndicatorsContainer.findViewById(R.id.leftIndicator);
                 mRightIndicator.setListener(EasyIntroCarouselFragment.this);
                 mLeftIndicator.setListener(EasyIntroCarouselFragment.this);
 
