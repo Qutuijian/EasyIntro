@@ -17,6 +17,7 @@
 package io.github.meness.easyintro.interfaces;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.AnimRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -157,4 +158,14 @@ public interface IConfigOnce {
      * @param resId resource id
      */
     void withPageIndicator(@LayoutRes int resId);
+
+    /**
+     * define overlay slides animations once instead of defining for each overlay slides
+     *
+     * @param enter    anim resource id
+     * @param exit     anim resource id
+     * @param popEnter anim resource id
+     * @param popExit  anim resource id
+     */
+    void withOverlaySlideAnimation(@AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit);
 }

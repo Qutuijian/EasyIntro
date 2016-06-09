@@ -18,6 +18,7 @@ package io.github.meness.easyintro;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.AnimRes;
 import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -238,6 +239,16 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
+    public void withIndicatorContainerGravity(int gravity) {
+        carouselFragment.withIndicatorContainerGravity(gravity);
+    }
+
+    @Override
+    public void withSlide(Fragment slide) {
+        carouselFragment.withSlide(slide);
+    }
+
+    @Override
     public void withLeftIndicatorDisabled(boolean b) {
         carouselFragment.withLeftIndicatorDisabled(b);
     }
@@ -245,6 +256,11 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     @Override
     public void withPageIndicator(@LayoutRes int resId) {
         carouselFragment.withPageIndicator(resId);
+    }
+
+    @Override
+    public void withOverlaySlideAnimation(@AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit) {
+        carouselFragment.withOverlaySlideAnimation(enter, exit, popEnter, popExit);
     }
 
     @Override
@@ -288,18 +304,23 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withIndicatorContainerGravity(int gravity) {
-        carouselFragment.withIndicatorContainerGravity(gravity);
-    }
-
-    @Override
-    public void withSlide(Fragment slide) {
-        carouselFragment.withSlide(slide);
-    }
-
-    @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
         carouselFragment.withOverlaySlide(slide, container, fragmentManager);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit) {
+        carouselFragment.withOverlaySlide(slide, container, fragmentManager, enter, exit);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit) {
+        carouselFragment.withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName) {
+        carouselFragment.withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, sharedElement, transitionName);
     }
 
     @Override

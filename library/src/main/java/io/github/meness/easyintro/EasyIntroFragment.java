@@ -16,10 +16,12 @@
 
 package io.github.meness.easyintro;
 
+import android.support.annotation.AnimRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 
 import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.interfaces.ICheck;
@@ -29,7 +31,6 @@ import io.github.meness.easyintro.listeners.OnBackPressListener;
 import io.github.meness.easyintro.utils.BackPressImpl;
 
 public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConfig, OnBackPressListener {
-
     @Override
     public boolean isLocked() {
         return getBaseContext().isLocked();
@@ -142,6 +143,21 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
         getBaseContext().withOverlaySlide(slide, container, fragmentManager);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit) {
+        getBaseContext().withOverlaySlide(slide, container, fragmentManager, enter, exit);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit) {
+        getBaseContext().withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName) {
+        getBaseContext().withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, sharedElement, transitionName);
     }
 
     @Override

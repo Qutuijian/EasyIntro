@@ -21,6 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.AnimRes;
 import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -86,6 +87,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @LayoutRes
     private int mIndicatorContainer = IndicatorContainer.ARROW.getLayout(); // arrow layout by default
     private int mIndicatorContainerGravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+    private int[] mOverlaySlidesAnimations = new int[4]; // enter, exit, popEnter, popExit
 
     public void setInteractionsListener(EasyIntroInteractionsListener listener) {
         this.mInteractionsListener = listener;
@@ -264,6 +266,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
+    public final void withSlide(Fragment slide) {
+        mAdapter.addFragment(slide);
+    }
+
+    @Override
     public void withLeftIndicatorDisabled(boolean b) {
         mLeftIndicator.withDisabled(b);
     }
@@ -276,6 +283,15 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @Override
     public final void withPageIndicator(@LayoutRes int resId) {
         mIndicatorRes = resId;
+    }
+
+    @Override
+    public void withOverlaySlideAnimation(@AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit) {
+        // define animations for whole overlay slides
+        mOverlaySlidesAnimations[0] = enter;
+        mOverlaySlidesAnimations[1] = exit;
+        mOverlaySlidesAnimations[2] = popEnter;
+        mOverlaySlidesAnimations[3] = popExit;
     }
 
     private void setVibrateEnabled() {
@@ -338,8 +354,36 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    public final void withSlide(Fragment slide) {
-        mAdapter.addFragment(slide);
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
+        withOverlaySlide(slide, container, fragmentManager, mOverlaySlidesAnimations[0], mOverlaySlidesAnimations[1], mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3]);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit) {
+        withOverlaySlide(slide, container, fragmentManager, enter, exit, mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3]);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit) {
+        withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, null, null);
+    }
+
+    @Override
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        // add to back stack
+        transaction.addToBackStack(null);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.setCustomAnimations(enter, exit, popEnter, popExit);
+        if (sharedElement != null) {
+            transaction.addSharedElement(sharedElement, transitionName);
+        }
+        transaction.replace(container, slide).commit();
+    }
+
+    @Override
+    public void withSlideTo(Class slideClass, boolean smoothScroll) {
+        withSlideTo(mAdapter.getItemPosition(slideClass), smoothScroll);
     }
 
     private void updateToggleIndicators() {
@@ -406,19 +450,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
     private void showLeftIndicator() {
         mLeftIndicator.show();
-    }
-
-    @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        // add to back stack
-        transaction.addToBackStack(null);
-        transaction.replace(container, slide).commit();
-    }
-
-    @Override
-    public void withSlideTo(Class slideClass, boolean smoothScroll) {
-        withSlideTo(mAdapter.getItemPosition(slideClass), smoothScroll);
     }
 
     @Override
