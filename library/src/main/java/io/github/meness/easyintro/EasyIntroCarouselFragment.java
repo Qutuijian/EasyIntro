@@ -355,6 +355,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
+    public void withSlideTo(Class slideClass, boolean smoothScroll) {
+        withSlideTo(mAdapter.getItemPosition(slideClass), smoothScroll);
+    }
+
+    @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
         withOverlaySlide(slide, container, fragmentManager, mOverlaySlidesAnimations[0], mOverlaySlidesAnimations[1], mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3]);
     }
@@ -380,11 +385,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
             transaction.addSharedElement(sharedElement, transitionName);
         }
         transaction.replace(container, slide).commit();
-    }
-
-    @Override
-    public void withSlideTo(Class slideClass, boolean smoothScroll) {
-        withSlideTo(mAdapter.getItemPosition(slideClass), smoothScroll);
     }
 
     private void updateToggleIndicators() {

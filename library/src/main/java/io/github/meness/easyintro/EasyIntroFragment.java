@@ -142,6 +142,11 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     }
 
     @Override
+    public void withSlideTo(Class slideClass, boolean smoothScroll) {
+        getBaseContext().withSlideTo(slideClass, smoothScroll);
+    }
+
+    @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
         getBaseContext().withOverlaySlide(slide, container, fragmentManager);
     }
@@ -159,10 +164,5 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName) {
         getBaseContext().withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, sharedElement, transitionName);
-    }
-
-    @Override
-    public void withSlideTo(Class slideClass, boolean smoothScroll) {
-        getBaseContext().withSlideTo(slideClass, smoothScroll);
     }
 }

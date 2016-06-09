@@ -18,8 +18,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
     <!--TODO id haro avaz kon-->
     <io.github.meness.easyintro.views.LeftToggleIndicator
         android:id="@+id/leftIndicator"
@@ -36,11 +36,11 @@
         android:id="@+id/pageIndicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:inflatedId="@id/pageIndicator"
         android:layout_toEndOf="@+id/leftIndicator"
         android:layout_toLeftOf="@+id/rightIndicator"
         android:layout_toRightOf="@+id/leftIndicator"
-        android:layout_toStartOf="@+id/rightIndicator"/>
+        android:layout_toStartOf="@+id/rightIndicator"
+        android:inflatedId="@id/pageIndicator"/>
 
     <io.github.meness.easyintro.views.RightToggleIndicator
         android:id="@+id/rightIndicator"
