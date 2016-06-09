@@ -19,6 +19,7 @@ package io.github.meness.easyintro.interfaces;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.EasyIntroFragment;
@@ -45,7 +46,14 @@ public interface IConfig {
 
     Fragment getCurrentSlide();
 
-    void withOverlaySlide(Fragment slide, @IdRes int container);
+    /**
+     * replace an overlay slide
+     *
+     * @param slide           slide you want to replace as an overlay slide
+     * @param container       resource id
+     * @param fragmentManager fragment manager
+     */
+    void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager);
 
     void withSlideTo(Class slideClass, boolean smoothScroll);
 }

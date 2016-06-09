@@ -19,6 +19,7 @@ package io.github.meness.easyintro;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.interfaces.ICheck;
@@ -139,8 +140,8 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container) {
-        getBaseContext().withOverlaySlide(slide, container);
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
+        getBaseContext().withOverlaySlide(slide, container, fragmentManager);
     }
 
     @Override

@@ -27,6 +27,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -297,8 +298,8 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container) {
-        carouselFragment.withOverlaySlide(slide, container);
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
+        carouselFragment.withOverlaySlide(slide, container, fragmentManager);
     }
 
     @Override

@@ -40,13 +40,13 @@ public class OverlaySlides extends EasyIntroFragment {
         view.findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                withOverlaySlide(LoginFragment.instantiate(getContext(), LoginFragment.class.getName()), R.id.container);
+                withOverlaySlide(LoginFragment.instantiate(getContext(), LoginFragment.class.getName()), R.id.container, getChildFragmentManager());
             }
         });
         view.findViewById(R.id.joinBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                withOverlaySlide(JoinFragment.instantiate(getContext(), JoinFragment.class.getName()), R.id.container);
+                withOverlaySlide(JoinFragment.instantiate(getContext(), JoinFragment.class.getName()), R.id.container, getChildFragmentManager());
             }
         });
     }
