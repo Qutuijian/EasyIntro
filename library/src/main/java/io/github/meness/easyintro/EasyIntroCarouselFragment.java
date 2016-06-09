@@ -74,7 +74,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @RawRes
     private int mSoundRes = -1; // no sound by default
     @LayoutRes
-    private int mIndicatorRes = PageIndicator.CIRCLE.getIndicatorRes(); // circle page indicator by default
+    private int mIndicatorRes = PageIndicator.CIRCLE.getLayout(); // circle page indicator by default
     private Vibrator mVibrator;
     private int mVibrateIntensity;
     private boolean mVibrate;
@@ -239,7 +239,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
      * @param pageIndicator Custom indicator
      */
     public final void withPageIndicator(PageIndicator pageIndicator) {
-        mIndicatorRes = pageIndicator.getIndicatorRes();
+        mIndicatorRes = pageIndicator.getLayout();
     }
 
     @Override
