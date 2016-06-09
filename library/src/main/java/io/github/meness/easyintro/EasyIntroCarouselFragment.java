@@ -339,8 +339,6 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @Override
     public final void withSlide(Fragment slide) {
         mAdapter.addFragment(slide);
-        // FIXME vaghti withSlide haro configOnce kari line paeeno bardar
-        updateToggleIndicators();
     }
 
     private void updateToggleIndicators() {

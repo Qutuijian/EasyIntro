@@ -45,8 +45,6 @@ public interface IConfig {
 
     Fragment getCurrentSlide();
 
-    void withSlide(Fragment slide);
-
     void withOverlaySlide(Fragment slide, @IdRes int container);
 
     void withSlideTo(Class slideClass, boolean smoothScroll);

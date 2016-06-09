@@ -21,6 +21,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.RawRes;
+import android.support.v4.app.Fragment;
 
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.enums.IndicatorContainer;
@@ -139,6 +140,8 @@ public interface IConfigOnce {
      * @param gravity Gravity
      */
     void withIndicatorContainerGravity(int gravity);
+
+    void withSlide(Fragment slide);
 
     /**
      * disable/enable left indicator for whole slides

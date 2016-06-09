@@ -139,11 +139,6 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     }
 
     @Override
-    public void withSlide(Fragment slide) {
-        getBaseContext().withSlide(slide);
-    }
-
-    @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container) {
         getBaseContext().withOverlaySlide(slide, container);
     }
