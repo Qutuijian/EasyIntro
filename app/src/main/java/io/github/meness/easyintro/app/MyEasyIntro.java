@@ -30,6 +30,8 @@ public class MyEasyIntro extends EasyIntro {
         withSlide(EndFragment.instantiate(getApplicationContext(), EndFragment.class.getName()));
 
         withSlideTransformer(SlideTransformer.ZOOM_OUT_SLIDE);
+        // define overlay slides animations once
+        withOverlaySlideAnimation(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         withFullscreen(true);
     }
 }
