@@ -14,7 +14,6 @@ If any (or all) of these questions seem familiar, the **EasyIntro** is the perfe
 * Uses the AppCompat support library
 * Follows the Google Material Design Guidelines
 * Uses vector (.svg) icons
-* Modify the slides on the go
 * **Overlay slides**
 * **Back stack fully supported for overlay slides**
 * Modify intro settings on the go
@@ -69,12 +68,12 @@ Create an activity which extends `EasyIntro` and override the necessary `initInt
 ```java
 public class MyEasyIntro extends EasyIntro {
     
-    // override all listeners you need
+    // override callbacks you need
     
     @Override
     protected void initIntro() {
-        // use withSlide() to add Fragments and
-        // modify intro settings here
+        // use withSlide() to add slides and
+        // configure your app intro
     }
 }
 ```
