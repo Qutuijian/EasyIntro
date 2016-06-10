@@ -15,20 +15,20 @@ If any (or all) of these questions seem familiar, the **EasyIntro** is the perfe
 * Follows the Google Material Design Guidelines
 * Uses vector (.svg) icons
 * **Overlay slides**
-* **Back stack fully supported for overlay slides**
+* **Fully supports back stack**
 * Modify intro settings on the go
 * Comes with multiple default indicators
-* Limit your swipe direction to left and/or right
-* **Back button press support on slides**
-* Define which toggle indicators to be shown
-* You may have all listeners you need
-* Abstract toggle indicator
-* Fragment to have easy access to your intro methods
+* Limit your swipe direction
+* **Supports back button press on slides**
+* **Supports custom indicators**
+* Callbacks
+* **Supports overlay slides animations**
+* **Extended Fragment for easy access to intro methods**
 * Comes with multiple default slide transformers
-* Based on a ViewPager
-* **RTL support**
+* Based on a `ViewPager`
+* **Supports RTL**
 * **Lock on specific slides**
-* Customizable
+* **Incredibly customizable**
 * Tested and stable
 * Absolutely no limits
 
