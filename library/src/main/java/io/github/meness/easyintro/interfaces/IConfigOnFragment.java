@@ -37,6 +37,7 @@ public interface IConfigOnFragment {
      * @param addToBackStack  add to back stack
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, boolean)
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, boolean)
+     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
      * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining once
      */
     void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, boolean addToBackStack);
@@ -52,6 +53,7 @@ public interface IConfigOnFragment {
      * @param addToBackStack  add to back stack
      * @see #withOverlaySlide(Fragment, int, FragmentManager, boolean)
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, boolean)
+     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
      * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining once
      */
     void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
@@ -70,6 +72,7 @@ public interface IConfigOnFragment {
      * @param addToBackStack  add to back stack
      * @see #withOverlaySlide(Fragment, int, FragmentManager, boolean)
      * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, boolean)
+     * #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
      * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining oncece
      */
     void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
