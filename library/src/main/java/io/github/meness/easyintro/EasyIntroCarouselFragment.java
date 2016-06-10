@@ -511,8 +511,8 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     public void onPreviousSlide() {
         // pass to current fragment
         Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-        if (currentFragment instanceof EasyIntroFragment) {
-            ((EasyIntroFragment) currentFragment).onPreviousSlide();
+        if (currentFragment instanceof ISlide) {
+            ((ISlide) currentFragment).onPreviousSlide();
         }
         // pass to EasyIntro activity
         mInteractionsListener.onPreviousSlide();
@@ -523,8 +523,8 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     public void onNextSlide() {
         // pass to current fragment
         Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-        if (currentFragment instanceof EasyIntroFragment) {
-            ((EasyIntroFragment) currentFragment).onNextSlide();
+        if (currentFragment instanceof ISlide) {
+            ((ISlide) currentFragment).onNextSlide();
         }
         // pass to EasyIntro activity
         mInteractionsListener.onNextSlide();
@@ -535,8 +535,8 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     public void onDonePressed() {
         // pass to current fragment
         Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-        if (currentFragment instanceof EasyIntroFragment) {
-            ((EasyIntroFragment) currentFragment).onDonePressed();
+        if (currentFragment instanceof ISlide) {
+            ((ISlide) currentFragment).onDonePressed();
         }
         // pass to EasyIntro activity
         mInteractionsListener.onDonePressed();
@@ -546,8 +546,8 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     public void onSkipPressed() {
         // pass to current fragment
         Fragment currentFragment = mAdapter.getRegisteredFragment(mPager.getCurrentItem());
-        if (currentFragment instanceof EasyIntroFragment) {
-            ((EasyIntroFragment) currentFragment).onSkipPressed();
+        if (currentFragment instanceof ISlide) {
+            ((ISlide) currentFragment).onSkipPressed();
         }
         // pass to EasyIntro activity
         mInteractionsListener.onSkipPressed();
