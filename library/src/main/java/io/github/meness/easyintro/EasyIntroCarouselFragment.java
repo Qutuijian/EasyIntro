@@ -360,25 +360,27 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager) {
-        withOverlaySlide(slide, container, fragmentManager, mOverlaySlidesAnimations[0], mOverlaySlidesAnimations[1], mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3]);
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, boolean addToBackStack) {
+        withOverlaySlide(slide, container, fragmentManager, mOverlaySlidesAnimations[0], mOverlaySlidesAnimations[1], mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3], addToBackStack);
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit) {
-        withOverlaySlide(slide, container, fragmentManager, enter, exit, mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3]);
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, boolean addToBackStack) {
+        withOverlaySlide(slide, container, fragmentManager, enter, exit, mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3], addToBackStack);
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit) {
-        withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, null, null);
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, boolean addToBackStack) {
+        withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, null, null, addToBackStack);
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName) {
+    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName, boolean addToBackStack) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         // add to back stack
-        transaction.addToBackStack(null);
+        if (addToBackStack) {
+            transaction.addToBackStack(null);
+        }
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.setCustomAnimations(enter, exit, popEnter, popExit);
         if (sharedElement != null) {
