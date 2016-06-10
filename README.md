@@ -19,6 +19,7 @@ If any (or all) of these questions seem familiar, the **EasyIntro** is the perfe
 * Modify intro settings on the go
 * Comes with multiple default indicators
 * Limit your swipe direction to left and/or right
+* **Back button press support on slides**
 * Define which toggle indicators to be shown
 * You may have all listeners you need
 * Abstract toggle indicator
