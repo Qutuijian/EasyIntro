@@ -367,12 +367,12 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
     @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, boolean addToBackStack) {
-        withOverlaySlide(slide, container, fragmentManager, mOverlaySlidesAnimations[0], mOverlaySlidesAnimations[1], mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3], addToBackStack);
+        withOverlaySlide(slide, container, fragmentManager, mOverlaySlidesAnimations[0], mOverlaySlidesAnimations[1], mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3], null, null, addToBackStack);
     }
 
     @Override
     public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, boolean addToBackStack) {
-        withOverlaySlide(slide, container, fragmentManager, enter, exit, mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3], addToBackStack);
+        withOverlaySlide(slide, container, fragmentManager, enter, exit, mOverlaySlidesAnimations[2], mOverlaySlidesAnimations[3], null, null, addToBackStack);
     }
 
     @Override
