@@ -89,6 +89,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     private int mIndicatorContainer = IndicatorContainer.ARROW.getLayout(); // arrow layout by default
     private int mIndicatorContainerGravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
     private int[] mOverlaySlidesAnimations = new int[4]; // enter, exit, popEnter, popExit
+    private boolean mSlideBackPressSupport = true;
 
     public void setInteractionsListener(EasyIntroInteractionsListener listener) {
         this.mInteractionsListener = listener;
@@ -293,6 +294,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
         mOverlaySlidesAnimations[1] = exit;
         mOverlaySlidesAnimations[2] = popEnter;
         mOverlaySlidesAnimations[3] = popExit;
+    }
+
+    @Override
+    public void withSlideBackPressSupport(boolean b) {
+        mSlideBackPressSupport = b;
     }
 
     private void setVibrateEnabled() {
@@ -598,7 +604,21 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
         if (currentFragment != null) {
             // lets see if the currentFragment or any of its childFragment can handle onBackPressed
-            return currentFragment.onBackPressed();
+            if (mSlideBackPressSupport) {
+                if (!currentFragment.onBackPressed()) {
+                    // close if first slide is visible
+                    if (mPager.getCurrentItem() == 0) {
+                        return false;
+                    }
+                    // swipe back on back pressed
+                    withPreviousSlide(true);
+                    return true;
+                } else {
+                    return true;
+                }
+            } else {
+                return currentFragment.onBackPressed();
+            }
         }
 
         // this Fragment couldn't handle the onBackPressed call

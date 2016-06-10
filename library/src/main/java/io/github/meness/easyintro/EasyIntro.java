@@ -262,6 +262,11 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     }
 
     @Override
+    public void withSlideBackPressSupport(boolean b) {
+        carouselFragment.withSlideBackPressSupport(b);
+    }
+
+    @Override
     public void withPageIndicatorVisibility(boolean b) {
         carouselFragment.withPageIndicatorVisibility(b);
     }

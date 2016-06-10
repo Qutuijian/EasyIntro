@@ -168,4 +168,11 @@ public interface IConfigOnActivity {
      * @param popExit  anim resource id
      */
     void withOverlaySlideAnimation(@AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit);
+
+    /**
+     * support back button press on slides (enabled by default)
+     *
+     * @param b Boolean
+     */
+    void withSlideBackPressSupport(boolean b);
 }
