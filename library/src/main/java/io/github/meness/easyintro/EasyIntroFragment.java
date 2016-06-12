@@ -16,9 +16,12 @@
 
 package io.github.meness.easyintro;
 
+import android.os.Bundle;
 import android.support.annotation.AnimRes;
+import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -144,6 +147,17 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     @Override
     public void withSlideTo(Class slideClass, boolean smoothScroll) {
         getBaseContext().withSlideTo(slideClass, smoothScroll);
+    }
+
+    @Override
+    @CallSuper
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // set view clickable property true to prevent passing click event to its parent
+        if (!view.isClickable()) {
+            view.setClickable(true);
+        }
     }
 
     @Override
