@@ -43,7 +43,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile "com.android.support:appcompat-v7:{$rootProject.ext.supportLibVersion}"
     compile "com.android.support:support-annotations:{$rootProject.ext.supportLibVersion}"
-    compile('com.mikepenz:materialize:0.8.8@aar') {
+    compile('com.mikepenz:materialize:0.9.0@aar') {
         transitive = true
     }
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
