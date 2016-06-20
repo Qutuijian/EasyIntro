@@ -16,17 +16,14 @@
 
 package io.github.meness.easyintro.views;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
+import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageButton;
 
 import io.github.meness.easyintro.R;
 
-public abstract class AbstractToggleIndicator extends ImageButton implements View.OnClickListener {
-
+public abstract class AbstractToggleIndicator extends AppCompatImageButton implements View.OnClickListener {
     public AbstractToggleIndicator(Context context) {
         this(context, null);
     }
@@ -36,12 +33,7 @@ public abstract class AbstractToggleIndicator extends ImageButton implements Vie
     }
 
     public AbstractToggleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, R.style.ToggleIndicatorsStyle);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public AbstractToggleIndicator(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context, attrs, defStyleAttr);
 
         setOnClickListener(this);
     }

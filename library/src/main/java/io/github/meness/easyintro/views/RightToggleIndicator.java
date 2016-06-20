@@ -38,10 +38,6 @@ public class RightToggleIndicator extends AbstractToggleIndicator {
         super(context, attrs, defStyleAttr);
     }
 
-    public RightToggleIndicator(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     public void setListener(OnToggleIndicatorsClickListener listener) {
         mListener = listener;
     }

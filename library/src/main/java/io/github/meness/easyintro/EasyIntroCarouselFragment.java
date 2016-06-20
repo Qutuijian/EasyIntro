@@ -34,13 +34,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.ViewStubCompat;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.widget.FrameLayout;
 
 import com.mikepenz.materialize.MaterializeBuilder;
@@ -669,7 +669,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     private void inflateIndicatorContainer(final View view) {
-        final ViewStub indicatorContainerStub = (ViewStub) view.findViewById(R.id.indicatorContainer);
+        final ViewStubCompat indicatorContainerStub = (ViewStubCompat) view.findViewById(R.id.indicatorContainer);
 
         // set gravity
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) indicatorContainerStub.getLayoutParams();
@@ -677,9 +677,9 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
         indicatorContainerStub.setLayoutParams(params);
 
         indicatorContainerStub.setLayoutResource(mIndicatorContainer);
-        indicatorContainerStub.setOnInflateListener(new ViewStub.OnInflateListener() {
+        indicatorContainerStub.setOnInflateListener(new ViewStubCompat.OnInflateListener() {
             @Override
-            public void onInflate(ViewStub stub, View inflated) {
+            public void onInflate(ViewStubCompat stub, View inflated) {
                 // there must be predefined ids
                 if (inflated.findViewById(R.id.leftIndicator) == null) {
                     throw new RuntimeException(getString(R.string.exception_left_indicator_id));
@@ -712,11 +712,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
     private void addIndicator() {
         if (mIndicatorRes != -1) {
-            ViewStub viewStub = (ViewStub) mIndicatorsContainer.findViewById(R.id.pageIndicator);
+            ViewStubCompat viewStub = (ViewStubCompat) mIndicatorsContainer.findViewById(R.id.pageIndicator);
             viewStub.setLayoutResource(mIndicatorRes);
-            viewStub.setOnInflateListener(new ViewStub.OnInflateListener() {
+            viewStub.setOnInflateListener(new ViewStubCompat.OnInflateListener() {
                 @Override
-                public void onInflate(ViewStub stub, View inflated) {
+                public void onInflate(ViewStubCompat stub, View inflated) {
                     setViewPagerToPageIndicator();
                 }
             });
