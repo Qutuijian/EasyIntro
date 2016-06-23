@@ -20,7 +20,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
-    <!--TODO id haro avaz kon-->
+
     <io.github.meness.easyintro.views.LeftToggleIndicator
         android:id="@+id/leftIndicator"
         android:layout_width="48dp"
@@ -29,6 +29,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
+        android:background="?attr/toggleIndicatorsBackground"
         android:padding="4dp"
         android:src="@drawable/ic_keyboard_arrow_left_white_24dp"/>
 
@@ -50,6 +51,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
+        android:background="?attr/toggleIndicatorsBackground"
         android:padding="4dp"
         android:src="@drawable/ic_keyboard_arrow_right_white_24dp"/>
 </RelativeLayout>
