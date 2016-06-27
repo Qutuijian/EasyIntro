@@ -317,21 +317,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @Override
     public final void withRightIndicatorDisabled(boolean b, @NonNull Class slide) {
         mDisableRightIndicatorOn.append(mDisableRightIndicatorOn.size(), slide);
-        if (b) {
-            mPager.setAllowedSwipeDirection(SwipeDirection.RIGHT);
-        } else {
-            withSwipeDirection(mSwipeDirection);
-        }
     }
 
     @Override
     public final void withLeftIndicatorDisabled(boolean b, @NonNull Class slide) {
         mDisableLeftIndicatorOn.append(mDisableLeftIndicatorOn.size(), slide);
-        if (b) {
-            mPager.setAllowedSwipeDirection(SwipeDirection.LEFT);
-        } else {
-            withSwipeDirection(mSwipeDirection);
-        }
     }
 
     @Override
