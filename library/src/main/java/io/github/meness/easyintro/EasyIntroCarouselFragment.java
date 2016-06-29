@@ -413,7 +413,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
         }
 
         if (currentItem == slidesCount) {
-            mRightIndicator.makeItDone();
+            if (mToggleIndicator == ToggleIndicator.WITHOUT_DONE) {
+                hideRightIndicator();
+            } else {
+                mRightIndicator.makeItDone();
+            }
             mLeftIndicator.makeItPrevious();
         } else if (currentItem < slidesCount) {
             if (currentItem == 0) {

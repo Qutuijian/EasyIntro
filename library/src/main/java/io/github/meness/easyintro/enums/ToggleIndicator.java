@@ -19,13 +19,14 @@ package io.github.meness.easyintro.enums;
 /**
  * @see ToggleIndicator#DEFAULT - All indicators will be displayed
  * @see ToggleIndicator#WITHOUT_SKIP - All indicators but skip one will be displayed
+ * @see ToggleIndicator#WITHOUT_DONE - All indicators but done one will be displayed
  * @see ToggleIndicator#NO_LEFT_INDICATOR - Only right (next and done indicators) will be displayed
  * @see ToggleIndicator#NONE - No left and right indicators will be displayed
  * <p/>
  * Note: Swipe direction will be adjusted by which type of above types is chose.
  */
 public enum ToggleIndicator {
-    DEFAULT(SwipeDirection.ALL), WITHOUT_SKIP(SwipeDirection.ALL), NO_LEFT_INDICATOR(SwipeDirection.LEFT), NONE(SwipeDirection.NONE);
+    DEFAULT(SwipeDirection.ALL), WITHOUT_SKIP(SwipeDirection.ALL), WITHOUT_DONE(SwipeDirection.ALL), NO_LEFT_INDICATOR(SwipeDirection.LEFT), NONE(SwipeDirection.NONE);
 
     private final SwipeDirection mSwipeDirection;
 
