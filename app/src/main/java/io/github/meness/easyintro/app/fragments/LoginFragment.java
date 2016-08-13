@@ -16,34 +16,35 @@
 
 package io.github.meness.easyintro.app.fragments;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import io.github.meness.easyintro.EasyIntroFragment;
 import io.github.meness.easyintro.app.R;
+import io.github.meness.easyintro.app.databinding.FragmentBackBinding;
 
 public class LoginFragment extends EasyIntroFragment {
+    private FragmentBackBinding mBinding;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_back, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_back, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText(getContext(), "Toast from Login Fragment", Toast.LENGTH_SHORT).show();
-
-        Button backBtn = (Button) view.findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        mBinding.title.setText(R.string.login_fragment);
+        mBinding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 getBaseContext().onBackPressed();
             }
         });

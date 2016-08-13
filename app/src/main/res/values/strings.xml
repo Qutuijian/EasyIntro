@@ -21,4 +21,6 @@
     <string name="join">Join</string>
     <string name="overlay_slides">Overlay Slides</string>
     <string name="hello">Hello World</string>
+    <string name="join_fragment">Join Fragment</string>
+    <string name="login_fragment">Login Fragment</string>
 </resources>
