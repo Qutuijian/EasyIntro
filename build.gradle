@@ -45,7 +45,7 @@ ext {
     targetSdkVersion = 24
 
     versionCode = 17
-    versionName = "2.9.18"
+    versionName = "3.0"
 }
 
 task clean(type: Delete) {
