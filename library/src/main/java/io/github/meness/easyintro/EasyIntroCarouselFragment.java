@@ -90,6 +90,9 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     private int mIndicatorContainerGravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
     private int[] mOverlaySlidesAnimations = new int[4]; // enter, exit, popEnter, popExit
     private boolean mSlideBackPressSupport = true;
+    private boolean mLeftIndicatorEnabled = true;
+    private boolean mRightIndicatorEnabled = true;
+    private boolean mPageIndicatorVisibility = true;
 
     public void setInteractionsListener(EasyIntroInteractionsListener listener) {
         this.mInteractionsListener = listener;
@@ -259,7 +262,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
     @Override
     public void withRightIndicatorDisabled(boolean b) {
-        mRightIndicator.withDisabled(b);
+        if (mRightIndicator != null) {
+            mRightIndicator.withDisabled(b);
+        } else {
+            mRightIndicatorEnabled = b;
+        }
     }
 
     @Override
@@ -274,7 +281,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
     @Override
     public void withLeftIndicatorDisabled(boolean b) {
-        mLeftIndicator.withDisabled(b);
+        if (mLeftIndicator != null) {
+            mLeftIndicator.withDisabled(b);
+        } else {
+            mLeftIndicatorEnabled = b;
+        }
     }
 
     /**
@@ -311,7 +322,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
     @Override
     public final void withPageIndicatorVisibility(boolean b) {
-        mIndicatorsContainer.findViewById(R.id.pageIndicator).setVisibility(b ? View.VISIBLE : View.GONE);
+        if (mIndicatorsContainer != null) {
+            mIndicatorsContainer.findViewById(R.id.pageIndicator).setVisibility(b ? View.VISIBLE : View.GONE);
+        } else {
+            mPageIndicatorVisibility = b;
+        }
     }
 
     @Override
@@ -695,7 +710,9 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
                 mRightIndicator = (RightToggleIndicator) mIndicatorsContainer.findViewById(R.id.rightIndicator);
                 mLeftIndicator = (LeftToggleIndicator) mIndicatorsContainer.findViewById(R.id.leftIndicator);
                 mRightIndicator.setListener(EasyIntroCarouselFragment.this);
+                mRightIndicator.withDisabled(mRightIndicatorEnabled);
                 mLeftIndicator.setListener(EasyIntroCarouselFragment.this);
+                mLeftIndicator.withDisabled(mLeftIndicatorEnabled);
 
                 addIndicator();
                 updateToggleIndicators();
@@ -714,7 +731,8 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
                     setViewPagerToPageIndicator();
                 }
             });
-            viewStub.inflate();
+            View view = viewStub.inflate();
+            view.setVisibility(mPageIndicatorVisibility ? View.VISIBLE : View.GONE);
         }
     }
 
