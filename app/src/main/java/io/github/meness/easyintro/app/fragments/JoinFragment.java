@@ -20,29 +20,37 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.github.meness.easyintro.EasyIntroFragment;
 import io.github.meness.easyintro.app.R;
-import io.github.meness.easyintro.app.databinding.FragmentBackBinding;
 
 public class JoinFragment extends EasyIntroFragment {
-    private FragmentBackBinding mBinding;
+    //region Bind views
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.backBtn)
+    Button backBtn;
+    //endregion
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_back, container, false);
-        return mBinding.getRoot();
+        View view = inflater.inflate(R.layout.fragment_back, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mBinding.title.setText(R.string.join_fragment);
-        mBinding.backBtn.setOnClickListener(new View.OnClickListener() {
+        title.setText(R.string.join_fragment);
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getBaseContext().onBackPressed();
