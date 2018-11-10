@@ -82,15 +82,15 @@ mikepenz.materialize = "com.mikepenz:materialize:$versions.materialize"
 deps.mikepenz = mikepenz
 
 def toxicbakery = [:]
-toxicbakery.viewPagerTransform = "com.ToxicBakery.viewpager.transforms:view-pager-transforms:$versions.viewPagerTransform"
+toxicbakery.view_pager_transform = "com.ToxicBakery.viewpager.transforms:view-pager-transforms:$versions.viewPagerTransform"
 deps.toxicbakery = toxicbakery
 
 def relex = [:]
-relex.circleIndicator = "me.relex:circleindicator:$versions.circleIndicator"
+relex.circleindicator = "me.relex:circleindicator:$versions.circleIndicator"
 deps.relex = relex
 
 def chenupt = [:]
-chenupt.springIndicator = "com.github.chenupt.android:springindicator:$versions.springIndicator"
+chenupt.springindicator = "com.github.chenupt.android:springindicator:$versions.springIndicator"
 deps.chenupt = chenupt
 
 def junit = [:]

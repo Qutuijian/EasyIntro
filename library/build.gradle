@@ -56,9 +56,9 @@ dependencies {
     implementation deps.android.constraintlayout
     implementation deps.android.annotation
     implementation deps.mikepenz.materialize
-    implementation deps.toxicbakery.viewPagerTransform
-    implementation deps.chenupt.springIndicator
-    implementation deps.relex.circleIndicator
+    implementation deps.toxicbakery.view_pager_transform
+    implementation deps.chenupt.springindicator
+    implementation deps.relex.circleindicator
 }
 
 apply from: "maven-push.gradle"
