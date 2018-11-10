@@ -1,3 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="Alireza" />
+  <settings default="Alireza">
+    <module2copyright>
+      <element module="Project Files" copyright="Alireza" />
+    </module2copyright>
+  </settings>
 </component>

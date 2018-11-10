@@ -1,0 +1,92 @@
+/*
+ * Copyright 2018 Alireza Eskandarpour
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ext.deps = [:]
+
+def plugins = [:]
+plugins.android_gradle = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
+plugins.butterknife_gradle = "com.jakewharton:butterknife-gradle-plugin:$versions.butterKnifeVersion"
+deps.plugins = plugins
+
+def android = [:]
+android.appcompat = "androidx.appcompat:appcompat:$versions.androidXVersion"
+android.cardview = "androidx.cardview:cardview:$versions.androidXVersion"
+android.material = "com.google.android.material:material:$versions.androidXVersion"
+android.recyclerview = "androidx.recyclerview:recyclerview:$versions.androidXVersion"
+android.legacy = "androidx.legacy:legacy-support-v4:$versions.androidXVersion"
+android.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintLayoutVersion"
+android.annotation = "androidx.annotation:annotation:$versions.androidXVersion"
+deps.android = android
+
+def google = [:]
+google.guava = "com.google.guava:guava:$versions.guavaVersion"
+deps.google = google
+
+def dagger = [:]
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.daggerVersion"
+dagger.dagger = "com.google.dagger:dagger:$versions.daggerVersion"
+dagger.android = "com.google.dagger:dagger-android:$versions.daggerVersion"
+dagger.android_support = "com.google.dagger:dagger-android-support:$versions.daggerVersion"
+dagger.android_processor = "com.google.dagger:dagger-android-processor:$versions.daggerVersion"
+deps.dagger = dagger
+
+def utilcode = [:]
+utilcode.utilcode = "com.blankj:utilcode:$versions.utilCodeVersion"
+deps.utilcode = utilcode
+
+def timber = [:]
+timber.timber = "com.jakewharton.timber:timber:$versions.timberVersion"
+deps.timber = timber
+
+def gravitysnaphelper = [:]
+gravitysnaphelper.gravitysnaphelper = "com.github.rubensousa:gravitysnaphelper:$versions.gravitySnapHelper"
+deps.gravitysnaphelper = gravitysnaphelper
+
+def butterknife = [:]
+butterknife.butterknife = "com.jakewharton:butterknife:$versions.butterKnifeVersion"
+butterknife.compiler = "com.jakewharton:butterknife-compiler:$versions.butterKnifeVersion"
+deps.butterknife = butterknife
+
+def rx = [:]
+rx.android = "io.reactivex.rxjava2:rxandroid:$versions.rxAndroidVersion"
+rx.java = "io.reactivex.rxjava2:rxjava:$versions.rxJavaVersion"
+
+def binding = [:]
+binding.appcompat_v7 = "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$versions.rxBindingVersion"
+binding.design = "com.jakewharton.rxbinding2:rxbinding-design:$versions.rxBindingVersion"
+binding.recyclerview_v7 = "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:$versions.rxBindingVersion"
+rx.binding = binding
+deps.rx = rx
+
+def leakcanary = [:]
+leakcanary.leakcanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakCanaryVersion"
+leakcanary.no_op = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakCanaryVersion"
+leakcanary.support_fragment = "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakCanaryVersion"
+deps.leakcanary = leakcanary
+
+def self = [:]
+self.library = project(':library')
+deps.self = self
+
+static def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    handler.maven { url 'https://jitpack.io' }
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+ext.addRepos = this.&addRepos

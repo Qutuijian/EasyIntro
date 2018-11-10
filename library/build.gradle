@@ -14,39 +14,50 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+plugins{
+    id 'com.android.library'
+}
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion app.compileSdkVersion
+    buildToolsVersion app.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion app.minSdkVersion
+        targetSdkVersion app.targetSdkVersion
+        versionCode app.versionCode
+        versionName app.versionName
     }
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            minifyEnabled true
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
     }
-    lintOptions {
-        abortOnError false
+
+    compileOptions {
+        sourceCompatibility app.sourceCompatibility
+        targetCompatibility app.targetCompatibility
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    compile "com.android.support:support-annotations:${rootProject.ext.supportLibVersion}"
-    compile "com.mikepenz:materialize:1.0.0@aar"
-    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
-    compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
-    compile 'me.relex:circleindicator:1.2.1@aar'
+    testImplementation 'junit:junit:4.12'
+    implementation deps.android.appcompat
+    implementation deps.android.annotation
+    implementation "com.mikepenz:materialize:1.0.0@aar"
+    implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    implementation 'com.github.chenupt.android:springindicator:1.0.2@aar'
+    implementation 'me.relex:circleindicator:1.2.1@aar'
 }
 
-apply from: '../publish-closure.gradle'
+apply from: "maven-push.gradle"

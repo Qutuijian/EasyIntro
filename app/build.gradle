@@ -14,36 +14,49 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion app.compileSdkVersion
+    buildToolsVersion app.buildToolsVersion
 
     defaultConfig {
         applicationId "io.github.meness.easyintro.app"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion app.minSdkVersion
+        targetSdkVersion app.targetSdkVersion
+        versionCode app.versionCode
+        versionName app.versionName
     }
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            minifyEnabled true
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
     }
-    lintOptions {
-        abortOnError false
-    }
+
     dataBinding {
         enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility app.sourceCompatibility
+        targetCompatibility app.targetCompatibility
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    compile project(':library')
+    testImplementation 'junit:junit:4.12'
+    implementation deps.android.appcompat
+    implementation deps.self.library
 }
