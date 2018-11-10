@@ -33,7 +33,7 @@ import com.ToxicBakery.viewpager.transforms.StackTransformer;
 import com.ToxicBakery.viewpager.transforms.TabletTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
-import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
+import com.ToxicBakery.viewpager.transforms.ZoomOutTransformer;
 
 public enum SlideTransformer {
     ACCORDION(new AccordionTransformer()),
@@ -52,7 +52,7 @@ public enum SlideTransformer {
     TABLET(new TabletTransformer()),
     ZOOM_IN(new ZoomInTransformer()),
     ZOOM_OUT_SLIDE(new ZoomOutSlideTransformer()),
-    ZOOM_OUT(new ZoomOutTranformer());
+    ZOOM_OUT(new ZoomOutTransformer());
 
     private final ABaseTransformer mTransformer;
 
