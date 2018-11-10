@@ -16,9 +16,10 @@
 
 package io.github.meness.easyintro.interfaces;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.EasyIntroFragment;
 

@@ -16,7 +16,7 @@
 
 package io.github.meness.easyintro.enums;
 
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 
 import io.github.meness.easyintro.R;
 

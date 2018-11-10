@@ -16,8 +16,8 @@
 
 package io.github.meness.easyintro.utils;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import io.github.meness.easyintro.listeners.OnBackPressListener;
 

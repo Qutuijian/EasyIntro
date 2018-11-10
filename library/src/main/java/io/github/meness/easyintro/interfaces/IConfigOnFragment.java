@@ -16,10 +16,10 @@
 
 package io.github.meness.easyintro.interfaces;
 
-import android.support.annotation.AnimRes;
-import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.AnimRes;
+import androidx.annotation.IdRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.view.View;
 
 import io.github.meness.easyintro.EasyIntroFragment;

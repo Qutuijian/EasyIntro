@@ -17,13 +17,13 @@
 package io.github.meness.easyintro.interfaces;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.AnimRes;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.RawRes;
-import android.support.v4.app.Fragment;
+import androidx.annotation.AnimRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.RawRes;
 
+import androidx.fragment.app.Fragment;
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.enums.IndicatorContainer;
 import io.github.meness.easyintro.enums.PageIndicator;
@@ -73,20 +73,20 @@ public interface IConfigOnActivity {
 
     /**
      * @param marginPixels margin pixels
-     * @see android.support.v4.view.ViewPager#setPageMargin(int)
+     * @see androidx.viewpager.widget.ViewPager#setPageMargin(int)
      */
     void withPageMargin(int marginPixels);
 
     /**
      * @param d Drawable
-     * @see android.support.v4.view.ViewPager#setPageMarginDrawable(Drawable)
+     * @see androidx.viewpager.widget.ViewPager#setPageMarginDrawable(Drawable)
      * @see IConfigOnActivity#setPageMarginDrawable(int)
      */
     void setPageMarginDrawable(Drawable d);
 
     /**
      * @param resId resource id
-     * @see android.support.v4.view.ViewPager#setPageMarginDrawable(int)
+     * @see androidx.viewpager.widget.ViewPager#setPageMarginDrawable(int)
      * @see IConfigOnActivity#setPageMarginDrawable(Drawable)
      */
     void setPageMarginDrawable(@DrawableRes int resId);

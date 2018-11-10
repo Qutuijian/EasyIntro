@@ -26,7 +26,7 @@
         android:overScrollMode="never">
     </io.github.meness.easyintro.views.DirectionalViewPager>
 
-    <android.support.v7.widget.ViewStubCompat
+    <androidx.appcompat.widget.ViewStubCompat
         android:id="@+id/indicatorContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
