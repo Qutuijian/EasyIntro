@@ -14,12 +14,11 @@
   ~ limitations under the License.
   -->
 
-<manifest package="io.github.meness.easyintro"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.github.meness.easyintro">
 
     <application
         android:allowBackup="true"
-        android:supportsRtl="true">
-    </application>
+        android:supportsRtl="true"></application>
 
 </manifest>

@@ -18,7 +18,6 @@ package io.github.meness.easyintro.utils;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import io.github.meness.easyintro.listeners.OnBackPressListener;
 
 public class BackPressImpl implements OnBackPressListener {

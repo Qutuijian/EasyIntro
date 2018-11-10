@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Alireza Eskandarpour
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +15,19 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <io.github.meness.easyintro.views.DirectionalViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
-    </io.github.meness.easyintro.views.DirectionalViewPager>
+        android:overScrollMode="never"></io.github.meness.easyintro.views.DirectionalViewPager>
 
     <androidx.appcompat.widget.ViewStubCompat
         android:id="@+id/indicatorContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inflatedId="@id/indicatorContainer"/>
+        android:inflatedId="@id/indicatorContainer" />
 
 </FrameLayout>

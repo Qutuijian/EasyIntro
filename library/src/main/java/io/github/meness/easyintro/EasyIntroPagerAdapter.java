@@ -16,11 +16,11 @@
 
 package io.github.meness.easyintro;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 class EasyIntroPagerAdapter extends SmartFragmentStatePagerAdapter {
     private final List<Fragment> mFragments = new ArrayList<>();

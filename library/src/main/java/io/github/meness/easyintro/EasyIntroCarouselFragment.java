@@ -21,6 +21,18 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
+import android.util.SparseArray;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+
+import com.mikepenz.materialize.MaterializeBuilder;
+
+import java.lang.reflect.InvocationTargetException;
+
 import androidx.annotation.AnimRes;
 import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
@@ -35,18 +47,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-
-import com.mikepenz.materialize.MaterializeBuilder;
-
-import java.lang.reflect.InvocationTargetException;
-
 import io.github.meness.easyintro.enums.IndicatorContainer;
 import io.github.meness.easyintro.enums.PageIndicator;
 import io.github.meness.easyintro.enums.SlideTransformer;

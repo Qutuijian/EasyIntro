@@ -17,6 +17,8 @@
 package io.github.meness.easyintro;
 
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.AnimRes;
 import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
@@ -24,8 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import android.view.View;
-
 import io.github.meness.easyintro.enums.SwipeDirection;
 import io.github.meness.easyintro.interfaces.ICheck;
 import io.github.meness.easyintro.interfaces.IConfigMultiple;

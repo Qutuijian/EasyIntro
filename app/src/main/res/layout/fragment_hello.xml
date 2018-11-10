@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Alireza Eskandarpour
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +15,15 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:src="@drawable/background"/>
+        android:src="@drawable/background" />
 
     <TextView
         android:layout_width="match_parent"
@@ -33,5 +32,5 @@
         android:text="@string/hello"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 </FrameLayout>

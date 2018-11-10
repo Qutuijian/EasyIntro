@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Alireza Eskandarpour
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +14,7 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
@@ -25,23 +23,23 @@
         android:id="@+id/leftIndicator"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:background="?attr/toggleIndicatorsBackground"
         android:padding="4dp"
-        android:src="@drawable/ic_keyboard_arrow_left_white_24dp"/>
+        android:src="@drawable/ic_keyboard_arrow_left_white_24dp" />
 
     <androidx.appcompat.widget.ViewStubCompat
         android:id="@+id/pageIndicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_toEndOf="@+id/leftIndicator"
-        android:layout_toLeftOf="@+id/rightIndicator"
-        android:layout_toRightOf="@+id/leftIndicator"
         android:layout_toStartOf="@+id/rightIndicator"
-        android:inflatedId="@id/pageIndicator"/>
+        android:layout_toLeftOf="@+id/rightIndicator"
+        android:layout_toEndOf="@+id/leftIndicator"
+        android:layout_toRightOf="@+id/leftIndicator"
+        android:inflatedId="@id/pageIndicator" />
 
     <io.github.meness.easyintro.views.RightToggleIndicator
         android:id="@+id/rightIndicator"
@@ -49,9 +47,9 @@
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:background="?attr/toggleIndicatorsBackground"
         android:padding="4dp"
-        android:src="@drawable/ic_keyboard_arrow_right_white_24dp"/>
+        android:src="@drawable/ic_keyboard_arrow_right_white_24dp" />
 </RelativeLayout>

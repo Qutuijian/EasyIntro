@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Alireza Eskandarpour
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +15,10 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/colorSignFragmentBg">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSignFragmentBg">
 
     <RelativeLayout
         android:id="@+id/container"
@@ -36,7 +35,7 @@
             android:text="@string/overlay_slides"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,14 +49,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
-                android:textAllCaps="true"/>
+                android:textAllCaps="true" />
 
             <Button
                 android:id="@+id/joinBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/join"
-                android:textAllCaps="true"/>
+                android:textAllCaps="true" />
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

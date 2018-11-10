@@ -17,12 +17,12 @@
 package io.github.meness.easyintro.interfaces;
 
 import android.graphics.drawable.Drawable;
+
 import androidx.annotation.AnimRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.RawRes;
-
 import androidx.fragment.app.Fragment;
 import io.github.meness.easyintro.EasyIntro;
 import io.github.meness.easyintro.enums.IndicatorContainer;

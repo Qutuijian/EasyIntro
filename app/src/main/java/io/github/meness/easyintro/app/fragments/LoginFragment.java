@@ -16,13 +16,13 @@
 
 package io.github.meness.easyintro.app.fragments;
 
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import io.github.meness.easyintro.EasyIntroFragment;
 import io.github.meness.easyintro.app.R;
 import io.github.meness.easyintro.app.databinding.FragmentBackBinding;

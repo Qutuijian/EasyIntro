@@ -17,10 +17,10 @@
 package io.github.meness.easyintro.views;
 
 import android.content.Context;
-import androidx.appcompat.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.appcompat.widget.AppCompatImageButton;
 import io.github.meness.easyintro.R;
 
 public abstract class AbstractToggleIndicator extends AppCompatImageButton implements View.OnClickListener {

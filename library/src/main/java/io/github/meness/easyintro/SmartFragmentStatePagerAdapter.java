@@ -16,11 +16,12 @@
 
 package io.github.meness.easyintro;
 
+import android.util.SparseArray;
+import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import android.util.SparseArray;
-import android.view.ViewGroup;
 
 /*
    Extension of FragmentStatePagerAdapter which intelligently caches

@@ -17,7 +17,6 @@
 package io.github.meness.easyintro.enums;
 
 import androidx.annotation.LayoutRes;
-
 import io.github.meness.easyintro.R;
 
 public enum PageIndicator {

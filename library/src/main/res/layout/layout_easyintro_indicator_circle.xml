@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Alireza Eskandarpour
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,6 @@
   ~ limitations under the License.
   -->
 
-<me.relex.circleindicator.CircleIndicator
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<me.relex.circleindicator.CircleIndicator xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp"/>
+    android:layout_height="48dp" />
