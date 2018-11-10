@@ -29,6 +29,11 @@ versions.rxJavaVersion = '2.2.3'
 versions.rxBindingVersion = '2.2.0'
 versions.androidGradlePlugin = '3.2.1'
 versions.bintrayGradlePlugin = '0.8.1'
+versions.materialize = '1.2.0'
+versions.viewPagerTransform = '1.3.7@aar'
+versions.springIndicator = '1.0.2@aar'
+versions.circleIndicator = '2.1.0'
+versions.junit = '4.12'
 ext.versions = versions
 
 def app = [:]

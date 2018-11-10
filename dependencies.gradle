@@ -77,6 +77,26 @@ leakcanary.no_op = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.l
 leakcanary.support_fragment = "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakCanaryVersion"
 deps.leakcanary = leakcanary
 
+def mikepenz = [:]
+mikepenz.materialize = "com.mikepenz:materialize:$versions.materialize"
+deps.mikepenz = mikepenz
+
+def toxicbakery = [:]
+toxicbakery.viewPagerTransform = "com.ToxicBakery.viewpager.transforms:view-pager-transforms:$versions.viewPagerTransform"
+deps.toxicbakery = toxicbakery
+
+def relex = [:]
+relex.circleIndicator = "me.relex:circleindicator:$versions.circleIndicator"
+deps.relex = relex
+
+def chenupt = [:]
+chenupt.springIndicator = "com.github.chenupt.android:springindicator:$versions.springIndicator"
+deps.chenupt = chenupt
+
+def junit = [:]
+junit.junit = "junit:junit:$versions.junit"
+deps.junit = junit
+
 def self = [:]
 self.library = project(':library')
 deps.self = self

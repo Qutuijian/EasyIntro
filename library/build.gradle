@@ -51,13 +51,14 @@ android {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
+    testImplementation deps.junit.junit
     implementation deps.android.appcompat
+    implementation deps.android.constraintlayout
     implementation deps.android.annotation
-    implementation "com.mikepenz:materialize:1.0.0@aar"
-    implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
-    implementation 'com.github.chenupt.android:springindicator:1.0.2@aar'
-    implementation 'me.relex:circleindicator:1.2.1@aar'
+    implementation deps.mikepenz.materialize
+    implementation deps.toxicbakery.viewPagerTransform
+    implementation deps.chenupt.springIndicator
+    implementation deps.relex.circleIndicator
 }
 
 apply from: "maven-push.gradle"
