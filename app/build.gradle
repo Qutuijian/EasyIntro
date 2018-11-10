@@ -45,10 +45,6 @@ android {
         }
     }
 
-    dataBinding {
-        enabled true
-    }
-
     compileOptions {
         sourceCompatibility app.sourceCompatibility
         targetCompatibility app.targetCompatibility
