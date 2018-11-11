@@ -9,7 +9,7 @@ If any (or all) of these questions seem familiar, the **EasyIntro** is the perfe
 ## A Quick Overview What's In
 * The easiest possible integration
 * Integrate in less than 5 minutes
-* Compatible down to API level 13
+* Compatible down to API level 16
 * Quick and simple API
 * Uses the AppCompat support library
 * Follows the Google Material Design Guidelines
