@@ -85,26 +85,6 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     }
 
     @Override
-    public void onPreviousSlide() {
-        // empty
-    }
-
-    @Override
-    public void onNextSlide() {
-        // empty
-    }
-
-    @Override
-    public void onDonePressed() {
-        // empty
-    }
-
-    @Override
-    public void onSkipPressed() {
-        // empty
-    }
-
-    @Override
     public void withPageIndicatorVisibility(boolean b) {
         getBaseContext().withPageIndicatorVisibility(b);
     }

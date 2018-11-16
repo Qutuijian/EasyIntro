@@ -17,11 +17,15 @@
 package io.github.meness.easyintro.interfaces;
 
 public interface ISlide {
-    void onPreviousSlide();
+    default void onPreviousSlide() {
+    }
 
-    void onNextSlide();
+    default void onNextSlide() {
+    }
 
-    void onDonePressed();
+    default void onDonePressed() {
+    }
 
-    void onSkipPressed();
+    default void onSkipPressed() {
+    }
 }

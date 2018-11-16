@@ -42,26 +42,6 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
     public static final String TAG = EasyIntro.class.getSimpleName();
     private EasyIntroCarouselFragment carouselFragment;
 
-    @Override
-    public void onPreviousSlide() {
-        // empty
-    }
-
-    @Override
-    public void onNextSlide() {
-        // empty
-    }
-
-    @Override
-    public void onDonePressed() {
-        // empty
-    }
-
-    @Override
-    public void onSkipPressed() {
-        // empty
-    }
-
     protected final EasyIntroCarouselFragment getCarouselFragment() {
         return carouselFragment;
     }
