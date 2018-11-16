@@ -19,6 +19,7 @@ package io.github.meness.easyintro;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -37,8 +38,9 @@ abstract class SmartFragmentStatePagerAdapter extends FragmentStatePagerAdapter 
     }
 
     // Register the fragment when the item is instantiated
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
         registeredFragments.put(position, fragment);
         return fragment;
@@ -46,7 +48,7 @@ abstract class SmartFragmentStatePagerAdapter extends FragmentStatePagerAdapter 
 
     // Unregister when the item is inactive
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         registeredFragments.remove(position);
         super.destroyItem(container, position, object);
     }

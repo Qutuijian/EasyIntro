@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import io.github.meness.easyintro.EasyIntroFragment;
 import io.github.meness.easyintro.app.R;
@@ -28,7 +29,7 @@ import io.github.meness.easyintro.app.R;
 public class EndFragment extends EasyIntroFragment {
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_end, container, false);
     }
 }

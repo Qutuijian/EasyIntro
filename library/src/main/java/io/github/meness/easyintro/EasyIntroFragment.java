@@ -151,7 +151,7 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
 
     @Override
     @CallSuper
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         // set view clickable property true to prevent passing click event to its parent

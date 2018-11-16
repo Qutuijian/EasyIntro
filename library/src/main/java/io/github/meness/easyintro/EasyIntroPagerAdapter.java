@@ -19,6 +19,7 @@ package io.github.meness.easyintro;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -61,7 +62,7 @@ class EasyIntroPagerAdapter extends SmartFragmentStatePagerAdapter {
     }
 
     @Override
-    public final int getItemPosition(Object object) {
+    public final int getItemPosition(@NonNull Object object) {
         // only update changed fragments
         int position = mFragments.indexOf(object);
 
