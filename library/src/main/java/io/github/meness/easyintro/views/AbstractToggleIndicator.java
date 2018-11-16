@@ -42,16 +42,8 @@ public abstract class AbstractToggleIndicator extends AppCompatImageButton imple
         return isEnabled();
     }
 
-    public void withDisabled(boolean b) {
-        if (b) {
-            // disable
-            setOnClickListener(null);
-            setEnabled(false);
-        } else {
-            // enable
-            setOnClickListener(this);
-            setEnabled(true);
-        }
+    public void withEnabled(boolean b) {
+        setEnabled(b);
     }
 
     public boolean isVisible() {

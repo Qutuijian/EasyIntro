@@ -109,22 +109,22 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
         // disable left indicator for specific slide
         for (int i = 0; i < mDisableLeftIndicatorOn.size(); i++) {
             if (fragment.getClass().getName().equalsIgnoreCase(mDisableLeftIndicatorOn.get(i).getName())) {
-                mLeftIndicator.withDisabled(true);
+                mLeftIndicator.withEnabled(false);
                 mPager.setAllowedSwipeDirection(SwipeDirection.LEFT);
                 break;
             } else {
-                mLeftIndicator.withDisabled(false);
+                mLeftIndicator.withEnabled(true);
                 withSwipeDirection(mSwipeDirection);
             }
         }
         // disable right indicator for specific slide
         for (int i = 0; i < mDisableRightIndicatorOn.size(); i++) {
             if (fragment.getClass().getName().equalsIgnoreCase(mDisableRightIndicatorOn.get(i).getName())) {
-                mRightIndicator.withDisabled(true);
+                mRightIndicator.withEnabled(false);
                 mPager.setAllowedSwipeDirection(SwipeDirection.RIGHT);
                 break;
             } else {
-                mRightIndicator.withDisabled(false);
+                mRightIndicator.withEnabled(true);
                 withSwipeDirection(mSwipeDirection);
             }
         }
@@ -262,7 +262,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @Override
     public void withRightIndicatorDisabled(boolean b) {
         if (mRightIndicator != null) {
-            mRightIndicator.withDisabled(b);
+            mRightIndicator.withEnabled(b);
         } else {
             mRightIndicatorEnabled = b;
         }
@@ -281,7 +281,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     @Override
     public void withLeftIndicatorDisabled(boolean b) {
         if (mLeftIndicator != null) {
-            mLeftIndicator.withDisabled(b);
+            mLeftIndicator.withEnabled(b);
         } else {
             mLeftIndicatorEnabled = b;
         }
@@ -642,17 +642,17 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_easyintro_carousel, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         // init
-        mPager = (DirectionalViewPager) view.findViewById(R.id.pager);
+        mPager = view.findViewById(R.id.pager);
         mMaterializeBuilder = new MaterializeBuilder(getActivity());
 
         mPager.setAdapter(mAdapter);
@@ -701,19 +701,18 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
                 throw new RuntimeException(getString(R.string.exception_next_indicator_instanceof));
             }
 
-                mIndicatorsContainer = inflated;
+            mIndicatorsContainer = inflated;
 
-                // must be initialized after inflating indicator container
-                mRightIndicator = (RightToggleIndicator) mIndicatorsContainer.findViewById(R.id.rightIndicator);
-                mLeftIndicator = (LeftToggleIndicator) mIndicatorsContainer.findViewById(R.id.leftIndicator);
-                mRightIndicator.setListener(EasyIntroCarouselFragment.this);
-                mRightIndicator.withDisabled(mRightIndicatorEnabled);
-                mLeftIndicator.setListener(EasyIntroCarouselFragment.this);
-                mLeftIndicator.withDisabled(mLeftIndicatorEnabled);
+            // must be initialized after inflating indicator container
+            mRightIndicator = mIndicatorsContainer.findViewById(R.id.rightIndicator);
+            mLeftIndicator = mIndicatorsContainer.findViewById(R.id.leftIndicator);
+            mRightIndicator.setListener(EasyIntroCarouselFragment.this);
+            mRightIndicator.withEnabled(mRightIndicatorEnabled);
+            mLeftIndicator.setListener(EasyIntroCarouselFragment.this);
+            mLeftIndicator.withEnabled(mLeftIndicatorEnabled);
 
-                addIndicator();
-                updateToggleIndicators();
-            }
+            addIndicator();
+            updateToggleIndicators();
         });
         indicatorContainerStub.inflate();
     }
