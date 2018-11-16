@@ -32,7 +32,6 @@ import io.github.meness.easyintro.interfaces.IConfigMultiple;
 import io.github.meness.easyintro.interfaces.IConfigOnFragment;
 import io.github.meness.easyintro.interfaces.ISlide;
 import io.github.meness.easyintro.listeners.OnBackPressListener;
-import io.github.meness.easyintro.utils.BackPressImpl;
 
 public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConfigOnFragment, IConfigMultiple, OnBackPressListener {
     @Override
@@ -81,7 +80,8 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
 
     @Override
     public boolean onBackPressed() {
-        return new BackPressImpl(this).onBackPressed();
+        withPreviousSlide(true);
+        return true;
     }
 
     @Override
