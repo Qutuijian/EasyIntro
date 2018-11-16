@@ -20,30 +20,44 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.github.meness.easyintro.EasyIntroFragment;
 import io.github.meness.easyintro.app.R;
 
 public class OverlaySlides extends EasyIntroFragment {
 
+    //region Bind views
+    @BindView(R.id.loginBtn)
+    Button loginBtn;
+
+    @BindView(R.id.joinBtn)
+    Button joinBtn;
+    //endregion
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_overlay, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_overlay, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 withOverlaySlide(LoginFragment.instantiate(getContext(), LoginFragment.class.getName()), R.id.container, getChildFragmentManager(), true);
             }
         });
-        view.findViewById(R.id.joinBtn).setOnClickListener(new View.OnClickListener() {
+        joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 withOverlaySlide(JoinFragment.instantiate(getContext(), JoinFragment.class.getName()), R.id.container, getChildFragmentManager(), true);
