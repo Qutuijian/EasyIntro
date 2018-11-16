@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.ViewStubCompat
+    <ViewStub
         android:id="@+id/indicatorContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

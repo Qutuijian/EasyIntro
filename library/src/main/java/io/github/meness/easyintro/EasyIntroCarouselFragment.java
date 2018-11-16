@@ -27,7 +27,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.view.ViewStub;
 
 import com.mikepenz.materialize.MaterializeBuilder;
 
@@ -42,7 +42,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
-import androidx.appcompat.widget.ViewStubCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -678,7 +677,7 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     private void inflateIndicatorContainer(final View view) {
-        final ViewStubCompat indicatorContainerStub = (ViewStubCompat) view.findViewById(R.id.indicatorContainer);
+        final ViewStub indicatorContainerStub = view.findViewById(R.id.indicatorContainer);
 
         // set gravity
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) indicatorContainerStub.getLayoutParams();
@@ -686,23 +685,21 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
         indicatorContainerStub.setLayoutParams(params);
 
         indicatorContainerStub.setLayoutResource(mIndicatorContainer);
-        indicatorContainerStub.setOnInflateListener(new ViewStubCompat.OnInflateListener() {
-            @Override
-            public void onInflate(ViewStubCompat stub, View inflated) {
-                // there must be predefined ids
-                if (inflated.findViewById(R.id.leftIndicator) == null) {
-                    throw new RuntimeException(getString(R.string.exception_left_indicator_id));
-                } else if (inflated.findViewById(R.id.rightIndicator) == null) {
-                    throw new RuntimeException(getString(R.string.exception_right_indicator_id));
-                } else if (inflated.findViewById(R.id.pageIndicator) == null) {
-                    throw new RuntimeException(getString(R.string.exception_page_indicator_id));
-                }
-                // check indicators instanceof
-                else if (!(inflated.findViewById(R.id.leftIndicator) instanceof LeftToggleIndicator)) {
-                    throw new RuntimeException(getString(R.string.exception_previous_indicator_instanceof));
-                } else if (!(inflated.findViewById(R.id.rightIndicator) instanceof RightToggleIndicator)) {
-                    throw new RuntimeException(getString(R.string.exception_next_indicator_instanceof));
-                }
+        indicatorContainerStub.setOnInflateListener((stub, inflated) -> {
+            // there must be predefined ids
+            if (inflated.findViewById(R.id.leftIndicator) == null) {
+                throw new RuntimeException(getString(R.string.exception_left_indicator_id));
+            } else if (inflated.findViewById(R.id.rightIndicator) == null) {
+                throw new RuntimeException(getString(R.string.exception_right_indicator_id));
+            } else if (inflated.findViewById(R.id.pageIndicator) == null) {
+                throw new RuntimeException(getString(R.string.exception_page_indicator_id));
+            }
+            // check indicators instanceof
+            else if (!(inflated.findViewById(R.id.leftIndicator) instanceof LeftToggleIndicator)) {
+                throw new RuntimeException(getString(R.string.exception_previous_indicator_instanceof));
+            } else if (!(inflated.findViewById(R.id.rightIndicator) instanceof RightToggleIndicator)) {
+                throw new RuntimeException(getString(R.string.exception_next_indicator_instanceof));
+            }
 
                 mIndicatorsContainer = inflated;
 
@@ -723,14 +720,9 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
 
     private void addIndicator() {
         if (mIndicatorRes != -1) {
-            ViewStubCompat viewStub = (ViewStubCompat) mIndicatorsContainer.findViewById(R.id.pageIndicator);
+            ViewStub viewStub = mIndicatorsContainer.findViewById(R.id.pageIndicator);
             viewStub.setLayoutResource(mIndicatorRes);
-            viewStub.setOnInflateListener(new ViewStubCompat.OnInflateListener() {
-                @Override
-                public void onInflate(ViewStubCompat stub, View inflated) {
-                    setViewPagerToPageIndicator();
-                }
-            });
+            viewStub.setOnInflateListener((stub, inflated) -> setViewPagerToPageIndicator());
             View view = viewStub.inflate();
             view.setVisibility(mPageIndicatorVisibility ? View.VISIBLE : View.GONE);
         }
