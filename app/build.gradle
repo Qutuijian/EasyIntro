@@ -57,8 +57,6 @@ dependencies {
     implementation deps.butterknife.butterknife
     annotationProcessor deps.butterknife.compiler
     // there was a conflict which following exclusion is a workaround
-    implementation(deps.android.constraintlayout) {
-        exclude group: 'androidx.recyclerview', module: 'recyclerview'
-    }
+    implementation(deps.android.constraintlayout)
     implementation deps.self.library
 }
