@@ -17,7 +17,7 @@
 <resources>
 
     <!-- light themes -->
-    <style name="EasyIntro.Light" parent="Theme.AppCompat.Light">
+    <style name="EasyIntro.Light" parent="Theme.MaterialComponents.Light">
         <item name="toggleIndicatorsEnabled">@color/toggleIndicatorsEnabledColor</item>
         <item name="toggleIndicatorsDisabled">@color/toggleIndicatorsDisabledColor</item>
         <item name="toggleIndicatorsPressed">@color/toggleIndicatorsPressedColor</item>
@@ -25,7 +25,7 @@
         <item name="toggleIndicatorsBackground">@drawable/toggle_indicators_bg</item>
     </style>
 
-    <style name="EasyIntro.Light.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="EasyIntro.Light.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="toggleIndicatorsEnabled">@color/toggleIndicatorsEnabledColor</item>
         <item name="toggleIndicatorsDisabled">@color/toggleIndicatorsDisabledColor</item>
         <item name="toggleIndicatorsPressed">@color/toggleIndicatorsPressedColor</item>
@@ -33,7 +33,7 @@
         <item name="toggleIndicatorsBackground">@drawable/toggle_indicators_bg</item>
     </style>
 
-    <style name="EasyIntro.Light.NoActionBar.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="EasyIntro.Light.NoActionBar.FullScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="toggleIndicatorsEnabled">@color/toggleIndicatorsEnabledColor</item>
         <item name="toggleIndicatorsDisabled">@color/toggleIndicatorsDisabledColor</item>
@@ -43,7 +43,7 @@
     </style>
 
     <!-- dark themes -->
-    <style name="EasyIntro" parent="Theme.AppCompat">
+    <style name="EasyIntro" parent="Theme.MaterialComponents">
         <item name="toggleIndicatorsEnabled">@color/toggleIndicatorsEnabledColor</item>
         <item name="toggleIndicatorsDisabled">@color/toggleIndicatorsDisabledColor</item>
         <item name="toggleIndicatorsPressed">@color/toggleIndicatorsPressedColor</item>
@@ -51,7 +51,7 @@
         <item name="toggleIndicatorsBackground">@drawable/toggle_indicators_bg</item>
     </style>
 
-    <style name="EasyIntro.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+    <style name="EasyIntro.NoActionBar" parent="Theme.MaterialComponents.NoActionBar">
         <item name="toggleIndicatorsEnabled">@color/toggleIndicatorsEnabledColor</item>
         <item name="toggleIndicatorsDisabled">@color/toggleIndicatorsDisabledColor</item>
         <item name="toggleIndicatorsPressed">@color/toggleIndicatorsPressedColor</item>
@@ -59,7 +59,7 @@
         <item name="toggleIndicatorsBackground">@drawable/toggle_indicators_bg</item>
     </style>
 
-    <style name="EasyIntro.NoActionBar.FullScreen" parent="Theme.AppCompat.NoActionBar">
+    <style name="EasyIntro.NoActionBar.FullScreen" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="toggleIndicatorsEnabled">@color/toggleIndicatorsEnabledColor</item>
         <item name="toggleIndicatorsDisabled">@color/toggleIndicatorsDisabledColor</item>

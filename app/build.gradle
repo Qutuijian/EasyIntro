@@ -54,6 +54,7 @@ android {
 dependencies {
     testImplementation deps.junit.junit
     implementation deps.android.appcompat
+    implementation deps.android.material
     implementation deps.butterknife.butterknife
     annotationProcessor deps.butterknife.compiler
     // there was a conflict which following exclusion is a workaround
