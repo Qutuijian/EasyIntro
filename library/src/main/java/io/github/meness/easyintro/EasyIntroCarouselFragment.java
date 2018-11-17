@@ -93,6 +93,14 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     private boolean mRightIndicatorEnabled = true;
     private boolean mPageIndicatorVisibility = true;
 
+    public static EasyIntroCarouselFragment newInstance() {
+        Bundle args = new Bundle();
+
+        EasyIntroCarouselFragment fragment = new EasyIntroCarouselFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public void setInteractionsListener(EasyIntroInteractionsListener listener) {
         this.mInteractionsListener = listener;
     }

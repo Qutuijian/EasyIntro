@@ -39,6 +39,14 @@ public class LoginFragment extends EasyIntroFragment {
     Button backBtn;
     //endregion
 
+    public static LoginFragment newInstance() {
+        Bundle args = new Bundle();
+
+        LoginFragment fragment = new LoginFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -38,6 +38,14 @@ public class JoinFragment extends EasyIntroFragment {
     Button backBtn;
     //endregion
 
+    public static JoinFragment newInstance() {
+        Bundle args = new Bundle();
+
+        JoinFragment fragment = new JoinFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

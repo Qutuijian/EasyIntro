@@ -39,6 +39,14 @@ public class OverlaySlides extends EasyIntroFragment {
     Button joinBtn;
     //endregion
 
+    public static OverlaySlides newInstance() {
+        Bundle args = new Bundle();
+
+        OverlaySlides fragment = new OverlaySlides();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,13 +62,13 @@ public class OverlaySlides extends EasyIntroFragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                withOverlaySlide(LoginFragment.instantiate(getContext(), LoginFragment.class.getName()), R.id.container, getChildFragmentManager(), true);
+                withOverlaySlide(LoginFragment.newInstance(), R.id.container, getChildFragmentManager(), true);
             }
         });
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                withOverlaySlide(JoinFragment.instantiate(getContext(), JoinFragment.class.getName()), R.id.container, getChildFragmentManager(), true);
+                withOverlaySlide(JoinFragment.newInstance(), R.id.container, getChildFragmentManager(), true);
             }
         });
     }

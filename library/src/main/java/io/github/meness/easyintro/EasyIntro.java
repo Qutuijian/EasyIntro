@@ -86,7 +86,7 @@ public abstract class EasyIntro extends AppCompatActivity implements EasyIntroIn
             // On orientation change, it will prevent fragment recreation
             // its necessary to reserve the fragment stack inside each tab
             // Creating the ViewPager container fragment once
-            carouselFragment = (EasyIntroCarouselFragment) EasyIntroCarouselFragment.instantiate(getApplicationContext(), EasyIntroCarouselFragment.class.getName());
+            carouselFragment = EasyIntroCarouselFragment.newInstance();
             carouselFragment.setInteractionsListener(this);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, carouselFragment)

@@ -27,6 +27,14 @@ import io.github.meness.easyintro.EasyIntroFragment;
 import io.github.meness.easyintro.app.R;
 
 public class EndFragment extends EasyIntroFragment {
+    public static EndFragment newInstance() {
+        Bundle args = new Bundle();
+
+        EndFragment fragment = new EndFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

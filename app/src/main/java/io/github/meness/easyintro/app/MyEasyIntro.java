@@ -25,9 +25,9 @@ import io.github.meness.easyintro.enums.SlideTransformer;
 public class MyEasyIntro extends EasyIntro {
     @Override
     protected void initIntro() {
-        withSlide(HelloFragment.instantiate(getApplicationContext(), HelloFragment.class.getName()));
-        withSlide(OverlaySlides.instantiate(getApplicationContext(), OverlaySlides.class.getName()));
-        withSlide(EndFragment.instantiate(getApplicationContext(), EndFragment.class.getName()));
+        withSlide(HelloFragment.newInstance());
+        withSlide(OverlaySlides.newInstance());
+        withSlide(EndFragment.newInstance());
 
         withSlideTransformer(SlideTransformer.ZOOM_OUT_SLIDE);
         // define overlay slides animations once
