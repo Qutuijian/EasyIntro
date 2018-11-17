@@ -35,12 +35,12 @@ public interface IConfigOnFragment {
      * @param container       resource id
      * @param fragmentManager fragment manager
      * @param addToBackStack  add to back stack
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, boolean)
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, boolean)
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, int, int, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, int, int, int, int, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
      * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining once
      */
-    void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, boolean addToBackStack);
+    void withSlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, boolean addToBackStack);
 
     /**
      * replace an overlay slide with enter and exit animations
@@ -51,13 +51,13 @@ public interface IConfigOnFragment {
      * @param enter           anim resource id
      * @param exit            anim resource id
      * @param addToBackStack  add to back stack
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, boolean)
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, boolean)
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, int, int, int, int, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
      * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining once
      */
-    void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
-                          @AnimRes int exit, boolean addToBackStack);
+    void withSlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
+                   @AnimRes int exit, boolean addToBackStack);
 
     /**
      * replace an overlay slide with enter, exit, pop enter and pop exit animations
@@ -70,13 +70,13 @@ public interface IConfigOnFragment {
      * @param popEnter        anim resource id
      * @param popExit         anim resource id
      * @param addToBackStack  add to back stack
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, boolean)
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, boolean)
-     * #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, int, int, boolean)
+     * #withSlide(Fragment, int, FragmentManager, int, int, int, int, View, String, boolean)
      * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining oncece
      */
-    void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
-                          @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, boolean addToBackStack);
+    void withSlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
+                   @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, boolean addToBackStack);
 
     /**
      * replace an overlay slide with enter, exit, pop enter and pop exit animations and also shared element
@@ -93,11 +93,11 @@ public interface IConfigOnFragment {
      * @param transitionName  the transitionName for a View in an appearing Fragment to match to the shared
      *                        element.
      * @param addToBackStack  add to back stack
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, boolean)
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, boolean)
-     * @see #withOverlaySlide(Fragment, int, FragmentManager, int, int, int, int, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, int, int, boolean)
+     * @see #withSlide(Fragment, int, FragmentManager, int, int, int, int, boolean)
      * @see IConfigOnActivity#withOverlaySlideAnimation(int, int, int, int) for defining oncece
      */
-    void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
-                          @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName, boolean addToBackStack);
+    void withSlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter,
+                   @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName, boolean addToBackStack);
 }

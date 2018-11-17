@@ -141,22 +141,22 @@ public class EasyIntroFragment extends Fragment implements ICheck, ISlide, IConf
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, boolean addToBackStack) {
-        getBaseContext().withOverlaySlide(slide, container, fragmentManager, addToBackStack);
+    public void withSlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, boolean addToBackStack) {
+        getBaseContext().withSlide(slide, container, fragmentManager, addToBackStack);
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, boolean addToBackStack) {
-        getBaseContext().withOverlaySlide(slide, container, fragmentManager, enter, exit, addToBackStack);
+    public void withSlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, boolean addToBackStack) {
+        getBaseContext().withSlide(slide, container, fragmentManager, enter, exit, addToBackStack);
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, boolean addToBackStack) {
-        getBaseContext().withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, addToBackStack);
+    public void withSlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, boolean addToBackStack) {
+        getBaseContext().withSlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, addToBackStack);
     }
 
     @Override
-    public void withOverlaySlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName, boolean addToBackStack) {
-        getBaseContext().withOverlaySlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, sharedElement, transitionName, addToBackStack);
+    public void withSlide(Fragment slide, @IdRes int container, FragmentManager fragmentManager, @AnimRes int enter, @AnimRes int exit, @AnimRes int popEnter, @AnimRes int popExit, View sharedElement, String transitionName, boolean addToBackStack) {
+        getBaseContext().withSlide(slide, container, fragmentManager, enter, exit, popEnter, popExit, sharedElement, transitionName, addToBackStack);
     }
 }
