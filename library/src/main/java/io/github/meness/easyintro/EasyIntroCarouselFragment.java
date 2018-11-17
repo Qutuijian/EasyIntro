@@ -232,19 +232,11 @@ public class EasyIntroCarouselFragment extends Fragment implements ICheck, IConf
     }
 
     @Override
-    /**
-     * @see android.view.View#setOverScrollMode(int)
-     */
     public final void withOverScrollMode(int mode) {
         mPager.setOverScrollMode(mode);
     }
 
     @Override
-    /**
-     * set predefined indicator.
-     *
-     * @param pageIndicator Custom indicator
-     */
     public final void withPageIndicator(PageIndicator pageIndicator) {
         mIndicatorRes = pageIndicator.getLayout();
     }
