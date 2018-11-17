@@ -38,7 +38,7 @@ public class JoinFragment extends EasyIntroFragment {
     Button backBtn;
     //endregion
 
-    public static JoinFragment newInstance() {
+    static JoinFragment newInstance() {
         Bundle args = new Bundle();
 
         JoinFragment fragment = new JoinFragment();

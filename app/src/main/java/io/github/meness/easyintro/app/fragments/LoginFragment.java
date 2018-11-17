@@ -39,7 +39,7 @@ public class LoginFragment extends EasyIntroFragment {
     Button backBtn;
     //endregion
 
-    public static LoginFragment newInstance() {
+    static LoginFragment newInstance() {
         Bundle args = new Bundle();
 
         LoginFragment fragment = new LoginFragment();
