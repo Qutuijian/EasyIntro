@@ -59,7 +59,7 @@ public class LoginFragment extends EasyIntroFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        title.setText(R.string.join_fragment);
+        title.setText(R.string.login_fragment);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
